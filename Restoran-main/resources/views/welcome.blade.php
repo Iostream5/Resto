@@ -31,6 +31,69 @@
     <!-- Template Stylesheet -->
     <link href="{{asset('template/css/style.css')}}" rel="stylesheet">
 </head>
+<style>
+    .kategori::-webkit-scrollbar { 
+    display: none;
+    }
+    .searching{
+    
+    position: relative;
+    }
+    
+    .searching .fa-search{
+    
+    position: absolute;
+    top:20px;
+    left: 20px;
+    color: #9ca3af;
+    
+    }
+    
+    .searching span{
+    
+    position: absolute;
+    right: 17px;
+    top: 13px;
+    padding: 2px;
+    border-left: 1px solid #d1d5db;
+    
+    }
+    
+    .left-pan{
+    padding-left: 7px;
+    }
+    
+    .left-pan i{
+    
+    padding-left: 10px;
+    }
+    
+    .form-inputs{
+    
+    height: 55px;
+    text-indent: 33px;
+    border-radius: 10px;
+    }
+    
+    .form-inputs:focus{
+    
+    box-shadow: none;
+    border:none;
+    }
+
+    .rounded-5{
+        border-radius: 15px
+    }
+    .ratings i{
+    
+    color:#cecece;
+    }
+    
+    .rating-color{
+    color:#fbc634 !important;
+    }
+
+</style>
 
 <body>
     <div class="container-xxl bg-white p-0">
@@ -59,16 +122,19 @@
 
             </nav>
 
-            <div class="container-xxl py-5 bg-dark hero-header mb-5">
+            <div class="container-xxl bg-dark hero-header py-2">
                 <div class="container my-5 py-5">
-                    <div class="row align-items-center g-5">
-                        <div class="col-lg-6 text-center text-lg-start">
-                            <h1 class="display-3 text-white animated slideInLeft">Enjoy Our<br>Delicious Meal</h1>
-                            <p class="text-white animated slideInLeft mb-4 pb-2">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-                            <a href="" class="btn btn-primary py-sm-3 px-sm-5 me-3 animated slideInLeft">Book A Table</a>
-                        </div>
-                        <div class="col-lg-6 text-center text-lg-end overflow-hidden">
-                            <img class="img-fluid" src="img/hero.png" alt="">
+                    <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner overflow-hidden">
+                            <div class="carousel-item rounded active" data-bs-interval="1000">
+                                <img src="{{ asset('gambar/slider 1.png') }}" class="d-block w-100 rounded" alt="...">
+                            </div>
+                            <div class="carousel-item rounded" data-bs-interval="4000">
+                                <img src="{{ asset('gambar/slider 3.png') }}" class="d-block w-100 rounded" alt="...">
+                            </div>
+                            <div class="carousel-item rounded" data-bs-interval="4000">
+                                <img src="{{ asset('gambar/slider 4.png') }}" class="d-block w-100 rounded" alt="...">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -78,45 +144,185 @@
 
 
         <!-- Service Start -->
-        <div class="container-xxl py-5">
-            <div class="container">
-                <div class="row g-4">
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="service-item rounded pt-3">
-                            <div class="p-4">
-                                <i class="fa fa-3x fa-user-tie text-primary mb-4"></i>
-                                <h5>Master Chefs</h5>
-                                <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+       <div class="py-lg-5 py-2">
+            <div class="row container-fluid">
+                <div class="col-12">
+                    <h5 class="fw-bolder border-bottom border-3" style="width: 250px">Mau Makan Apa Hari Ini?</h5>
+                </div>
+                <div class="col-12 mt-3 kategori d-flex container overflow-auto">
+                    <div class="mx-lg-2 mx-1">
+                        <a href="#">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                                <h6 class="text-light">Cemilan</h6>
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mx-lg-2 mx-1">
+                        <a href="#">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                                <h6 class="text-light">Cemilan</h6>
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mx-lg-2 mx-1">
+                        <a href="#">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                                <h6 class="text-light">Cemilan</h6>
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mx-lg-2 mx-1">
+                        <a href="#">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                                <h6 class="text-light">Cemilan</h6>
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mx-lg-2 mx-1">
+                        <a href="#">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                                <h6 class="text-light">Cemilan</h6>
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mx-lg-2 mx-1">
+                        <a href="#">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                                <h6 class="text-light">Cemilan</h6>
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mx-lg-2 mx-1">
+                        <a href="#">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                                <h6 class="text-light">Cemilan</h6>
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mx-lg-2 mx-1">
+                        <a href="#">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                                <h6 class="text-light">Cemilan</h6>
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mx-lg-2 mx-1">
+                        <a href="#">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                                <h6 class="text-light">Cemilan</h6>
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mx-lg-2 mx-1">
+                        <a href="#">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                                <h6 class="text-light">Cemilan</h6>
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mx-lg-2 mx-1">
+                        <a href="#">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                                <h6 class="text-light">Cemilan</h6>
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mx-lg-2 mx-1">
+                        <a href="#">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                                <h6 class="text-light">Cemilan</h6>
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mx-lg-2 mx-1">
+                        <a href="#">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                                <h6 class="text-light">Cemilan</h6>
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mx-lg-2 mx-1">
+                        <a href="#">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                                <h6 class="text-light">Cemilan</h6>
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mx-lg-2 mx-1">
+                        <a href="#">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                                <h6 class="text-light">Cemilan</h6>
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mx-lg-2 mx-1">
+                        <a href="#">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                                <h6 class="text-light">Cemilan</h6>
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mx-lg-2 mx-1">
+                        <a href="#">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                                <h6 class="text-light">Cemilan</h6>
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mx-lg-2 mx-1">
+                        <a href="#">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                                <h6 class="text-light">Cemilan</h6>
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-12 mt-4">
+                    <div class="searching">
+                        <i class="fa fa-search"></i>
+                        <input type="text" class="form-control form-inputs" placeholder="Search anything...">
+                        <span class="left-pan"><i class="fa fa-microphone"></i></span>
+                    </div>
+                </div>
+                <div class="row mt-4 col-12 container">
+                    <a href="#" class="ms-auto col-lg-3 col-md-5 col-auto">
+                        <img src="{{ asset('gambar/produk.png') }}" class="card-img-top rounded-5" alt="...">
+                        <div class="card-body">
+                            <p class="text-dark text-start produk card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                                content.</p>
+                            <h5 class="text-warning fw-bold">Rp.1.000.000</h5>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="ratings">
+                                    @php
+                                    $rating = 4;
+                                    @endphp
+                                    <div class="ratings">
+                                        @for ($i = 1; $i <= 5; $i++) <i class="fa fa-star {{ $i <= $rating ? 'rating-color' : '' }}"></i>
+                                            @endfor
+                                    </div>
+                                </div>
+                                <h5 class="review-count">12 Reviews</h5>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="service-item rounded pt-3">
-                            <div class="p-4">
-                                <i class="fa fa-3x fa-utensils text-primary mb-4"></i>
-                                <h5>Quality Food</h5>
-                                <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="service-item rounded pt-3">
-                            <div class="p-4">
-                                <i class="fa fa-3x fa-cart-plus text-primary mb-4"></i>
-                                <h5>Online Order</h5>
-                                <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                        <div class="service-item rounded pt-3">
-                            <div class="p-4">
-                                <i class="fa fa-3x fa-headset text-primary mb-4"></i>
-                                <h5>24/7 Service</h5>
-                                <p>Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-                            </div>
-                        </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -125,51 +331,9 @@
 
         <!-- About Start -->
         <div class="container-xxl py-5">
-            <div class="container">
-                <div class="row g-5 align-items-center">
-                    <div class="col-lg-6">
-                        <div class="row g-3">
-                            <div class="col-6 text-start">
-                                <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.1s" src="img/about-1.jpg">
-                            </div>
-                            <div class="col-6 text-start">
-                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.3s" src="img/about-2.jpg" style="margin-top: 25%;">
-                            </div>
-                            <div class="col-6 text-end">
-                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.5s" src="img/about-3.jpg">
-                            </div>
-                            <div class="col-6 text-end">
-                                <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.7s" src="img/about-4.jpg">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <h5 class="section-title ff-secondary text-start text-primary fw-normal">About Us</h5>
-                        <h1 class="mb-4">Welcome to <i class="fa fa-utensils text-primary me-2"></i>Restoran</h1>
-                        <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos erat ipsum et lorem et sit, sed stet lorem sit.</p>
-                        <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-                        <div class="row g-4 mb-4">
-                            <div class="col-sm-6">
-                                <div class="d-flex align-items-center border-start border-5 border-primary px-3">
-                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0" data-toggle="counter-up">15</h1>
-                                    <div class="ps-4">
-                                        <p class="mb-0">Years of</p>
-                                        <h6 class="text-uppercase mb-0">Experience</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="d-flex align-items-center border-start border-5 border-primary px-3">
-                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0" data-toggle="counter-up">50</h1>
-                                    <div class="ps-4">
-                                        <p class="mb-0">Popular</p>
-                                        <h6 class="text-uppercase mb-0">Master Chefs</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <a class="btn btn-primary py-3 px-5 mt-2" href="">Read More</a>
-                    </div>
+            <div class="container-fluid row">
+                <div class="col-12">
+                    <h5 class="fw-bolder border-bottom border-3" style="width: 150px">Cari di Toko</h5>
                 </div>
             </div>
         </div>
@@ -609,7 +773,7 @@
                     <h1 class="mb-5">Our Master Chefs</h1>
                 </div>
                 <div class="row g-4">
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="ms-auto col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="team-item text-center rounded overflow-hidden">
                             <div class="rounded-circle overflow-hidden m-4">
                                 <img class="img-fluid" src="img/team-1.jpg" alt="">
@@ -623,7 +787,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="ms-auto col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                         <div class="team-item text-center rounded overflow-hidden">
                             <div class="rounded-circle overflow-hidden m-4">
                                 <img class="img-fluid" src="img/team-2.jpg" alt="">
@@ -637,7 +801,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="ms-auto col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                         <div class="team-item text-center rounded overflow-hidden">
                             <div class="rounded-circle overflow-hidden m-4">
                                 <img class="img-fluid" src="img/team-3.jpg" alt="">
@@ -651,7 +815,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="ms-auto col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
                         <div class="team-item text-center rounded overflow-hidden">
                             <div class="rounded-circle overflow-hidden m-4">
                                 <img class="img-fluid" src="img/team-4.jpg" alt="">
