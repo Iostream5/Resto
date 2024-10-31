@@ -53,6 +53,7 @@
                     <span class="fa fa-bars"></span>
                 </button>
 
+                {{-- nav --}}
                 @include('bagian.nav')
                 
             </nav>
