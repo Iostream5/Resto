@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Restoran - Bootstrap Restaurant Template</title>
+    <title>Tefatie Resto</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -55,7 +55,7 @@
 
                 {{-- nav --}}
                 @include('bagian.nav')
-                
+
             </nav>
 
             <div class="container-xxl py-5 bg-dark hero-header mb-5">
@@ -82,37 +82,32 @@
                         <div class="row g-3">
                             <div class="col-6 text-start">
                                 <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.1s"
-                                    src="img/about-1.jpg">
+                                    src="{{asset('logo.jpeg')}}">
                             </div>
                             <div class="col-6 text-start">
                                 <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.3s"
-                                    src="img/about-2.jpg" style="margin-top: 25%;">
+                                    src="{{asset('Inox.jpg')}}   " style="margin-top: 25%;">
                             </div>
                             <div class="col-6 text-end">
                                 <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.5s"
-                                    src="img/about-3.jpg">
+                                    src="{{asset('sot.png')}}">
                             </div>
                             <div class="col-6 text-end">
                                 <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.7s"
-                                    src="img/about-4.jpg">
+                                    src="{{asset('public/img/about-4.jpg')}}">
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <h5 class="section-title ff-secondary text-start text-primary fw-normal">About Us</h5>
                         <h1 class="mb-4">Welcome to <i class="fa fa-utensils text-primary me-2"></i>Restoran</h1>
-                        <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet
-                            diam et
-                            eos erat ipsum et lorem et sit, sed stet lorem sit.</p>
-                        <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet
-                            diam et
-                            eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat
-                            amet
+                        <p class="mb-4">Restoran online adalah konsep modern dalam dunia kuliner yang menyediakan layanan makanan tanpa lokasi fisik untuk tamu datang makan, mengandalkan pemesanan dan pengiriman secara daring (online) saja. Restoran semacam ini juga dikenal sebagai "ghost kitchen", "cloud kitchen", atau "virtual restaurant". Konsep ini sangat diminati karena fleksibilitasnya, terutama dalam era digital di mana banyak pelanggan lebih suka memesan makanan secara online.</p>
+                        <p class="mb-4">Tefatie ini memberi siswa kesempatan untuk menciptakan produk dan layanan nyata yang siap dipasarkan. Contohnya, mereka mengembangkan aplikasi digital seperti "Irsyadut Thulab," yang memberikan panduan beragama bagi umat. TEFA Al-Ittihad membantu siswa dalam menghadapi tantangan dunia kerja dengan pengetahuan teknis dan pengalaman praktis, sambil menanamkan jiwa wirausaha, sejalan dengan misi sekolah untuk menghasilkan lulusan yang kompeten dan berdaya saing.
                         </p>
                         <div class="row g-4 mb-4">
                             <div class="col-sm-6">
                                 <div class="d-flex align-items-center border-start border-5 border-primary px-3">
-                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0" data-toggle="counter-up">15
+                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0" data-toggle="counter-up">50
                                     </h1>
                                     <div class="ps-4">
                                         <p class="mb-0">Years of</p>
@@ -152,12 +147,12 @@
                             <div class="rounded-circle overflow-hidden m-4">
                                 <img class="img-fluid" src="img/team-1.jpg" alt="">
                             </div>
-                            <h5 class="mb-0">Full Name</h5>
+                            <h5 class="mb-0">Rizqi Ramadhan</h5>
                             <small>Designation</small>
                             <div class="d-flex justify-content-center mt-3">
-                                <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
+                                <a class="btn btn-square btn-primary mx-1" href="https://www.facebook.com/SMKAlIttihad"><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-square btn-primary mx-1" href="https://twitter.com/SMKAlIttihad"><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-square btn-primary mx-1" href="https://www.instagram.com/r1zk1_rmdhn"><i class="fab fa-instagram"></i></a>
                             </div>
                         </div>
                     </div>
@@ -166,12 +161,12 @@
                             <div class="rounded-circle overflow-hidden m-4">
                                 <img class="img-fluid" src="img/team-2.jpg" alt="">
                             </div>
-                            <h5 class="mb-0">Full Name</h5>
+                            <h5 class="mb-0">Azhar Adrian Hasibuan</h5>
                             <small>Designation</small>
                             <div class="d-flex justify-content-center mt-3">
-                                <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
+                                <a class="btn btn-square btn-primary mx-1" href="https://www.facebook.com/SMKAlIttihad "><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-square btn-primary mx-1" href="https://twitter.com/SMKAlIttihad"><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-square btn-primary mx-1" href="https://www.instagram.com/include._iostream"><i class="fab fa-instagram"></i></a>
                             </div>
                         </div>
                     </div>
@@ -180,12 +175,12 @@
                             <div class="rounded-circle overflow-hidden m-4">
                                 <img class="img-fluid" src="img/team-3.jpg" alt="">
                             </div>
-                            <h5 class="mb-0">Full Name</h5>
+                            <h5 class="mb-0">Rio Adrian Sidik</h5>
                             <small>Designation</small>
                             <div class="d-flex justify-content-center mt-3">
-                                <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
+                                <a class="btn btn-square btn-primary mx-1" href="https://www.facebook.com/Youcnock"><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-square btn-primary mx-1" href="https://twitter.com/SMKAlIttihad"><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-square btn-primary mx-1" href="https://www.instagram.com/Youcnock"><i class="fab fa-instagram"></i></a>
                             </div>
                         </div>
                     </div>
@@ -194,12 +189,12 @@
                             <div class="rounded-circle overflow-hidden m-4">
                                 <img class="img-fluid" src="img/team-4.jpg" alt="">
                             </div>
-                            <h5 class="mb-0">Full Name</h5>
+                            <h5 class="mb-0">AL Culenk Bin SCP 096</h5>
                             <small>Designation</small>
                             <div class="d-flex justify-content-center mt-3">
-                                <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
+                                <a class="btn btn-square btn-primary mx-1" href="https://www.facebook.com/r1zk1_rmdhn"><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-square btn-primary mx-1" href="https://twitter.com/SMKAlIttihad"><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-square btn-primary mx-1" href="https://www.instagram.com/r1zk1_rmdhn"><i class="fab fa-instagram"></i></a>
                             </div>
                         </div>
                     </div>
