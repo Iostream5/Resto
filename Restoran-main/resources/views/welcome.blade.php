@@ -48,20 +48,56 @@
     .rating-color{
     color:#fbc634 !important;
     }
+    .searching {
+    
+    position: relative;
+    }
+    
+    .searching .fa-search {
+    
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #9ca3af;
+    
+    }
+    
+    .searching span {
+    
+    position: absolute;
+    right: 17px;
+    top: 13px;
+    padding: 2px;
+    border-left: 1px solid #d1d5db;
+    
+    }
+    
+    .left-pan {
+    padding-left: 7px;
+    }
+    
+    .left-pan i {
+    
+    padding-left: 10px;
+    }
+    
+    .form-inputs {
+    
+    height: 55px;
+    text-indent: 33px;
+    border-radius: 10px;
+    }
+    
+    .form-inputs:focus {
+    
+    box-shadow: none;
+    border: none;
+    }
 
 </style>
 
 <body style="background: linear-gradient(rgba(15, 23, 43, .9), rgba(15, 23, 43, .9))">
     <div class="container-xxl bg-white p-0">
-        <!-- Spinner Start -->
-        {{-- <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div> --}}
-        <!-- Spinner End -->
-
-
         <!-- Navbar & Hero Start -->
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0 mb-lg-4">
                 <a href="" class="navbar-brand p-0">
@@ -247,6 +283,13 @@
                                 <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
                             </div>
                         </a>
+                    </div>
+                </div>
+                <div class="col-12 my-4">
+                    <div class="searching">
+                        <i class="fa fa-search"></i>
+                        <input type="text" class="form-control form-inputs" onclick="menu()" placeholder="Search anything...">
+                        <span class="left-pan"><i class="fa fa-microphone"></i></span>
                     </div>
                 </div>
                 <div class="row mt-4 col-12">
@@ -436,9 +479,14 @@
     <script src="{{asset('template/lib/tempusdominus/js/moment.min.js')}}"></script>
     <script src="{{asset('template/lib/tempusdominus/js/moment-timezone.min.js')}}"></script>
     <script src="{{asset('template/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js')}}"></script>
+    <script>
+        function menu(){
+            window.location="{{ route('search') }}"
+        }
+    </script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="{{ asset('template/js/main.js') }}"></script>
 </body>
 
 </html>

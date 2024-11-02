@@ -12,4 +12,4 @@ Route::get('/about',function(){
 
 Route::get('/search',function(){
     return view('page.search');
-});
+})->name('search');
