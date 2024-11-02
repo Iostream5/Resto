@@ -1,7 +1,6 @@
 <div class="collapse navbar-collapse" id="navbarCollapse">
     <div class="navbar-nav ms-auto py-0 pe-4">
         <a href="/" class="nav-item nav-link">Home</a>
-        <a href="menu.html" class="nav-item nav-link">Menu</a>
         <a href="/search" class="nav-item nav-link">Cari Makanan</a>
         <a href="/about" class="nav-item nav-link">About</a>
         <a href="/favorit" class="nav-item nav-link">Favorite</a>
