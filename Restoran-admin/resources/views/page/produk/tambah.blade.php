@@ -49,8 +49,8 @@
                         <div class="card overflow-hidden">
                             <div class="card-body p-4">
                                 <div class="heading d-flex align-items-center justify-content-between">
-                                    <h5 class="card-title mb-9 fw-semibold">Data Toko</h5>
-                                    <a href="#" class="btn btn-success">Lihat data <svg viewBox="0 0 24 24"
+                                    <h5 class="card-title mb-9 fw-semibold">Data Produk</h5>
+                                    <a href="{{ route('produks.index') }}" class="btn btn-success">Lihat data <svg viewBox="0 0 24 24"
                                             class="fw-bold" height="15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                             <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
@@ -75,7 +75,12 @@
                                     <input class="form-control form-control-lg" type="text"
                                         placeholder="Masukan Nilai Toko" aria-label=".form-control-lg example">
                                     <label class="fw-bolder my-2">Foto Toko</label>
-                                    <input class="form-control form-control-lg" id="formFileLg" type="file">
+                                    <input class="form-control form-control-lg" id="formFileLg" type="file"
+                                        onchange="previewImage(event)">
+                                    <div style="margin-top: 20px;">
+                                        <img id="imagePreview" src="" alt="Preview Foto"
+                                            style="max-width: 300px; display: none;">
+                                    </div>
                                     <button class="btn btn-primary my-3">Kirim<svg height="15" class="ms-2"
                                             viewBox="0 -4.15 57.875 57.875" xmlns="http://www.w3.org/2000/svg"
                                             fill="#000000">
@@ -99,7 +104,9 @@
                                                         stroke-width="4"></path>
                                                 </g>
                                             </g>
-                                        </svg></button>
+                                        </svg>
+                                    </button>
+
                                 </form>
                             </div>
                         </div>
@@ -118,6 +125,24 @@
     <script src="{{asset('template/src/assets/libs/apexcharts/dist/apexcharts.min.js')}}"></script>
     <script src="{{asset('template/src/assets/libs/simplebar/dist/simplebar.js')}}"></script>
     <script src="{{asset('template/src/assets/js/dashboard.js')}}"></script>
+    <script>
+        function previewImage(event) {
+                    const input = event.target;
+                    const preview = document.getElementById('imagePreview');
+                    
+                    // Cek apakah ada file yang dipilih
+                    if (input.files && input.files[0]) {
+                        const reader = new FileReader();
+        
+                        reader.onload = function(e) {
+                            preview.src = e.target.result; // Mengatur source gambar
+                            preview.style.display = 'block'; // Menampilkan elemen img
+                        };
+        
+                        reader.readAsDataURL(input.files[0]); // Membaca file sebagai URL data
+                    }
+                }
+    </script>
 </body>
 
 </html>

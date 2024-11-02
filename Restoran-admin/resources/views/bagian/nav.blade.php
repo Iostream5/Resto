@@ -5,7 +5,7 @@
             <span class="hide-menu">Home</span>
         </li>
         <li class="sidebar-item">
-            <a class="sidebar-link" href="./index.html" aria-expanded="false">
+            <a class="sidebar-link" href="/" aria-expanded="false">
                 <span>
                     <i class="ti ti-layout-dashboard"></i>
                 </span>
@@ -17,7 +17,7 @@
             <span class="hide-menu">Data</span>
         </li>
         <li class="sidebar-item">
-            <a class="sidebar-link" href="./ui-buttons.html" aria-expanded="false">
+            <a class="sidebar-link" href="{{ route('toko.tampil') }}" aria-expanded="false">
                 <span>
                     <i class="ti ti-article"></i>
                 </span>
@@ -25,7 +25,7 @@
             </a>
         </li>
         <li class="sidebar-item">
-            <a class="sidebar-link" href="./ui-alerts.html" aria-expanded="false">
+            <a class="sidebar-link" href="{{ route('kategoris.index') }}" aria-expanded="false">
                 <span>
                     <i class="ti ti-alert-circle"></i>
                 </span>
@@ -33,13 +33,13 @@
             </a>
         </li>
         <li class="sidebar-item">
-            <a class="sidebar-link" href="./ui-card.html" aria-expanded="false">
+            <a class="sidebar-link" href="{{ route('produks.index') }}" aria-expanded="false">
                 <span>
                     <i class="ti ti-cards"></i>
                 </span>
                 <span class="hide-menu">Produk</span>
             </a>
         </li>
-        
+
     </ul>
 </nav>
