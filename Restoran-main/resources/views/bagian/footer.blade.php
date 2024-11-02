@@ -21,22 +21,13 @@
                     <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Opening</h4>
-                <h5 class="text-light fw-normal">Monday - Saturday</h5>
-                <p>09AM - 09PM</p>
-                <h5 class="text-light fw-normal">Sunday</h5>
-                <p>10AM - 08PM</p>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Newsletter</h4>
-                <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-                <div class="position-relative mx-auto" style="max-width: 400px;">
-                    <input class="form-control border-primary w-100 py-3 ps-4 pe-5" type="text"
-                        placeholder="Your email">
-                    <button type="button"
-                        class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
-                </div>
+            <div class="col-lg-3 col-md-6 overflow-hidden">
+                    <section id="custom_html-3" class="widget_text widget widget_custom_html top-1">
+                        <div class="textwidget custom-html-widget"><iframe
+                                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15846.945161979667!2d107.1726618!3d-6.8019021!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68536ad0d9d7a3%3A0xbd528f81cf2abe7b!2sPondok%20Pesantren%20Al%20Ittihad%20Cianjur!5e0!3m2!1sid!2suk!4v1681350968382!5m2!1sid!2suk"
+                                width="540" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+                    </section>
             </div>
         </div>
     </div>
@@ -47,16 +38,8 @@
                     &copy; <a class="border-bottom" href="#">Tefatie</a>, All Right Reserved.
 
                     <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                    Designed By <a class="border-bottom" href="https://htmlcodex.com">Tefatie</a><br><br>
-                    Distributed By <a class="border-bottom" href="https://themewagon.com" target="_blank">Tefatie</a>
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <div class="footer-menu">
-                        <a href="">Home</a>
-                        <a href="">Cookies</a>
-                        <a href="">Help</a>
-                        <a href="">FQAs</a>
-                    </div>
+                    Designed By <a class="border-bottom" href="#">Tefatie</a><br><br>
+                    Distributed By <a class="border-bottom" href="#" target="_blank">Tefatie</a>
                 </div>
             </div>
         </div>
