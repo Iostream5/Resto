@@ -25,7 +25,7 @@
             </a>
         </li>
         <li class="sidebar-item">
-            <a class="sidebar-link" href="{{ route('kategori.data') }}" aria-expanded="false">
+            <a class="sidebar-link" href="{{ route('kategoris.index') }}" aria-expanded="false">
                 <span>
                     <i class="ti ti-alert-circle"></i>
                 </span>
@@ -33,7 +33,7 @@
             </a>
         </li>
         <li class="sidebar-item">
-            <a class="sidebar-link" href="{{ route('produk.data') }}" aria-expanded="false">
+            <a class="sidebar-link" href="{{ route('produks.index') }}" aria-expanded="false">
                 <span>
                     <i class="ti ti-cards"></i>
                 </span>

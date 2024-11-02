@@ -49,8 +49,8 @@
                         <div class="card overflow-hidden">
                             <div class="card-body p-4">
                                 <div class="heading d-flex align-items-center justify-content-between">
-                                    <h5 class="card-title mb-9 fw-semibold">Data Toko</h5>
-                                    <a href="#" class="btn btn-success">Lihat data <svg viewBox="0 0 24 24"
+                                    <h5 class="card-title mb-9 fw-semibold">Data Produk</h5>
+                                    <a href="{{ route('produks.index') }}" class="btn btn-success">Lihat data <svg viewBox="0 0 24 24"
                                             class="fw-bold" height="15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                             <g id="SVGRepo_tracerCarrier" stroke-linecap="round"

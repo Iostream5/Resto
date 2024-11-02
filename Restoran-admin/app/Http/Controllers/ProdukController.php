@@ -6,34 +6,48 @@ use App\Models\Kategori;
 use App\Models\Produk;
 use App\Models\Toko;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class ProdukController extends Controller
 {
     /**
      * Display a listing of the resource.
      */ 
-    public function tampil()
-    {
-
+    public function tampil(){
         return view('page.produk.data');
     }
-
-    // Menampilkan daftar semua produk
-    public function index()
+     
+    public function data()
     {
-        $produks = Produk::all();
-        return view('produks.index', compact('produks'));
+        $produks = Produk::with('toko', 'kategori')->get(); // Menyertakan relasi toko dan kategori
+
+        return DataTables::of($produks)
+            ->addColumn('action', function ($produk) {
+                return '
+                    <a href="' . route('produk.show', $produk->id) . '" class="btn btn-info">View</a>
+                    <a href="' . route('produk.edit', $produk->id) . '" class="btn btn-warning">Edit</a>
+                    <form action="' . route('produk.destroy', $produk->id) . '" method="POST" style="display:inline;">
+                        ' . csrf_field() . '
+                        ' . method_field('DELETE') . '
+                        <button type="submit" class="btn btn-danger" onclick="return confirm(\'Are you sure?\')">Delete</button>
+                    </form>
+                ';
+            })
+            ->make(true);
     }
 
-    // Menampilkan form untuk membuat produk baru
+    public function index()
+    {
+        return view('page.produk.tambah');
+    }
+
     public function create()
     {
         $tokos = Toko::all();
         $kategoris = Kategori::all();
-        return view('produks.create', compact('tokos', 'kategoris'));
+        return view('page.produk.tambah', compact('tokos', 'kategoris'));
     }
 
-    // Menyimpan produk baru ke dalam database
     public function store(Request $request)
     {
         $request->validate([
@@ -45,24 +59,21 @@ class ProdukController extends Controller
         ]);
 
         Produk::create($request->all());
-        return redirect()->route('produks.index')->with('success', 'Produk berhasil ditambahkan!');
+        return redirect()->route('produk.tampil')->with('success', 'Produk berhasil ditambahkan!');
     }
 
-    // Menampilkan produk yang spesifik
     public function show(Produk $produk)
     {
-        return view('produks.show', compact('produk'));
+        return view('page.produk.tampil', compact('produk'));
     }
 
-    // Menampilkan form untuk mengedit produk
     public function edit(Produk $produk)
     {
         $tokos = Toko::all();
         $kategoris = Kategori::all();
-        return view('produks.edit', compact('produk', 'tokos', 'kategoris'));
+        return view('page.produk.edit', compact('produk', 'tokos', 'kategoris'));
     }
 
-    // Memperbarui produk yang sudah ada
     public function update(Request $request, Produk $produk)
     {
         $request->validate([
@@ -74,13 +85,12 @@ class ProdukController extends Controller
         ]);
 
         $produk->update($request->all());
-        return redirect()->route('produks.index')->with('success', 'Produk berhasil diperbarui!');
+        return redirect()->route('produk.tampil')->with('success', 'Produk berhasil diperbarui!');
     }
 
-    // Menghapus produk
     public function destroy(Produk $produk)
     {
         $produk->delete();
-        return redirect()->route('produks.index')->with('success', 'Produk berhasil dihapus!');
+        return redirect()->route('produk.tampil')->with('success', 'Produk berhasil dihapus!');
     }
 }

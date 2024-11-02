@@ -4,31 +4,46 @@ namespace App\Http\Controllers;
 
 use App\Models\Kategori;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class KategoriController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function tampil()
-    {
-
+    public function tampil(){
         return view('page.kategori.data');
     }
-
-     public function index()
+    
+    public function data()
     {
-        $kategoris = Kategori::all();
-        return view('kategoris.index', compact('kategoris'));
+        $kategoris = Kategori::query();
+
+        return DataTables::of($kategoris)
+            ->addColumn('action', function ($kategori) {
+                return '
+                    <a href="' . route('kategori.show', $kategori->id) . '" class="btn btn-info">View</a>
+                    <a href="' . route('kategori.edit', $kategori->id) . '" class="btn btn-warning">Edit</a>
+                    <form action="' . route('kategori.destroy', $kategori->id) . '" method="POST" style="display:inline;">
+                        ' . csrf_field() . '
+                        ' . method_field('DELETE') . '
+                        <button type="submit" class="btn btn-danger" onclick="return confirm(\'Are you sure?\')">Delete</button>
+                    </form>
+                ';
+            })
+            ->make(true);
     }
 
-    // Menampilkan form untuk membuat kategori baru
+    public function index()
+    {
+        return view('page.kategori.tambah');
+    }
+
     public function create()
     {
-        return view('kategoris.create');
+        return view('page.kategori.tambah');
     }
 
-    // Menyimpan kategori baru ke dalam database
     public function store(Request $request)
     {
         $request->validate([
@@ -36,22 +51,19 @@ class KategoriController extends Controller
         ]);
 
         Kategori::create($request->all());
-        return redirect()->route('kategoris.index')->with('success', 'Kategori berhasil ditambahkan!');
+        return redirect()->route('produks.tampil')->with('success', 'Kategori berhasil ditambahkan!'); // Sesuaikan dengan route yang benar
     }
 
-    // Menampilkan kategori yang spesifik
     public function show(Kategori $kategori)
     {
-        return view('kategoris.show', compact('kategori'));
+        return view('page.kategori.data', compact('kategori'));
     }
 
-    // Menampilkan form untuk mengedit kategori
     public function edit(Kategori $kategori)
     {
-        return view('kategoris.edit', compact('kategori'));
+        return view('page.kategori.edit', compact('kategori'));
     }
 
-    // Memperbarui kategori yang sudah ada
     public function update(Request $request, Kategori $kategori)
     {
         $request->validate([
@@ -59,13 +71,12 @@ class KategoriController extends Controller
         ]);
 
         $kategori->update($request->all());
-        return redirect()->route('kategoris.index')->with('success', 'Kategori berhasil diperbarui!');
+        return redirect()->route('kategoris.tampil')->with('success', 'Kategori berhasil diperbarui!'); // Sesuaikan dengan route yang benar
     }
 
-    // Menghapus kategori
     public function destroy(Kategori $kategori)
     {
         $kategori->delete();
-        return redirect()->route('kategoris.index')->with('success', 'Kategori berhasil dihapus!');
+        return redirect()->route('kategoris.tampil')->with('success', 'Kategori berhasil dihapus!'); // Sesuaikan dengan route yang benar
     }
 }

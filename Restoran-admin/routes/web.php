@@ -22,8 +22,12 @@ Route::get('/toko/data', [TokoController::class, 'getData'])->name('toko.data');
 
 
 //kategori
-Route::get('/kategori-data', [kategoriController::class, 'tampil'])->name('kategori.data');
+Route::resource('kategoris', KategoriController::class);
+Route::get('/data/kategori', [KategoriController::class, 'data'])->name('DataKategori');
+Route::get('/kategori-data', [KategoriController::class, 'tampil'])->name('kategori.tampil');
 
 
 //produk
-Route::get('/produk-data', [ProdukController::class, 'tampil'])->name('produk.data');
+Route::resource('produks', ProdukController::class);
+Route::get('data/produk', [ProdukController::class, 'data'])->name('DataProduk');
+Route::get('/kategori-data', [KategoriController::class, 'tampil'])->name('produk.tampil');
