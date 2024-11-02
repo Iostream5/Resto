@@ -4,6 +4,7 @@
         <a href="menu.html" class="nav-item nav-link">Menu</a>
         <a href="/search" class="nav-item nav-link">Cari Makanan</a>
         <a href="/about" class="nav-item nav-link">About</a>
+        <a href="/favorit" class="nav-item nav-link">Favorite</a>
     </div>
     <a href="" class="btn btn-primary me-2">masuk</a>
     <a href="" class="btn btn-outline-primary">daftar</a>
