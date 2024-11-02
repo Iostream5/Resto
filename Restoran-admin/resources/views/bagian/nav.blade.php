@@ -17,7 +17,7 @@
             <span class="hide-menu">Data</span>
         </li>
         <li class="sidebar-item">
-            <a class="sidebar-link" href="{{ route('toko.data') }}" aria-expanded="false">
+            <a class="sidebar-link" href="{{ route('toko.tampil') }}" aria-expanded="false">
                 <span>
                     <i class="ti ti-article"></i>
                 </span>
@@ -40,6 +40,6 @@
                 <span class="hide-menu">Produk</span>
             </a>
         </li>
-        
+
     </ul>
 </nav>

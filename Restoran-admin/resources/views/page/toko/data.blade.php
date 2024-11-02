@@ -7,8 +7,11 @@
     <title>Modernize Free</title>
     <link rel="shortcut icon" type="image/png" href="{{ asset('template/src/assets/images/logos/favicon.png') }}" />
     <link rel="stylesheet" href="{{ asset('template/src/assets/css/styles.min.css') }}" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
 </head>
-
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 <body>
     <!--  Body Wrapper -->
     <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
@@ -50,7 +53,7 @@
                             <div class="card-body p-4">
                                 <div class="heading d-flex align-items-center justify-content-between">
                                     <h5 class="card-title mb-9 fw-semibold">Datass Toko</h5>
-                                    <a href="#" class="btn btn-success">Lihat data <svg viewBox="0 0 24 24"
+                                    <a href="data" class="btn btn-success">Lihat data <svg viewBox="0 0 24 24"
                                             class="fw-bold" height="15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                             <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
@@ -64,7 +67,8 @@
                                             </g>
                                         </svg></a>
                                 </div>
-                                <form action="#" method="post">
+                                <form action="{{ route('toko.index') }}" method="POST">
+                                    @csrf
                                     <label class="fw-bolder my-2">Nama Toko</label>
                                     <input class="form-control form-control-lg" type="text"
                                         placeholder="Masukan Nama Toko" aria-label=".form-control-lg example">
@@ -111,6 +115,28 @@
             </div>
         </div>
     </div>
+    @push('scripts')
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $('#toko-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: '{{ route("toko.data") }}',
+        columns: [
+            { data: 'id', name: 'id' },
+            { data: 'nama', name: 'nama' },
+            { data: 'alamat', name: 'alamat' },
+            { data: 'rating', name: 'rating' },
+            { data: 'foto', name: 'foto', orderable: false, searchable: false },
+            { data: 'action', name: 'action', orderable: false, searchable: false },
+        ]
+    });
+});
+</script>
+@endpush
     <script src="{{asset('template/src/assets/libs/jquery/dist/jquery.min.js')}}"></script>
     <script src="{{asset('template/src/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('template/src/assets/js/sidebarmenu.js')}}"></script>
