@@ -17,3 +17,7 @@ Route::get('/favorit',function(){
 Route::get('/search',function(){
     return view('page.search');
 })->name('search');
+
+Route::get('/profil',function(){
+    return view('page.profil');
+})->name('profil');
