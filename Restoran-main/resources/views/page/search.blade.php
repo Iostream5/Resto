@@ -252,14 +252,11 @@
                                 <div class="container text-start">
                                     <h4>Cari toko</h4>
                                 </div>
-                                <div class="col-md-5 pl-2 mb-4">
-                                    <div class="input-group">
-                                        <input class="form-control border-end-0 border rounded-pill me-4" type="search" value="hasil" id="example-search-input">
-                                        <span class="input-group-append">
-                                            <button class="btn btn-outline-secondary bg-white border-bottom-0 border rounded-pill ms-n5" type="button">
-                                                <i class="fa fa-search"></i>
-                                            </button>
-                                        </span>
+                                <div class="col-12 my-2 mx-auto">
+                                    <div class="searching" style="width:500px;">
+                                        <i class="fa fa-search"></i>
+                                        <input type="text" class="form-control form-inputs" placeholder="Search anything..." style="width:">
+                                        <span class="left-pan"><i class="fa fa-microphone"></i></span>
                                     </div>
                                 </div>
                             </div>
