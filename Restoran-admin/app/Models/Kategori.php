@@ -2,9 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Kategori extends Model
 {
-    //
+    use HasFactory;
+
+    // Relasi satu ke banyak dengan Produk
+    public function produks()
+    {
+        return $this->hasMany(Produk::class);
+    }
 }
