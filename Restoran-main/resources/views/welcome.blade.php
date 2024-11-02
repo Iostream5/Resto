@@ -35,51 +35,7 @@
     .kategori::-webkit-scrollbar { 
     display: none;
     }
-    .searching{
     
-    position: relative;
-    }
-    
-    .searching .fa-search{
-    
-    position: absolute;
-    top:20px;
-    left: 20px;
-    color: #9ca3af;
-    
-    }
-    
-    .searching span{
-    
-    position: absolute;
-    right: 17px;
-    top: 13px;
-    padding: 2px;
-    border-left: 1px solid #d1d5db;
-    
-    }
-    
-    .left-pan{
-    padding-left: 7px;
-    }
-    
-    .left-pan i{
-    
-    padding-left: 10px;
-    }
-    
-    .form-inputs{
-    
-    height: 55px;
-    text-indent: 33px;
-    border-radius: 10px;
-    }
-    
-    .form-inputs:focus{
-    
-    box-shadow: none;
-    border:none;
-    }
 
     .rounded-5{
         border-radius: 15px
@@ -291,13 +247,6 @@
                                 <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
                             </div>
                         </a>
-                    </div>
-                </div>
-                <div class="col-12 mt-4">
-                    <div class="searching">
-                        <i class="fa fa-search"></i>
-                        <input type="text" class="form-control form-inputs" placeholder="Search anything...">
-                        <span class="left-pan"><i class="fa fa-microphone"></i></span>
                     </div>
                 </div>
                 <div class="row mt-4 col-12">
