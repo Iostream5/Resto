@@ -9,7 +9,13 @@ class ProdukController extends Controller
 {
     /**
      * Display a listing of the resource.
-     */
+     */ 
+    public function tampil()
+    {
+
+        return view('page.produk.data');
+    }
+
     public function index()
     {
         //

@@ -10,6 +10,12 @@ class KategoriController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function tampil()
+    {
+
+        return view('page.kategori.data');
+    }
+
     public function index()
     {
         //

@@ -10,9 +10,14 @@ class TokoController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function tampil(){
+        
+        return view('page.toko.data');
+    }
+     
     public function index()
     {
-        //
+        return view('page.toko.tambah');
     }
 
     /**
