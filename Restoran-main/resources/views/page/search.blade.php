@@ -31,6 +31,38 @@
     <!-- Template Stylesheet -->
     <link href="{{ asset('template/css/style.css') }}" rel="stylesheet">
 </head>
+<style>
+    .searching {
+    position: relative;
+}
+
+.form-inputs {
+    padding-left: 2.5rem; /* Jarak untuk ikon search di kiri */
+    padding-right: 2.5rem; /* Jarak untuk ikon microphone di kanan */
+    height: 55px;
+    text-indent: 33px;
+    border-radius: 10px;
+}
+
+.searching .fa-search,
+.searching .fa-microphone {
+    color: #6c757d; /* Warna ikon, sesuaikan sesuai kebutuhan */
+}
+
+.form-inputs:focus{
+    
+    box-shadow: none;
+    border:none;
+    }
+
+.b {
+    border-left: 1px solid rgba(141, 141, 141, 0.6);
+
+}
+.c {
+    margin-left: 14px;
+}
+</style>
 
 <body>
     
@@ -43,17 +75,33 @@
         </div> --}}
         <!-- Spinner End -->
 
+        <div class="container-xxl position-relative p-0">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
+                <a href="" class="navbar-brand p-0">
+                    <h1 class="text-primary m-0"><i class="fa fa-utensils me-3"></i>Restoran</h1>
+                    <!-- <img src="img/logo.png" alt="Logo"> -->
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
 
-        <!-- Navbar & Hero Start -->
-        @include('bagian.nav')
-        <!-- Navbar & Hero End -->
+                {{-- nav --}}
+                @include('bagian.nav')
 
+            </nav>
 
+            <div class="container-xxl py-5 bg-dark hero-header mb-5">
+                <div class="container text-center my-5 pt-5 pb-4">
+                    <nav aria-label="breadcrumb">
+                    </nav>
+                </div>
+            </div>
+        </div>
         <!-- Menu Start -->
         <div class="container-xxl py-5">
             <div class="container">
                 <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                    <h1 class="mb-5">Results!</h1>
+                    <h1 class="mb-5">Hasil pencarian</h1>
                 </div>
 
                 {{-- <div class="container">
@@ -63,24 +111,21 @@
                   </svg><input type="search" name="" id="" class="me-2 form-control" style="width:27%"></div>
             </div> --}}
             <div class="row mb-5">
-                <div class="col-md-5 mx-auto">
-                    <div class="input-group">
-                        <input class="form-control border-end-0 border rounded-pill" type="search" value="hasil" id="example-search-input">
-                        <span class="input-group-append">
-                            <button class="btn btn-outline-secondary bg-white border-bottom-0 border rounded-pill ms-n5" type="button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
+                <div class="col-12 mt-4 mb-4">
+                    <div class="searching position-relative">
+                        <i class="fa fa-search position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+                        <input type="text" class="form-control form-inputs ps-5 pe-5" placeholder="Results!">
+                        <span class="b position-absolute top-50 end-0 translate-middle-y me-3"><i class="c fa fa-microphone"></i></span>
                     </div>
                 </div>
-            </div>
+                
                 <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.1s">
                     <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
                         <li class="nav-item">
                             <a class="d-flex align-items-center text-start mx-3 ms-0 pb-3 active" data-bs-toggle="pill" href="#tab-1">
                                 <i class="fa fa-coffee fa-2x text-primary"></i>
                                 <div class="ps-3">
-                                    <small class="text-body">Popular</small>
+                                    <small class="text-body">Populer</small>
                                     <h6 class="mt-n1 mb-0">Breakfast</h6>
                                 </div>
                             </a>
@@ -89,7 +134,7 @@
                             <a class="d-flex align-items-center text-start mx-3 pb-3" data-bs-toggle="pill" href="#tab-2">
                                 <i class="fa fa-hamburger fa-2x text-primary"></i>
                                 <div class="ps-3">
-                                    <small class="text-body">Special</small>
+                                    <small class="text-body">Banyak di sukai</small>
                                     <h6 class="mt-n1 mb-0">Launch</h6>
                                 </div>
                             </a>
@@ -98,7 +143,7 @@
                             <a class="d-flex align-items-center text-start mx-3 me-0 pb-3" data-bs-toggle="pill" href="#tab-3">
                                 <i class="fa fa-utensils fa-2x text-primary"></i>
                                 <div class="ps-3">
-                                    <small class="text-body">Lovely</small>
+                                    <small class="text-body">Hemat</small>
                                     <h6 class="mt-n1 mb-0">Dinner</h6>
                                 </div>
                             </a>
