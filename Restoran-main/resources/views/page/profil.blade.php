@@ -118,26 +118,56 @@
         fill: #FF4545;/* Mengatur warna hati menjadi merah */
     }
 
+    .list-group {
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+        }
+
+        .list-group-item {
+            background-color: transparent;
+            border: none;
+            padding: 8px 0;
+        }
+
+        /* Styling tombol dan ikon SVG */
+        .list-group-item button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        /* Warna default ikon mata */
+        .list-group-item svg {
+            fill: black; /* Warna hitam untuk mata */
+            transition: fill 0.3s ease;
+        }
+
+        /* Ubah warna tengah mata saat tombol difokuskan */
+        .list-group-item button:focus svg path:nth-child(2) {
+            fill: black; /* Mata tengah berwarna hitam saat fokus */
+            color: black
+        }
+
+        /* Ubah outline pada focus */
+        .list-group-item button:focus {
+            outline: none;
+        }
+
 
 </style>
 
 <body style="background: linear-gradient(rgba(15, 23, 43, .9), rgba(15, 23, 43, .9))">
     <div class="container-xxl bg-white p-0">
         <!-- Navbar & Hero Start -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0 mb-lg-4">
-            <a href="" class="navbar-brand p-0">
-                <h1 class="text-primary m-0"><i class="fa fa-utensils me-3"></i>Restoran</h1>
-                <!-- <img src="img/logo.png" alt="Logo"> -->
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            
+            {{-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="fa fa-bars"></span>
-            </button>
+            </button> --}}
             
             {{-- nav --}}
             @include('bagian.nav')
-
-            
-        </nav>
         
         <div class="container-fluid bg-dark hero-header py-2" style="width: 100%">
             <div class="container py-3 py-lg-3 my-lg-5">
@@ -159,13 +189,38 @@
                             <p class="card-text">Pecinta makanan dan penjelajah kuliner.</p>
                             <a href="#" class="btn btn-primary">Edit Profil</a>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-8 mt-4">
                             <h2>Informasi Pengguna</h2>
                             <ul class="list-group">
-                                <li class="list-group-item">Email: pengguna@example.com</li>
-                                <li class="list-group-item">Telepon: (123) 456-7890</li>
-                                <li class="list-group-item">Alamat: Jalan Contoh No. 123, Kota, Provinsi</li>
+                                <li class="list-group-item">
+                                    Email: <span id="email">****@****.com</span>
+                                    <button onclick="toggleVisibility('email', 'pengguna@example.com')">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+  <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+</svg>
+                                    </button>
+                                </li>
+                                <li class="list-group-item">
+                                    Telepon: <span id="telepon">(***) ***-****</span>
+                                    <button onclick="toggleVisibility('telepon', '(123) 456-7890')">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+  <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+</svg>
+                                    </button>
+                                </li>
+                                <li class="list-group-item">
+                                    Alamat: <span id="alamat">Jalan ***** No. ***</span>
+                                    <button onclick="toggleVisibility('alamat', 'Jalan Contoh No. 123, Kota, Provinsi')">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+  <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+</svg>
+                                    </button>
+                                </li>
                             </ul>
+                        
                             <h3 class="mt-4">Riwayat Pesanan</h3>
                             <table class="table">
                                 <thead>
@@ -205,7 +260,7 @@
                 </div>
                 <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.1s">
                     <div class="container-fluid">
-                    <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5" style="width: 100%;">
+                    <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5 mt-5" style="width: 100%;">
                         <li class="nav-item">
                             <a class="d-flex align-items-center text-start mx-3 ms-0 pb-3 active" data-bs-toggle="pill" href="#tab-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="red" class="bi bi-heart-fill" viewBox="0 0 16 16">
@@ -232,10 +287,12 @@
                         </li>
                         <li class="nav-item">
                             <a class="d-flex align-items-center text-start mx-3 me-0 pb-3" data-bs-toggle="pill" href="#tab-3">
-                                <i class="fa fa-utensils fa-2x text-primary"></i>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-box-seam" viewBox="0 0 16 16">
+                                    <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2zm3.564 1.426L5.596 5 8 5.961 14.154 3.5zm3.25 1.7-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464z"/>
+                                  </svg>
                                 <div class="ps-3">
-                                    <small class="text-body">Lovely</small>
-                                    <h6 class="mt-n1 mb-0">Dinner</h6>
+                                    <small class="text-body">Sedang</small>
+                                    <h6 class="mt-n1 mb-0">Dipesan</h6>
                                 </div>
                             </a>
                         </li>
@@ -658,6 +715,15 @@
         function menu(){
             window.location="{{ route('search') }}"
         }
+
+        function toggleVisibility(id, fullText) {
+    const element = document.getElementById(id);
+    if (element.textContent.includes('*')) {
+        element.textContent = fullText;
+    } else {
+        element.textContent = element.textContent.replace(/[^\s@]/g, '*');
+    }
+}
     </script>
 
     <!-- Template Javascript -->
