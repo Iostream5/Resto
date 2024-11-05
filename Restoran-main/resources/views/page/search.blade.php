@@ -23,9 +23,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="{{ asset ('template/lib/animate/animate.min.css') }}" rel="stylesheet">
-    <link href="{{ asset ('template/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
-    <link href="{{ asset ('template/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('template/lib/animate/animate.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('template/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('template/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('template/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -35,35 +35,40 @@
 </head>
 <style>
     .searching {
-    position: relative;
-}
-
-.form-inputs {
-    padding-left: 2.5rem; /* Jarak untuk ikon search di kiri */
-    padding-right: 2.5rem; /* Jarak untuk ikon microphone di kanan */
-    height: 55px;
-    text-indent: 33px;
-    border-radius: 10px;
-}
-
-.searching .fa-search,
-.searching .fa-microphone {
-    color: #6c757d; /* Warna ikon, sesuaikan sesuai kebutuhan */
-}
-
-.form-inputs:focus{
-    
-    box-shadow: none;
-    border:none;
+        position: relative;
     }
 
-.b {
-    border-left: 1px solid rgba(141, 141, 141, 0.6);
+    .form-inputs {
+        padding-left: 2.5rem;
+        /* Jarak untuk ikon search di kiri */
+        padding-right: 2.5rem;
+        /* Jarak untuk ikon microphone di kanan */
+        height: 55px;
+        text-indent: 33px;
+        border-radius: 10px;
+    }
 
-}
-.c {
-    margin-left: 14px;
-}
+    .searching .fa-search,
+    .searching .fa-microphone {
+        color: #6c757d;
+        /* Warna ikon, sesuaikan sesuai kebutuhan */
+    }
+
+    .form-inputs:focus {
+
+        box-shadow: none;
+        border: none;
+    }
+
+    .b {
+        border-left: 1px solid rgba(141, 141, 141, 0.6);
+
+    }
+
+    .c {
+        margin-left: 14px;
+    }
+
     .searching {
 
         position: relative;
@@ -115,19 +120,7 @@
 
     <div class="container-xxl bg-white p-0">
         <!-- Navbar & Hero Start -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0 mb-lg-4">
-            <a href="" class="navbar-brand p-0">
-                <h1 class="text-primary m-0"><i class="fa fa-utensils me-3"></i>Restoran</h1>
-                <!-- <img src="img/logo.png" alt="Logo"> -->
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                <span class="fa fa-bars"></span>
-            </button>
-        
-            {{-- nav --}}
-            @include('bagian.nav')
-        
-        </nav>
+        @include('bagian.nav')
         <!-- Navbar & Hero End -->
         <div class="container-fluid bg-dark hero-header py-2" style="width: 100%">
             <div class="container py-3 py-lg-3 my-lg-3">
@@ -152,7 +145,9 @@
                         <div class="row g-4">
                             <div class="col-lg-6 mb-4">
                                 <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="{{ asset('template/img/menu-1.jpg') }}" alt="" style="width: 80px;">
+                                    <img class="flex-shrink-0 img-fluid rounded"
+                                        src="{{ asset('template/img/menu-1.jpg') }}" alt=""
+                                        style="width: 80px;">
                                     <div class="w-100 d-flex flex-column text-start ps-4">
                                         <h5 class="d-flex justify-content-between border-bottom pb-2">
                                             <span>Chicken Burger</span>
@@ -164,7 +159,9 @@
                             </div>
                             <div class="col-lg-6 mb-4">
                                 <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="{{ asset('template/img/menu-2.jpg') }}" alt="" style="width: 80px;">
+                                    <img class="flex-shrink-0 img-fluid rounded"
+                                        src="{{ asset('template/img/menu-2.jpg') }}" alt=""
+                                        style="width: 80px;">
                                     <div class="w-100 d-flex flex-column text-start ps-4">
                                         <h5 class="d-flex justify-content-between border-bottom pb-2">
                                             <span>Chicken Burger</span>
@@ -176,7 +173,9 @@
                             </div>
                             <div class="col-lg-6 mb-4">
                                 <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="{{ asset('template/img/menu-3.jpg') }}" alt="" style="width: 80px;">
+                                    <img class="flex-shrink-0 img-fluid rounded"
+                                        src="{{ asset('template/img/menu-3.jpg') }}" alt=""
+                                        style="width: 80px;">
                                     <div class="w-100 d-flex flex-column text-start ps-4">
                                         <h5 class="d-flex justify-content-between border-bottom pb-2">
                                             <span>Chicken Burger</span>
@@ -188,7 +187,9 @@
                             </div>
                             <div class="col-lg-6 mb-4">
                                 <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="{{ asset('template/img/menu-4.jpg') }}" alt="" style="width: 80px;">
+                                    <img class="flex-shrink-0 img-fluid rounded"
+                                        src="{{ asset('template/img/menu-4.jpg') }}" alt=""
+                                        style="width: 80px;">
                                     <div class="w-100 d-flex flex-column text-start ps-4">
                                         <h5 class="d-flex justify-content-between border-bottom pb-2">
                                             <span>Chicken Burger</span>
@@ -200,7 +201,9 @@
                             </div>
                             <div class="col-lg-6 mb-4">
                                 <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="{{ asset('template/img/menu-5.jpg') }}" alt="" style="width: 80px;">
+                                    <img class="flex-shrink-0 img-fluid rounded"
+                                        src="{{ asset('template/img/menu-5.jpg') }}" alt=""
+                                        style="width: 80px;">
                                     <div class="w-100 d-flex flex-column text-start ps-4">
                                         <h5 class="d-flex justify-content-between border-bottom pb-2">
                                             <span>Chicken Burger</span>
@@ -212,7 +215,9 @@
                             </div>
                             <div class="col-lg-6 mb-4">
                                 <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="{{ asset('template/img/menu-6.jpg') }}" alt="" style="width: 80px;">
+                                    <img class="flex-shrink-0 img-fluid rounded"
+                                        src="{{ asset('template/img/menu-6.jpg') }}" alt=""
+                                        style="width: 80px;">
                                     <div class="w-100 d-flex flex-column text-start ps-4">
                                         <h5 class="d-flex justify-content-between border-bottom pb-2">
                                             <span>Chicken Burger</span>
@@ -224,7 +229,9 @@
                             </div>
                             <div class="col-lg-6 mb-4">
                                 <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="{{ asset('template/img/menu-7.jpg') }}" alt="" style="width: 80px;">
+                                    <img class="flex-shrink-0 img-fluid rounded"
+                                        src="{{ asset('template/img/menu-7.jpg') }}" alt=""
+                                        style="width: 80px;">
                                     <div class="w-100 d-flex flex-column text-start ps-4">
                                         <h5 class="d-flex justify-content-between border-bottom pb-2">
                                             <span>Chicken Burger</span>
@@ -236,7 +243,9 @@
                             </div>
                             <div class="col-lg-6 mb-4">
                                 <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="{{ asset('template/img/menu-8.jpg') }}" alt="" style="width: 80px;">
+                                    <img class="flex-shrink-0 img-fluid rounded"
+                                        src="{{ asset('template/img/menu-8.jpg') }}" alt=""
+                                        style="width: 80px;">
                                     <div class="w-100 d-flex flex-column text-start ps-4">
                                         <h5 class="d-flex justify-content-between border-bottom pb-2">
                                             <span>Chicken Burger</span>
@@ -255,14 +264,17 @@
                                 <div class="col-12 my-2 mx-auto">
                                     <div class="searching" style="width:500px;">
                                         <i class="fa fa-search"></i>
-                                        <input type="text" class="form-control form-inputs" placeholder="Search anything..." style="width:">
+                                        <input type="text" class="form-control form-inputs"
+                                            placeholder="Search anything..." style="width:">
                                         <span class="left-pan"><i class="fa fa-microphone"></i></span>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6 mb-4">
                                 <div class="d-flex align-items-center mt-2">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="{{ asset('template/img/menu-1.jpg') }}" alt="" style="width: 80px;">
+                                    <img class="flex-shrink-0 img-fluid rounded"
+                                        src="{{ asset('template/img/menu-1.jpg') }}" alt=""
+                                        style="width: 80px;">
                                     <div class="w-100 d-flex flex-column text-start ps-4">
                                         <h5 class="d-flex justify-content-between border-bottom pb-2">
                                             <span>Chicken Burger</span>
@@ -274,7 +286,9 @@
                             </div>
                             <div class="col-lg-6 mb-4">
                                 <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="{{ asset('template/img/menu-2.jpg') }}" alt="" style="width: 80px;">
+                                    <img class="flex-shrink-0 img-fluid rounded"
+                                        src="{{ asset('template/img/menu-2.jpg') }}" alt=""
+                                        style="width: 80px;">
                                     <div class="w-100 d-flex flex-column text-start ps-4">
                                         <h5 class="d-flex justify-content-between border-bottom pb-2">
                                             <span>Chicken Burger</span>
@@ -286,7 +300,9 @@
                             </div>
                             <div class="col-lg-6 mb-4">
                                 <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="{{ asset('template/img/menu-3.jpg') }}" alt="" style="width: 80px;">
+                                    <img class="flex-shrink-0 img-fluid rounded"
+                                        src="{{ asset('template/img/menu-3.jpg') }}" alt=""
+                                        style="width: 80px;">
                                     <div class="w-100 d-flex flex-column text-start ps-4">
                                         <h5 class="d-flex justify-content-between border-bottom pb-2">
                                             <span>Chicken Burger</span>
@@ -298,7 +314,9 @@
                             </div>
                             <div class="col-lg-6 mb-4">
                                 <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="{{ asset('template/img/menu-3.jpg') }}" alt="" style="width: 80px;">
+                                    <img class="flex-shrink-0 img-fluid rounded"
+                                        src="{{ asset('template/img/menu-3.jpg') }}" alt=""
+                                        style="width: 80px;">
                                     <div class="w-100 d-flex flex-column text-start ps-4">
                                         <h5 class="d-flex justify-content-between border-bottom pb-2">
                                             <span>Chicken Burger</span>
@@ -311,7 +329,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
 

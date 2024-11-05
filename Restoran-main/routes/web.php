@@ -21,3 +21,7 @@ Route::get('/search',function(){
 Route::get('/profil',function(){
     return view('page.profil');
 })->name('profil');
+
+Route::get('/detail',function(){
+    return view('page.detail');
+})->name('detail');

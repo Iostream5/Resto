@@ -115,19 +115,9 @@
 
     <div class="container-xxl bg-white p-0">
         <!-- Navbar & Hero Start -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0 mb-lg-4">
-            <a href="" class="navbar-brand p-0">
-                <h1 class="text-primary m-0"><i class="fa fa-utensils me-3"></i>Restoran</h1>
-                <!-- <img src="img/logo.png" alt="Logo"> -->
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                <span class="fa fa-bars"></span>
-            </button>
 
             {{-- nav --}}
             @include('bagian.nav')
-
-        </nav>
         <!-- Navbar & Hero End -->
         <div class="container-fluid bg-dark hero-header py-2" style="width: 100%">
             <div class="container py-3 py-lg-3 my-lg-3">

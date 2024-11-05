@@ -14,127 +14,123 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap"
+        rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="{{asset('template/lib/animate/animate.min.css')}}" rel="stylesheet">
-    <link href="{{asset('template/lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
-    <link href="{{asset('template/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css')}}" rel="stylesheet" />
+    <link href="{{ asset('template/lib/animate/animate.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('template/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('template/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="{{asset('template/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('template/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="{{asset('template/css/style.css')}}" rel="stylesheet">
+    <link href="{{ asset('template/css/style.css') }}" rel="stylesheet">
 </head>
 <style>
-    .kategori::-webkit-scrollbar { 
-    display: none;
+    .kategori::-webkit-scrollbar {
+        display: none;
     }
-    
 
-    .rounded-5{
+
+    .rounded-5 {
         border-radius: 15px
     }
-    .ratings i{
-    
-    color:#cecece;
-    }
-    
-    .rating-color{
-    color:#fbc634 !important;
-    }
-    .searching {
-    
-    position: relative;
-    }
-    
-    .searching .fa-search {
-    
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    color: #9ca3af;
-    
-    }
-    
-    .searching span {
-    
-    position: absolute;
-    right: 17px;
-    top: 13px;
-    padding: 2px;
-    border-left: 1px solid #d1d5db;
-    
-    }
-    
-    .left-pan {
-    padding-left: 7px;
-    }
-    
-    .left-pan i {
-    
-    padding-left: 10px;
-    }
-    
-    .form-inputs {
-    
-    height: 55px;
-    text-indent: 33px;
-    border-radius: 10px;
-    }
-    
-    .form-inputs:focus {
-    
-    box-shadow: none;
-    border: none;
+
+    .ratings i {
+
+        color: #cecece;
     }
 
+    .rating-color {
+        color: #fbc634 !important;
+    }
+
+    .searching {
+
+        position: relative;
+    }
+
+    .searching .fa-search {
+
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        color: #9ca3af;
+
+    }
+
+    .searching span {
+
+        position: absolute;
+        right: 17px;
+        top: 13px;
+        padding: 2px;
+        border-left: 1px solid #d1d5db;
+
+    }
+
+    .left-pan {
+        padding-left: 7px;
+    }
+
+    .left-pan i {
+
+        padding-left: 10px;
+    }
+
+    .form-inputs {
+
+        height: 55px;
+        text-indent: 33px;
+        border-radius: 10px;
+    }
+
+    .form-inputs:focus {
+
+        box-shadow: none;
+        border: none;
+    }
 </style>
 
 <body style="background: linear-gradient(rgba(15, 23, 43, .9), rgba(15, 23, 43, .9))">
     <div class="container-xxl bg-white p-0">
         <!-- Navbar & Hero Start -->
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0 mb-lg-4">
-                <a href="" class="navbar-brand p-0">
-                    <h1 class="text-primary m-0"><i class="fa fa-utensils me-3"></i>Restoran</h1>
-                    <!-- <img src="img/logo.png" alt="Logo"> -->
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                    <span class="fa fa-bars"></span>
-                </button>
-                
-                {{-- nav --}}
-                @include('bagian.nav')
 
-            </nav>
+        {{-- nav --}}
+        @include('bagian.nav')
 
-            <div class="container-fluid bg-dark hero-header py-2" style="width: 100%">
-                <div class="container py-3 py-lg-3 my-lg-5">
-                    <div id="carouselExampleInterval" class="carousel slide p-4" data-bs-ride="carousel">
-                        <div class="carousel-inner overflow-hidden">
-                            <div class="carousel-item  active" data-bs-interval="1000">
-                                <img src="{{ asset('gambar/slider 1.png') }}" class="d-block w-100 rounded-5" alt="...">
-                            </div>
-                            <div class="carousel-item " data-bs-interval="4000">
-                                <img src="{{ asset('gambar/slider 3.png') }}" class="d-block w-100 rounded-5" alt="...">
-                            </div>
-                            <div class="carousel-item " data-bs-interval="4000">
-                                <img src="{{ asset('gambar/slider 4.png') }}" class="d-block w-100 rounded-5" alt="...">
-                            </div>
+        <div class="container-fluid bg-dark hero-header py-2" style="width: 100%">
+            <div class="container py-3 py-lg-3 my-lg-5">
+                <div id="carouselExampleInterval" class="carousel slide p-4" data-bs-ride="carousel">
+                    <div class="carousel-inner overflow-hidden">
+                        <div class="carousel-item  active" data-bs-interval="1000">
+                            <img src="{{ asset('gambar/slider 1.png') }}" class="d-block w-100 rounded-5"
+                                alt="...">
+                        </div>
+                        <div class="carousel-item " data-bs-interval="4000">
+                            <img src="{{ asset('gambar/slider 3.png') }}" class="d-block w-100 rounded-5"
+                                alt="...">
+                        </div>
+                        <div class="carousel-item " data-bs-interval="4000">
+                            <img src="{{ asset('gambar/slider 4.png') }}" class="d-block w-100 rounded-5"
+                                alt="...">
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         <!-- Navbar & Hero End -->
 
 
         <!-- menu Start -->
-       <div class="py-lg-5 py-2">
+        <div class="py-lg-5 py-2">
             <div class="row pe-0 container-fluid">
                 <div class="col-12 mt-3">
                     <h5 class="fw-bolder border-bottom border-3" style="width: 250px">Mau Makan Apa Hari Ini?</h5>
@@ -142,145 +138,181 @@
                 <div class="col-12 mt-3 kategori d-flex container overflow-auto">
                     <div class="mx-lg-2 mx-1">
                         <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
+                                style="width: 130px; height:50px;">
                                 <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
+                                    alt="">
                             </div>
                         </a>
                     </div>
                     <div class="mx-lg-2 mx-1">
                         <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
+                                style="width: 130px; height:50px;">
                                 <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
+                                    alt="">
                             </div>
                         </a>
                     </div>
                     <div class="mx-lg-2 mx-1">
                         <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
+                                style="width: 130px; height:50px;">
                                 <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
+                                    alt="">
                             </div>
                         </a>
                     </div>
                     <div class="mx-lg-2 mx-1">
                         <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
+                                style="width: 130px; height:50px;">
                                 <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
+                                    alt="">
                             </div>
                         </a>
                     </div>
                     <div class="mx-lg-2 mx-1">
                         <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
+                                style="width: 130px; height:50px;">
                                 <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
+                                    alt="">
                             </div>
                         </a>
                     </div>
                     <div class="mx-lg-2 mx-1">
                         <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
+                                style="width: 130px; height:50px;">
                                 <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
+                                    alt="">
                             </div>
                         </a>
                     </div>
                     <div class="mx-lg-2 mx-1">
                         <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
+                                style="width: 130px; height:50px;">
                                 <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
+                                    alt="">
                             </div>
                         </a>
                     </div>
                     <div class="mx-lg-2 mx-1">
                         <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
+                                style="width: 130px; height:50px;">
                                 <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
+                                    alt="">
                             </div>
                         </a>
                     </div>
                     <div class="mx-lg-2 mx-1">
                         <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
+                                style="width: 130px; height:50px;">
                                 <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
+                                    alt="">
                             </div>
                         </a>
                     </div>
                     <div class="mx-lg-2 mx-1">
                         <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
+                                style="width: 130px; height:50px;">
                                 <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
+                                    alt="">
                             </div>
                         </a>
                     </div>
                     <div class="mx-lg-2 mx-1">
                         <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
+                                style="width: 130px; height:50px;">
                                 <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
+                                    alt="">
                             </div>
                         </a>
                     </div>
                     <div class="mx-lg-2 mx-1">
                         <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
+                                style="width: 130px; height:50px;">
                                 <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
+                                    alt="">
                             </div>
                         </a>
                     </div>
                     <div class="mx-lg-2 mx-1">
                         <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
+                                style="width: 130px; height:50px;">
                                 <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
+                                    alt="">
                             </div>
                         </a>
                     </div>
                     <div class="mx-lg-2 mx-1">
                         <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
+                                style="width: 130px; height:50px;">
                                 <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
+                                    alt="">
                             </div>
                         </a>
                     </div>
                     <div class="mx-lg-2 mx-1">
                         <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
+                                style="width: 130px; height:50px;">
                                 <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
+                                    alt="">
                             </div>
                         </a>
                     </div>
                     <div class="mx-lg-2 mx-1">
                         <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
+                                style="width: 130px; height:50px;">
                                 <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
+                                    alt="">
                             </div>
                         </a>
                     </div>
                     <div class="mx-lg-2 mx-1">
                         <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
+                                style="width: 130px; height:50px;">
                                 <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
+                                    alt="">
                             </div>
                         </a>
                     </div>
                     <div class="mx-lg-2 mx-1">
                         <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2" style="width: 130px; height:50px;">
+                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
+                                style="width: 130px; height:50px;">
                                 <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50" alt="">
+                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
+                                    alt="">
                             </div>
                         </a>
                     </div>
@@ -288,7 +320,8 @@
                 <div class="col-12 my-4">
                     <div class="searching">
                         <i class="fa fa-search"></i>
-                        <input type="text" class="form-control form-inputs" onclick="menu()" placeholder="Search anything...">
+                        <input type="text" class="form-control form-inputs" onclick="menu()"
+                            placeholder="Search anything...">
                         <span class="left-pan"><i class="fa fa-microphone"></i></span>
                     </div>
                 </div>
@@ -296,16 +329,18 @@
                     <a href="#" class="ms-auto col-lg-3 col-md-5 col-6">
                         <img src="{{ asset('gambar/produk.png') }}" class="card-img-top rounded-5" alt="...">
                         <div class="card-body">
-                            <p class="text-dark text-start produk card-text fw-bold">Chicken Burger by Hangry - Cikini.</p>
+                            <p class="text-dark text-start produk card-text fw-bold">Chicken Burger by Hangry - Cikini.
+                            </p>
                             <h5 class="text-primary fw-bold text-nowrap">Rp.1.000.000</h5>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="ratings text-nowrap">
                                     @php
-                                    $rating = 4;
+                                        $rating = 4;
                                     @endphp
                                     <div class="ratings">
-                                        @for ($i = 1; $i <= 5; $i++) <i class="fa fa-star {{ $i <= $rating ? 'rating-color' : '' }}"></i>
-                                            @endfor
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            <i class="fa fa-star {{ $i <= $rating ? 'rating-color' : '' }}"></i>
+                                        @endfor
                                     </div>
                                     <h5 class="review-count">12 Reviews</h5>
                                 </div>
@@ -315,16 +350,18 @@
                     <a href="#" class="ms-auto col-lg-3 col-md-5 col-6">
                         <img src="{{ asset('gambar/produk.png') }}" class="card-img-top rounded-5" alt="...">
                         <div class="card-body">
-                            <p class="text-dark text-start produk card-text fw-bold">Chicken Burger by Hangry - Cikini.</p>
+                            <p class="text-dark text-start produk card-text fw-bold">Chicken Burger by Hangry - Cikini.
+                            </p>
                             <h5 class="text-primary fw-bold text-nowrap">Rp.1.000.000</h5>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="ratings text-nowrap">
                                     @php
-                                    $rating = 4;
+                                        $rating = 4;
                                     @endphp
                                     <div class="ratings">
-                                        @for ($i = 1; $i <= 5; $i++) <i class="fa fa-star {{ $i <= $rating ? 'rating-color' : '' }}"></i>
-                                            @endfor
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            <i class="fa fa-star {{ $i <= $rating ? 'rating-color' : '' }}"></i>
+                                        @endfor
                                     </div>
                                     <h5 class="review-count">12 Reviews</h5>
                                 </div>
@@ -334,16 +371,18 @@
                     <a href="#" class="ms-auto col-lg-3 col-md-5 col-6">
                         <img src="{{ asset('gambar/produk.png') }}" class="card-img-top rounded-5" alt="...">
                         <div class="card-body">
-                            <p class="text-dark text-start produk card-text fw-bold">Chicken Burger by Hangry - Cikini.</p>
+                            <p class="text-dark text-start produk card-text fw-bold">Chicken Burger by Hangry - Cikini.
+                            </p>
                             <h5 class="text-primary fw-bold text-nowrap">Rp.1.000.000</h5>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="ratings text-nowrap">
                                     @php
-                                    $rating = 4;
+                                        $rating = 4;
                                     @endphp
                                     <div class="ratings">
-                                        @for ($i = 1; $i <= 5; $i++) <i class="fa fa-star {{ $i <= $rating ? 'rating-color' : '' }}"></i>
-                                            @endfor
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            <i class="fa fa-star {{ $i <= $rating ? 'rating-color' : '' }}"></i>
+                                        @endfor
                                     </div>
                                     <h5 class="review-count">12 Reviews</h5>
                                 </div>
@@ -353,16 +392,18 @@
                     <a href="#" class="ms-auto col-lg-3 col-md-5 col-6">
                         <img src="{{ asset('gambar/produk.png') }}" class="card-img-top rounded-5" alt="...">
                         <div class="card-body">
-                            <p class="text-dark text-start produk card-text fw-bold">Chicken Burger by Hangry - Cikini.</p>
+                            <p class="text-dark text-start produk card-text fw-bold">Chicken Burger by Hangry - Cikini.
+                            </p>
                             <h5 class="text-primary fw-bold text-nowrap">Rp.1.000.000</h5>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="ratings text-nowrap">
                                     @php
-                                    $rating = 4;
+                                        $rating = 4;
                                     @endphp
                                     <div class="ratings">
-                                        @for ($i = 1; $i <= 5; $i++) <i class="fa fa-star {{ $i <= $rating ? 'rating-color' : '' }}"></i>
-                                            @endfor
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            <i class="fa fa-star {{ $i <= $rating ? 'rating-color' : '' }}"></i>
+                                        @endfor
                                     </div>
                                     <h5 class="review-count">12 Reviews</h5>
                                 </div>
@@ -384,7 +425,8 @@
                 <div class="row col-12 g-4">
                     <div class="col-lg-6">
                         <div class="d-flex align-items-center">
-                            <img class="flex-shrink-0 img-fluid rounded" src="img/menu-1.jpg" alt="" style="width: 80px;">
+                            <img class="flex-shrink-0 img-fluid rounded" src="img/menu-1.jpg" alt=""
+                                style="width: 80px;">
                             <div class="w-100 d-flex flex-column text-start ps-4">
                                 <h5 class="d-flex justify-content-between border-bottom pb-2">
                                     <span>Warung Kholiq</span>
@@ -394,7 +436,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -457,7 +499,7 @@
             </div>
         </div> --}}
         <!-- Testimonial End -->
-        
+
 
         <!-- Footer Start -->
         @include('bagian.footer')
@@ -471,17 +513,17 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{asset('template/lib/wow/wow.min.js')}}"></script>
-    <script src="{{asset('template/lib/easing/easing.min.js')}}"></script>
-    <script src="{{asset('template/lib/waypoints/waypoints.min.js')}}"></script>
-    <script src="{{asset('template/lib/counterup/counterup.min.js')}}"></script>
-    <script src="{{asset('template/lib/owlcarousel/owl.carousel.min.js')}}"></script>
-    <script src="{{asset('template/lib/tempusdominus/js/moment.min.js')}}"></script>
-    <script src="{{asset('template/lib/tempusdominus/js/moment-timezone.min.js')}}"></script>
-    <script src="{{asset('template/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js')}}"></script>
+    <script src="{{ asset('template/lib/wow/wow.min.js') }}"></script>
+    <script src="{{ asset('template/lib/easing/easing.min.js') }}"></script>
+    <script src="{{ asset('template/lib/waypoints/waypoints.min.js') }}"></script>
+    <script src="{{ asset('template/lib/counterup/counterup.min.js') }}"></script>
+    <script src="{{ asset('template/lib/owlcarousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('template/lib/tempusdominus/js/moment.min.js') }}"></script>
+    <script src="{{ asset('template/lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
+    <script src="{{ asset('template/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
     <script>
-        function menu(){
-            window.location="{{ route('search') }}"
+        function menu() {
+            window.location = "{{ route('search') }}"
         }
     </script>
 
