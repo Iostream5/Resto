@@ -25,3 +25,7 @@ Route::get('/profil',function(){
 Route::get('/detail',function(){
     return view('page.detail');
 })->name('detail');
+
+Route::get('/toko',function(){
+    return view('page.toko');
+})->name('toko');

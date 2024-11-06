@@ -26,6 +26,7 @@
                 <a href="/search" class="nav-item nav-link">Cari Makanan</a>
                 <a href="/about" class="nav-item nav-link">About</a>
                 <a href="/favorit" class="nav-item nav-link">Populer</a>
+                <a href="/toko" class="nav-item nav-link">Toko</a>
             </div>
 
             <!-- Tombol Masuk & Daftar -->
