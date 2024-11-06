@@ -131,15 +131,9 @@
         <div class="container-xxl  py-5">
             <div class="container">
                 <div class="text-center wow fadeInUp my-5" data-wow-delay="0.1s">
-                    <h1 class="mb-5">Cari Makanan Yang Kamu Inginkan!</h1>
+                    <h1 class="mb-5">Category!</h1>
                 </div>
-                <div class="col-12 my-4">
-                    <div class="searching">
-                        <i class="fa fa-search"></i>
-                        <input type="text" class="form-control form-inputs" placeholder="Search anything...">
-                        <span class="left-pan"><i class="fa fa-microphone"></i></span>
-                    </div>
-                </div>
+                
                 <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.1s">
                     <div id="tab-1" class="tab-pane fade show p-0 active">
                         <div class="row g-4">
@@ -256,77 +250,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row mt-5">
-                            <div class="row mx-auto">
-                                <div class="container text-start">
-                                    <h4>Cari toko</h4>
-                                </div>
-                                <div class="col-12 my-2 mx-auto">
-                                    <div class="searching" style="width:500px;">
-                                        <i class="fa fa-search"></i>
-                                        <input type="text" class="form-control form-inputs"
-                                            placeholder="Search anything..." style="width:">
-                                        <span class="left-pan"><i class="fa fa-microphone"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                                <div class="d-flex align-items-center mt-2">
-                                    <img class="flex-shrink-0 img-fluid rounded"
-                                        src="{{ asset('template/img/menu-1.jpg') }}" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded"
-                                        src="{{ asset('template/img/menu-2.jpg') }}" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded"
-                                        src="{{ asset('template/img/menu-3.jpg') }}" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded"
-                                        src="{{ asset('template/img/menu-3.jpg') }}" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
 

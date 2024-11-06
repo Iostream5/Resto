@@ -29,3 +29,8 @@ Route::get('/detail',function(){
 Route::get('/toko',function(){
     return view('page.toko');
 })->name('toko');
+
+Route::get('/kategori',function(){
+    return view('page.kategori');
+})->name('kategori');
+
