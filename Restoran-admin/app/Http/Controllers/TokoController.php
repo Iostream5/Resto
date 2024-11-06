@@ -4,98 +4,86 @@ namespace App\Http\Controllers;
 
 use App\Models\Toko;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 
 class TokoController extends Controller
 {
-
-
-    public function create()
+    public function tampil()
     {
-        return view('page.toko.create'); // Form tambah toko
+        return view('page.toko.data');
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'nama' => 'required',
-            'alamat' => 'required',
-            'rating' => 'required|numeric',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-
-        $data = $request->all();
-
-        if ($request->hasFile('foto')) {
-            $data['foto'] = $request->file('foto')->store('tokos', 'public');
-        }
-
-        Toko::create($data);
-
-        return redirect()->route('toko.index')->with('success', 'Toko berhasil ditambahkan.');
-    }
-
-    public function show(Toko $toko)
-    {
-        return view('page.toko.show', compact('toko'));
-    }
-
-    public function edit(Toko $toko)
-    {
-        return view('page.toko.edit', compact('toko'));
-    }
-
-    public function update(Request $request, Toko $toko)
-    {
-        $request->validate([
-            'nama' => 'required',
-            'alamat' => 'required',
-            'rating' => 'required|numeric',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-
-        $data = $request->all();
-
-        if ($request->hasFile('foto')) {
-            $data['foto'] = $request->file('foto')->store('tokos', 'public');
-        }
-
-        $toko->update($data);
-
-        return redirect()->route('toko.index')->with('success', 'Toko berhasil diupdate.');
-    }
-
-    public function destroy(Toko $toko)
-    {
-        $toko->delete();
-        return redirect()->route('toko.index')->with('success', 'Toko berhasil dihapus.');
-    }
-
-    public function index()
-    {
-    $tokos = Toko::all(); // Mengambil semua data toko dari database
-    return view('page.toko.data', compact('tokos')); // Mengirim data ke view
-}
-public function tampil()
-{
-    $tokos = Toko::all(); // Ambil semua data toko dari database
-    return view('page.toko.data', compact('tokos')); // Kirim data ke view
-}
-
-public function getData(Request $request)
+    public function data(Request $request)
     {
         if ($request->ajax()) {
-            $tokos = Toko::select(['id', 'nama', 'alamat', 'rating', 'foto']);
-            return DataTables::of($tokos)
+            $toko = Toko::where('user_id', Auth::id())->select(['id', 'nama_toko', 'alamat', 'rating', 'foto']);
+            return DataTables::of($toko)
                 ->addColumn('action', function ($toko) {
-                    return view('page.toko.partials.actions', compact('toko'))->render();
+                    return '
+                        <a href="' . route('toko.edit', $toko->id) . '" class="btn btn-primary btn-sm">Edit</a>
+                        <form action="' . route('toko.hapus', $toko->id) . '" method="POST" style="display:inline;">
+                            ' . csrf_field() . '
+                            ' . method_field('DELETE') . '
+                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                        </form>
+                    ';
                 })
                 ->editColumn('foto', function ($toko) {
-                    return '<img src="' . asset('storage/' . $toko->foto) . '" width="50" height="50" />';
+                    return '<img src="' . Storage::url($toko->foto) . '" height="50" />';
                 })
-                ->rawColumns(['foto', 'action']) // Kolom yang memerlukan HTML render
+                ->rawColumns(['action', 'foto'])
                 ->make(true);
         }
     }
 
+    public function tambah()
+    {
+        return view('page.toko.tambah');
+    }
+
+    public function simpan(Request $request)
+    {
+        $toko = new Toko();
+        $toko->nama_toko = $request->nama_toko;
+        $toko->alamat = $request->alamat;
+        $toko->rating = $request->rating;
+        $toko->foto = $request->file('foto')->store('toko', 'public');
+        $toko->user_id = Auth::id();
+        $toko->save();
+
+        return redirect()->route('toko.tampil')->with('success', 'Toko berhasil dibuat');
+    }
+
+    public function edit($id)
+    {
+        $toko = Toko::where('user_id', Auth::id())->findOrFail($id);
+        return view('page.toko.edit', compact('toko'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $toko = Toko::where('user_id', Auth::id())->findOrFail($id);
+        $toko->nama_toko = $request->nama_toko;
+        $toko->alamat = $request->alamat;
+        $toko->rating = $request->rating;
+        $toko->foto = $request->file('foto')->store('toko', 'public');
+
+        $toko->save();
+
+        return redirect()->route('toko.tampil')->with('success', 'Toko berhasil diperbarui');
+    }
+
+    public function hapus($id)
+    {
+        $toko = Toko::where('user_id', Auth::id())->findOrFail($id);
+        if ($toko->foto) {
+            Storage::disk('public')->delete($toko->foto);
+        }
+
+        $toko->delete();
+
+        return redirect()->route('toko.tampil')->with('success', 'Toko berhasil dihapus');
+    }
 }

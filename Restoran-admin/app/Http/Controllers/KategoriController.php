@@ -5,78 +5,80 @@ namespace App\Http\Controllers;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Storage;
 
 class KategoriController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function tampil(){
+    public function tampil()
+    {
         return view('page.kategori.data');
     }
-    
+
+
     public function data()
     {
         $kategoris = Kategori::query();
-
+    
         return DataTables::of($kategoris)
             ->addColumn('action', function ($kategori) {
                 return '
-                    <a href="' . route('kategori.show', $kategori->id) . '" class="btn btn-info">View</a>
-                    <a href="' . route('kategori.edit', $kategori->id) . '" class="btn btn-warning">Edit</a>
-                    <form action="' . route('kategori.destroy', $kategori->id) . '" method="POST" style="display:inline;">
+                    <a href="' . route('kategori.edit', $kategori->id) . '" class="btn btn-warning btn-sm">Edit</a>
+                    <form action="' . route('kategori.hapus', $kategori->id) . '" method="POST" style="display:inline;">
                         ' . csrf_field() . '
                         ' . method_field('DELETE') . '
-                        <button type="submit" class="btn btn-danger" onclick="return confirm(\'Are you sure?\')">Delete</button>
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure?\')">Hapus</button>
                     </form>
                 ';
             })
+            ->editColumn('foto', function ($kategori) {
+                return '<img src="' . asset('storage/' . $kategori->foto) . '" alt="' . $kategori->nama_kategori . '" style="max-width: 100px;">';
+            })
+            ->rawColumns(['action', 'foto'])
             ->make(true);
     }
 
-    public function index()
+
+    public function tambah()
     {
         return view('page.kategori.tambah');
     }
 
-    public function create()
+    public function simpan(Request $request)
     {
-        return view('page.kategori.tambah');
+        $kategori = new Kategori();
+        $kategori->nama_kategori = $request->nama_kategori;
+        $kategori->foto = $request->file('foto')->store('kategori', 'public');
+        $kategori->save();
+
+        return redirect()->route('kategori.tampil');
     }
 
-    public function store(Request $request)
+    public function edit($id)
     {
-        $request->validate([
-            'nama_kategori' => 'required|string|max:255',
-        ]);
-
-        Kategori::create($request->all());
-        return redirect()->route('produks.tampil')->with('success', 'Kategori berhasil ditambahkan!'); // Sesuaikan dengan route yang benar
-    }
-
-    public function show(Kategori $kategori)
-    {
-        return view('page.kategori.data', compact('kategori'));
-    }
-
-    public function edit(Kategori $kategori)
-    {
+        $kategori = Kategori::findOrFail($id);
         return view('page.kategori.edit', compact('kategori'));
     }
 
-    public function update(Request $request, Kategori $kategori)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'nama_kategori' => 'sometimes|required|string|max:255',
-        ]);
+        $kategori = Kategori::find($id);
+        $kategori->nama_kategori = $request->nama_kategori;
+        $kategori->foto = $request->file('foto')->store('kategori', 'public');
+        $kategori->update();    
 
-        $kategori->update($request->all());
-        return redirect()->route('kategoris.tampil')->with('success', 'Kategori berhasil diperbarui!'); // Sesuaikan dengan route yang benar
+        return redirect()->route('kategori.tampil');
     }
 
-    public function destroy(Kategori $kategori)
+    public function hapus($id)
     {
+        $kategori = Kategori::findOrFail($id);
+
+        if ($kategori->foto) {
+            Storage::disk('public')->delete($kategori->foto);
+        }
+
         $kategori->delete();
-        return redirect()->route('kategoris.tampil')->with('success', 'Kategori berhasil dihapus!'); // Sesuaikan dengan route yang benar
+
+        return redirect()->route('kategori.tampil')->with('success', 'Kategori berhasil dihapus!');
     }
 }

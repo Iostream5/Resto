@@ -10,12 +10,9 @@
 </head>
 
 <body>
-    <!--  Body Wrapper -->
     <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed">
-        <!-- Sidebar Start -->
         <aside class="left-sidebar">
-            <!-- Sidebar scroll-->
             <div>
                 <div class="brand-logo d-flex align-items-center justify-content-between">
                     <a href="./index.html" class="text-nowrap logo-img">
@@ -25,33 +22,25 @@
                         <i class="ti ti-x fs-8"></i>
                     </div>
                 </div>
-                <!-- Sidebar navigation-->
 
                 @include('bagian.nav')
 
-                <!-- End Sidebar navigation -->
             </div>
-            <!-- End Sidebar scroll-->
         </aside>
-        <!--  Sidebar End -->
-        <!--  Main wrapper -->
         <div class="body-wrapper">
-            <!--  Header Start -->
 
             @include('bagian.header')
 
-            <!--  Header End -->
             <div class="container-fluid">
-                <!--  Row 1 -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <!-- Yearly Breakup -->
                         <div class="card overflow-hidden">
                             <div class="card-body p-4">
                                 <div class="heading d-flex align-items-center justify-content-between">
                                     <h5 class="card-title mb-9 fw-semibold">Data Produk</h5>
-                                    <a href="{{ route('produks.index') }}" class="btn btn-success">Lihat data <svg viewBox="0 0 24 24"
-                                            class="fw-bold" height="15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <a href="{{ route('produk.tampil') }}" class="btn btn-success">Lihat data <svg
+                                            viewBox="0 0 24 24" class="fw-bold" height="15" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
                                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                             <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
                                                 stroke-linejoin="round"></g>
@@ -64,19 +53,50 @@
                                             </g>
                                         </svg></a>
                                 </div>
-                                <form action="#" method="post">
+                                <form action="{{ route('produk.simpan') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
                                     <label class="fw-bolder my-2">Nama Toko</label>
-                                    <input class="form-control form-control-lg" type="text"
-                                        placeholder="Masukan Nama Toko" aria-label=".form-control-lg example">
-                                    <label class="fw-bolder my-2">Alamat Toko</label>
-                                    <input class="form-control form-control-lg" type="text"
-                                        placeholder="Masukan Alamat Toko" aria-label=".form-control-lg example">
-                                    <label class="fw-bolder my-2">Rating Toko</label>
-                                    <input class="form-control form-control-lg" type="text"
-                                        placeholder="Masukan Nilai Toko" aria-label=".form-control-lg example">
-                                    <label class="fw-bolder my-2">Foto Toko</label>
-                                    <input class="form-control form-control-lg" id="formFileLg" type="file"
-                                        onchange="previewImage(event)">
+                                    <select required class="form-control form-control-lg"
+                                        aria-label=".form-control-lg example" name="toko_id" id="">
+                                        <option selected>Nama toko</option>
+                                        @foreach ($toko as $data)
+                                        <option value="{{ $data->id }}">{{ $data->nama_toko }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    <label class="fw-bolder my-2">Nama Produk</label>
+                                    <input required name="nama" class="form-control form-control-lg" type="text"
+                                        placeholder="Masukan nama produk" aria-label=".form-control-lg example">
+
+                                    <label class="fw-bolder my-2">Harga Produk</label>
+                                    <input required name="harga" class="form-control form-control-lg" type="text"
+                                        placeholder="Masukan harga produk" aria-label=".form-control-lg example">
+
+                                    <label class="fw-bolder my-2">Deskripsi</label>
+                                    <input required name="deskripsi" class="form-control form-control-lg" type="text"
+                                        placeholder="Masukan deskripsi produk" aria-label=".form-control-lg example">
+
+                                    <label class="fw-bolder my-2">Kategori Makanan</label>
+                                    <select required class="form-control form-control-lg"
+                                        aria-label=".form-control-lg example" name="kategori_id">
+                                        <option selected>pilih kategori makanan</option>
+                                        @foreach ($kategori as $item)
+                                        <option value="{{ $item->id }}">{{ $item->nama_kategori }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    <div class="mb-3">
+                                        <label class="fw-bolder my-2">Rating</label>
+                                        <input type="range" step="0.1" min="0" max="5"
+                                            class="form-control form-control-lg" id="rating" name="rating"
+                                            placeholder="Masukkan Rating (0-5)" oninput="updateRatingValue(this.value)">
+                                        <span id="rating-value">0</span>
+                                    </div>
+
+                                    <label class="fw-bolder my-2">Foto Makanan</label>
+                                    <input required name="foto" class="form-control form-control-lg" id="formFileLg"
+                                        type="file" onchange="previewImage(event)">
+
                                     <div style="margin-top: 20px;">
                                         <img id="imagePreview" src="" alt="Preview Foto"
                                             style="max-width: 300px; display: none;">
@@ -129,19 +149,28 @@
         function previewImage(event) {
                     const input = event.target;
                     const preview = document.getElementById('imagePreview');
-                    
-                    // Cek apakah ada file yang dipilih
+
                     if (input.files && input.files[0]) {
                         const reader = new FileReader();
         
                         reader.onload = function(e) {
-                            preview.src = e.target.result; // Mengatur source gambar
-                            preview.style.display = 'block'; // Menampilkan elemen img
+                            preview.src = e.target.result; 
+                            preview.style.display = 'block';
                         };
         
-                        reader.readAsDataURL(input.files[0]); // Membaca file sebagai URL data
+                        reader.readAsDataURL(input.files[0]);
                     }
                 }
+    </script>
+    <script>
+        function updateRatingValue(value) {
+                document.getElementById("rating-value").textContent = value;
+            }
+        
+            document.addEventListener("DOMContentLoaded", function() {
+                document.getElementById("rating").value = 0;
+                updateRatingValue(0);
+            });
     </script>
 </body>
 

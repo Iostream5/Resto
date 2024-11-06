@@ -6,91 +6,135 @@ use App\Models\Kategori;
 use App\Models\Produk;
 use App\Models\Toko;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 
 class ProdukController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */ 
-    public function tampil(){
+    public function tampil()
+    {
         return view('page.produk.data');
     }
-     
+
     public function data()
     {
-        $produks = Produk::with('toko', 'kategori')->get(); // Menyertakan relasi toko dan kategori
+        $produk = Produk::with(['kategori', 'toko'])
+            ->whereHas('toko', function ($query) {
+                $query->where('user_id', Auth::id());
+            })
+            ->get();
 
-        return DataTables::of($produks)
+        return DataTables::of($produk)
+            ->addColumn('kategori', function ($produk) {
+                return $produk->kategori->nama_kategori;
+            })
+            ->addColumn('toko', function ($produk) {
+                return $produk->toko->nama_toko;
+            })
             ->addColumn('action', function ($produk) {
                 return '
-                    <a href="' . route('produk.show', $produk->id) . '" class="btn btn-info">View</a>
-                    <a href="' . route('produk.edit', $produk->id) . '" class="btn btn-warning">Edit</a>
-                    <form action="' . route('produk.destroy', $produk->id) . '" method="POST" style="display:inline;">
-                        ' . csrf_field() . '
-                        ' . method_field('DELETE') . '
-                        <button type="submit" class="btn btn-danger" onclick="return confirm(\'Are you sure?\')">Delete</button>
-                    </form>
-                ';
+                <a href="' . route('produk.edit', $produk->id) . '" class="btn btn-warning">Edit</a>
+                <form action="' . route('produk.destroy', $produk->id) . '" method="POST" style="display:inline;">
+                    ' . csrf_field() . '
+                    ' . method_field('DELETE') . '
+                    <button type="submit" class="btn btn-danger" onclick="return confirm(\'Are you sure?\')">Delete</button>
+                </form>
+            ';
             })
+            ->editColumn('foto', function ($produk) {
+                return '<img src="' . asset('storage/' . $produk->foto) . '" alt="" style="max-width: 100px;">';
+            })
+            ->rawColumns(['action', 'foto'])
             ->make(true);
     }
 
-    public function index()
+    public function tambah()
     {
-        return view('page.produk.tambah');
+        $toko = Toko::where('user_id', Auth::id())->get();
+        $kategori = Kategori::all();
+        return view('page.produk.tambah', compact('toko', 'kategori'));
     }
 
-    public function create()
-    {
-        $tokos = Toko::all();
-        $kategoris = Kategori::all();
-        return view('page.produk.tambah', compact('tokos', 'kategoris'));
-    }
-
-    public function store(Request $request)
+    public function simpan(Request $request)
     {
         $request->validate([
             'nama' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
             'harga' => 'required|numeric',
-            'deskripsi' => 'nullable|string',
-            'toko_id' => 'required|exists:tokos,id',
+            'rating' => 'nullable|numeric|between:0,5',
             'kategori_id' => 'required|exists:kategoris,id',
+            'toko_id' => 'required|exists:tokos,id',
+            'foto' => 'image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
-        Produk::create($request->all());
-        return redirect()->route('produk.tampil')->with('success', 'Produk berhasil ditambahkan!');
+        // Pastikan toko milik user yang sedang login
+        $toko = Toko::where('id', $request->toko_id)->where('user_id', Auth::id())->firstOrFail();
+
+        $produk = new Produk();
+        $produk->toko_id = $toko->id;
+        $produk->nama = $request->nama;
+        $produk->deskripsi = $request->deskripsi;
+        $produk->harga = $request->harga;
+        $produk->rating = $request->rating;
+        $produk->kategori_id = $request->kategori_id;
+        $produk->foto = $request->file('foto')->store('produk', 'public');
+        $produk->save();
+
+        return redirect()->route('produk.tampil')->with('success', 'Produk berhasil ditambahkan');
     }
 
-    public function show(Produk $produk)
+    public function edit($id)
     {
-        return view('page.produk.tampil', compact('produk'));
+        $produk = Produk::with(['kategori', 'toko'])
+            ->whereHas('toko', function ($query) {
+                $query->where('user_id', Auth::id());
+            })
+            ->findOrFail($id);
+        $toko = Toko::where('user_id', Auth::id())->get();
+        $kategori = Kategori::all();
+        return view('page.produk.edit', compact('produk', 'toko', 'kategori'));
     }
 
-    public function edit(Produk $produk)
+    public function update(Request $request, $id)
     {
-        $tokos = Toko::all();
-        $kategoris = Kategori::all();
-        return view('page.produk.edit', compact('produk', 'tokos', 'kategoris'));
-    }
-
-    public function update(Request $request, Produk $produk)
-    {
+        $produk = Produk::whereHas('toko', function ($query) {
+            $query->where('user_id', Auth::id());
+        })->findOrFail($id);
         $request->validate([
-            'nama' => 'sometimes|required|string|max:255',
-            'harga' => 'sometimes|required|numeric',
+            'nama' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
-            'toko_id' => 'sometimes|required|exists:tokos,id',
-            'kategori_id' => 'sometimes|required|exists:kategoris,id',
+            'harga' => 'required|numeric',
+            'rating' => 'nullable|numeric|between:0,5',
+            'kategori_id' => 'required|exists:kategoris,id',
+            'toko_id' => 'required|exists:tokos,id',
+            'foto' => 'image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
-        $produk->update($request->all());
-        return redirect()->route('produk.tampil')->with('success', 'Produk berhasil diperbarui!');
+        // Validasi toko milik user yang sedang login
+        $toko = Toko::where('id', $request->toko_id)->where('user_id', Auth::id())->firstOrFail();
+
+        $produk->nama = $request->nama;
+        $produk->deskripsi = $request->deskripsi;
+        $produk->harga = $request->harga;
+        $produk->rating = $request->rating;
+        $produk->kategori_id = $request->kategori_id;
+        $produk->foto = $request->file('foto')->store('produk', 'public');
+        $produk->save();
+
+        return redirect()->route('produk.tampil')->with('success', 'Produk berhasil diperbarui');
     }
 
-    public function destroy(Produk $produk)
+    public function hapus($id)
     {
+        $produk = Produk::whereHas('toko', function ($query) {
+            $query->where('user_id', Auth::id());
+        })->findOrFail($id);
+        if ($produk->foto) {
+            Storage::disk('public')->delete($produk->foto);
+        }
         $produk->delete();
-        return redirect()->route('produk.tampil')->with('success', 'Produk berhasil dihapus!');
+
+        return redirect()->route('produk.tampil')->with('success', 'Produk berhasil dihapus');
     }
 }

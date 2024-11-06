@@ -10,12 +10,9 @@
 </head>
 
 <body>
-    <!--  Body Wrapper -->
     <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed">
-        <!-- Sidebar Start -->
         <aside class="left-sidebar">
-            <!-- Sidebar scroll-->
             <div>
                 <div class="brand-logo d-flex align-items-center justify-content-between">
                     <a href="./index.html" class="text-nowrap logo-img">
@@ -25,84 +22,54 @@
                         <i class="ti ti-x fs-8"></i>
                     </div>
                 </div>
-                <!-- Sidebar navigation-->
 
                 @include('bagian.nav')
 
-                <!-- End Sidebar navigation -->
             </div>
-            <!-- End Sidebar scroll-->
         </aside>
-        <!--  Sidebar End -->
-        <!--  Main wrapper -->
         <div class="body-wrapper">
-            <!--  Header Start -->
 
             @include('bagian.header')
 
-            <!--  Header End -->
             <div class="container-fluid">
-                <!--  Row 1 -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <!-- Yearly Breakup -->
                         <div class="card overflow-hidden">
                             <div class="card-body p-4">
                                 <div class="heading d-flex align-items-center justify-content-between">
-                                    <h5 class="card-title mb-9 fw-semibold">Data Toko</h5>
-                                    <a href="{{ route('produk.index') }}" class="btn btn-success">Lihat data <svg viewBox="0 0 24 24"
-                                            class="fw-bold" height="15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <h5 class="card-title mb-9 fw-semibold">Edit Data Kategori</h5>
+                                </div>
+                                <form action="{{ route('kategori.update', $kategori->id) }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
+                                    <label class="fw-bolder my-2">Nama Kategori</label>
+                                    <input required name="nama_kategori" class="form-control form-control-lg"
+                                        type="text" value="{{ old('nama_kategori', $kategori->nama_kategori) }}"
+                                        placeholder="Masukan nama kategori" aria-label=".form-control-lg example">
+
+                                    <label class="fw-bolder my-2">Foto Kategori</label>
+                                    <input required name="foto" accept="image/*" class="form-control form-control-lg"
+                                        id="formFileLg" type="file" onchange="previewImage(event)">
+
+                                    <div style="margin-top: 20px;">
+                                        <img id="imagePreview" src="{{ asset('storage/'. $kategori->foto) }}"
+                                            alt="Preview Foto"
+                                            style="max-width: 300px; display: {{ $kategori->foto ? 'block' : 'none' }};">
+                                    </div>
+                                    <button class="btn btn-primary my-3">Edit
+                                        <svg class="ms-2" height="15" viewBox="0 0 24 24" fill="#fff"
+                                            xmlns="http://www.w3.org/2000/svg">
                                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                             <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
                                                 stroke-linejoin="round"></g>
                                             <g id="SVGRepo_iconCarrier">
                                                 <path
-                                                    d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z"
-                                                    stroke="#fff" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round">
-                                                </path>
-                                            </g>
-                                        </svg></a>
-                                </div>
-                                <form action="#" method="post">
-                                    <label class="fw-bolder my-2">Nama Toko</label>
-                                    <input class="form-control form-control-lg" type="text"
-                                        placeholder="Masukan Nama Toko" aria-label=".form-control-lg example">
-                                    <label class="fw-bolder my-2">Alamat Toko</label>
-                                    <input class="form-control form-control-lg" type="text"
-                                        placeholder="Masukan Alamat Toko" aria-label=".form-control-lg example">
-                                    <label class="fw-bolder my-2">Rating Toko</label>
-                                    <input class="form-control form-control-lg" type="text"
-                                        placeholder="Masukan Nilai Toko" aria-label=".form-control-lg example">
-                                    <label class="fw-bolder my-2">Foto Toko</label>
-                                    <input class="form-control form-control-lg" id="formFileLg" type="file"
-                                        onchange="previewImage(event)">
-                                    <div style="margin-top: 20px;">
-                                        <img id="imagePreview" src="" alt="Preview Foto"
-                                            style="max-width: 300px; display: none;">
-                                    </div>
-                                    <button class="btn btn-primary my-3">Kirim<svg height="15" class="ms-2"
-                                            viewBox="0 -4.15 57.875 57.875" xmlns="http://www.w3.org/2000/svg"
-                                            fill="#000000">
-                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
-                                                stroke-linejoin="round"></g>
-                                            <g id="SVGRepo_iconCarrier">
-                                                <g id="Group_37" data-name="Group 37"
-                                                    transform="translate(-1209.722 -1357.465)">
-                                                    <path id="Path_95" data-name="Path 95"
-                                                        d="M1224.729,1387.963v16.4l26.032-28.734Z" fill="#d1d3d4"
-                                                        stroke="#fff" stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="4"></path>
-                                                    <path id="Path_96" data-name="Path 96"
-                                                        d="M1228.118,1390.522l37.479-30.686-17.1,45.207Z" fill="#ffffff"
-                                                        stroke="#fff" stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="4"></path>
-                                                    <path id="Path_97" data-name="Path 97"
-                                                        d="M1211.722,1378.673l16.4,11.712,37.479-30.92Z" fill="#ffffff"
-                                                        stroke="#fff" stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="4"></path>
-                                                </g>
+                                                    d="M20.1497 7.93997L8.27971 19.81C7.21971 20.88 4.04971 21.3699 3.27971 20.6599C2.50971 19.9499 3.06969 16.78 4.12969 15.71L15.9997 3.84C16.5478 3.31801 17.2783 3.03097 18.0351 3.04019C18.7919 3.04942 19.5151 3.35418 20.0503 3.88938C20.5855 4.42457 20.8903 5.14781 20.8995 5.90463C20.9088 6.66146 20.6217 7.39189 20.0997 7.93997H20.1497Z"
+                                                    stroke="#fff" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round"></path>
+                                                <path d="M21 21H12" stroke="#fff" stroke-width="1.5"
+                                                    stroke-linecap="round" stroke-linejoin="round"></path>
                                             </g>
                                         </svg>
                                     </button>
@@ -127,21 +94,10 @@
     <script src="{{asset('template/src/assets/js/dashboard.js')}}"></script>
     <script>
         function previewImage(event) {
-                    const input = event.target;
-                    const preview = document.getElementById('imagePreview');
-                    
-                    // Cek apakah ada file yang dipilih
-                    if (input.files && input.files[0]) {
-                        const reader = new FileReader();
-        
-                        reader.onload = function(e) {
-                            preview.src = e.target.result; // Mengatur source gambar
-                            preview.style.display = 'block'; // Menampilkan elemen img
-                        };
-        
-                        reader.readAsDataURL(input.files[0]); // Membaca file sebagai URL data
-                    }
-                }
+        const imagePreview = document.getElementById('imagePreview');
+        imagePreview.src = URL.createObjectURL(event.target.files[0]);
+        imagePreview.style.display = 'block';
+    }
     </script>
 </body>
 

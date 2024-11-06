@@ -45,9 +45,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    
-    public function favorites()
+
+    public function produk()
     {
-        return $this->belongsToMany(Produk::class, 'favorites');
+        return $this->hasMany(Produk::class);
+    }
+
+    public function toko()
+    {
+        return $this->hasOne(Toko::class);
     }
 }

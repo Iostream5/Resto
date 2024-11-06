@@ -9,21 +9,23 @@ class Produk extends Model
 {
     use HasFactory;
 
-    // Relasi banyak ke satu dengan Toko
-    public function toko()
-    {
-        return $this->belongsTo(Toko::class);
-    }
+    protected $table = 'produks';
 
-    // Relasi banyak ke satu dengan Kategori
+    protected $fillable = ['id', 'nama', 'deskripsi', 'foto', 'harga', 'deskripsi', 'toko_id', 'kategori_id'];
+
     public function kategori()
     {
-        return $this->belongsTo(Kategori::class);
+        return $this->belongsTo(Kategori::class, 'kategori_id');
     }
 
-    // Relasi banyak ke banyak dengan Favorite
-    public function favorites()
+    public function toko()
     {
-        return $this->belongsToMany(User::class, 'favorites');
+        return $this->belongsTo(Toko::class, 'toko_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
 }

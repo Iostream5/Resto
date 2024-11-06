@@ -10,12 +10,9 @@
 </head>
 
 <body>
-    <!--  Body Wrapper -->
     <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed">
-        <!-- Sidebar Start -->
         <aside class="left-sidebar">
-            <!-- Sidebar scroll-->
             <div>
                 <div class="brand-logo d-flex align-items-center justify-content-between">
                     <a href="./index.html" class="text-nowrap logo-img">
@@ -25,25 +22,69 @@
                         <i class="ti ti-x fs-8"></i>
                     </div>
                 </div>
-                <!-- Sidebar navigation-->
 
                 @include('bagian.nav')
 
-                <!-- End Sidebar navigation -->
             </div>
-            <!-- End Sidebar scroll-->
         </aside>
-        <!--  Sidebar End -->
-        <!--  Main wrapper -->
         <div class="body-wrapper">
-            <!--  Header Start -->
 
             @include('bagian.header')
 
-            <!--  Header End -->
             <div class="container-fluid">
-                <!--  Row 1 -->
-                tooluul
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Data Kategori </h5>
+                                <h6 class="card-subtitle mb-2 text-body-secondary">Total</h6>
+                                <h1 class="">
+                                    @php
+                                    $totalKategori = $kategori->where('user_id', Auth::id())->count();
+                                    echo $totalKategori;
+                                    @endphp
+                                </h1>
+                                <a href="{{ route('kategori.tampil') }}" class="card-link">Lihat Data</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Data Toko </h5>
+                                <h6 class="card-subtitle mb-2 text-body-secondary">Total</h6>
+                                <h1 class="">
+                                    @php
+                                    $totalToko = $toko->where('user_id', Auth::id())->count();
+                                    echo $totalToko;
+                                    @endphp
+                                </h1>
+                                <a href="{{ route('toko.tampil') }}" class="card-link">Lihat Data</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Data Produk </h5>
+                                <h6 class="card-subtitle mb-2 text-body-secondary">Total</h6>
+                                <h1 class="">
+                                    @php
+                                    $totalProduk = $produk->where('toko.user_id', Auth::id())->count();
+                                    echo $totalProduk;
+                                    @endphp
+                                </h1>
+                                <a href="{{ route('produk.tampil') }}" class="card-link">Lihat Data</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
 
                 @include('bagian.footer')
 
@@ -57,24 +98,6 @@
     <script src="{{asset('template/src/assets/libs/apexcharts/dist/apexcharts.min.js')}}"></script>
     <script src="{{asset('template/src/assets/libs/simplebar/dist/simplebar.js')}}"></script>
     <script src="{{asset('template/src/assets/js/dashboard.js')}}"></script>
-    <script>
-        function previewImage(event) {
-                    const input = event.target;
-                    const preview = document.getElementById('imagePreview');
-                    
-                    // Cek apakah ada file yang dipilih
-                    if (input.files && input.files[0]) {
-                        const reader = new FileReader();
-        
-                        reader.onload = function(e) {
-                            preview.src = e.target.result; // Mengatur source gambar
-                            preview.style.display = 'block'; // Menampilkan elemen img
-                        };
-        
-                        reader.readAsDataURL(input.files[0]); // Membaca file sebagai URL data
-                    }
-                }
-    </script>
 </body>
 
 </html>

@@ -37,64 +37,46 @@
                         <div class="card overflow-hidden">
                             <div class="card-body p-4">
                                 <div class="heading d-flex align-items-center justify-content-between">
-                                    <h5 class="card-title mb-9 fw-semibold">Edit Data Produk</h5>
+                                    <h5 class="card-title mb-9 fw-semibold">Edit Data Toko</h5>
                                 </div>
-                                <form action="{{ route('produk.update', $produk->id) }}" method="POST"
+                                <form action="{{ route('toko.update', $toko->id) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
-                                    <label class="fw-bolder my-2">Nama Toko</label>
-                                    <select required class="form-control form-control-lg"
-                                        aria-label=".form-control-lg example" name="toko_id" id="">
-                                        <option selected value="{{ old('toko_id', $produk->toko_id) }}">{{
-                                            old('toko_id', $produk->toko->nama_toko) }}</option>
-                                        @foreach ($toko as $data)
-                                        <option value="{{ $data->id }}">{{ $data->nama_toko }}</option>
-                                        @endforeach
-                                    </select>
+                                    <div class="mb-3">
+                                        <label class="fw-bolder my-2">Nama Toko</label>
+                                        <input type="text" value="{{ old('nama_toko', $toko->nama_toko) }}"
+                                            class="form-control form-control-lg" id="nama_toko" name="nama_toko"
+                                            placeholder="Masukkan Nama Toko" required>
+                                    </div>
 
-                                    <label class="fw-bolder my-2">Nama Produk</label>
-                                    <input required name="nama" value="{{ old('nama', $produk->nama) }}"
-                                        class="form-control form-control-lg" type="text"
-                                        placeholder="Masukan nama produk" aria-label=".form-control-lg example">
-
-                                    <label class="fw-bolder my-2">Harga Produk</label>
-                                    <input required name="harga" value="{{ old('harga', $produk->harga) }}"
-                                        class="form-control form-control-lg" type="text"
-                                        placeholder="Masukan harga produk" aria-label=".form-control-lg example">
-
-                                    <label class="fw-bolder my-2">Deskripsi</label>
-                                    <input required name="deskripsi" value="{{ old('deskripsi', $produk->deskripsi) }}"
-                                        class="form-control form-control-lg" type="text"
-                                        placeholder="Masukan deskripsi produk" aria-label=".form-control-lg example">
-
-                                    <label class="fw-bolder my-2">Kategori Makanan</label>
-                                    <select required class="form-control form-control-lg"
-                                        aria-label=".form-control-lg example" name="kategori_id">
-                                        <option selected value="{{ old('kategori_id', $produk->kategori_id) }}">{{
-                                            old('kategori_id', $produk->kategori_id) }}</option>
-                                        @foreach ($kategori as $item)
-                                        <option value="{{ $item->id }}">{{ $item->nama_kategori }}</option>
-                                        @endforeach
-                                    </select>
+                                    <div class="mb-3">
+                                        <label class="fw-bolder my-2">Alamat</label>
+                                        <textarea class="form-control form-control-lg" id="alamat" name="alamat"
+                                            placeholder="Masukkan Alamat"
+                                            required>{{ old('alamat', $toko->alamat) }}</textarea>
+                                    </div>
 
                                     <div class="mb-3">
                                         <label class="fw-bolder my-2">Rating</label>
                                         <input type="range" step="0.1" min="0" max="5"
                                             class="form-control form-control-lg" id="rating" name="rating"
                                             placeholder="Masukkan Rating (0-5)" oninput="updateRatingValue(this.value)">
-                                        <span id="rating-value">{{ old('rating', $produk->rating) }}</span>
+                                        <span id="rating-value">{{ old('rating', $toko->rating) }}</span>
                                     </div>
 
-                                    <label class="fw-bolder my-2">Foto Makanan</label>
-                                    <input required name="foto" class="form-control form-control-lg" id="formFileLg"
-                                        type="file" onchange="previewImage(event)">
+                                    <div class="mb-3">
+                                        <label class="fw-bolder my-2">Foto</label>
+                                        <input type="file" class="form-control form-control-lg" id="foto" name="foto"
+                                            onchange="previewImage(event)">
+                                    </div>
 
-                                    <div style="margin-top: 20px;">
-                                        <img id="imagePreview" src="{{ asset('storage/'. $produk->foto) }}"
+                                    <div style="mb-3">
+                                        <img id="imagePreview" src="{{ asset('storage/'. $toko->foto) }}"
                                             alt="Preview Foto"
-                                            style="max-width: 300px; display: {{ $produk->foto ? 'block' : 'none' }};">
+                                            style="max-width: 300px; display: {{ $toko->foto ? 'block' : 'none' }};">
                                     </div>
+
                                     <button class="btn btn-primary my-3">Edit
                                         <svg class="ms-2" height="15" viewBox="0 0 24 24" fill="#fff"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -111,7 +93,6 @@
                                             </g>
                                         </svg>
                                     </button>
-
                                 </form>
                             </div>
                         </div>
@@ -143,8 +124,8 @@
             }
         
             document.addEventListener("DOMContentLoaded", function() {
-                document.getElementById("rating").value = {{ old('rating', $produk->rating) }};
-                updateRatingValue({{ old('rating', $produk->rating) }});
+                document.getElementById("rating").value = {{ old('rating', $toko->rating) }};
+                updateRatingValue({{ old('rating', $toko->rating) }});
             });
     </script>
 </body>
