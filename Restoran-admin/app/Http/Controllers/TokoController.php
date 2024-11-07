@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Toko;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 
@@ -18,7 +17,7 @@ class TokoController extends Controller
     public function data(Request $request)
     {
         if ($request->ajax()) {
-            $toko = Toko::where('user_id', Auth::id())->select(['id', 'nama_toko', 'alamat', 'rating', 'foto']);
+            $toko = Toko::select(['id', 'nama_toko', 'alamat', 'rating', 'foto']);
             return DataTables::of($toko)
                 ->addColumn('action', function ($toko) {
                     return '
@@ -48,42 +47,41 @@ class TokoController extends Controller
         $toko = new Toko();
         $toko->nama_toko = $request->nama_toko;
         $toko->alamat = $request->alamat;
+        $toko->deskripsi = $request->deskripsi;
         $toko->rating = $request->rating;
         $toko->foto = $request->file('foto')->store('toko', 'public');
-        $toko->user_id = Auth::id();
         $toko->save();
 
-        return redirect()->route('toko.tampil')->with('success', 'Toko berhasil dibuat');
+        return redirect()->route('toko.tampil');
     }
 
     public function edit($id)
     {
-        $toko = Toko::where('user_id', Auth::id())->findOrFail($id);
+        $toko = Toko::findOrFail($id);
         return view('page.toko.edit', compact('toko'));
     }
 
     public function update(Request $request, $id)
     {
-        $toko = Toko::where('user_id', Auth::id())->findOrFail($id);
+        $toko = Toko::findOrFail($id);
         $toko->nama_toko = $request->nama_toko;
         $toko->alamat = $request->alamat;
+        $toko->deskripsi = $request->deskripsi;
         $toko->rating = $request->rating;
         $toko->foto = $request->file('foto')->store('toko', 'public');
+        $toko->update();
 
-        $toko->save();
-
-        return redirect()->route('toko.tampil')->with('success', 'Toko berhasil diperbarui');
+        return redirect()->route('toko.tampil');
     }
 
     public function hapus($id)
     {
-        $toko = Toko::where('user_id', Auth::id())->findOrFail($id);
+        $toko = Toko::findOrFail($id);
         if ($toko->foto) {
             Storage::disk('public')->delete($toko->foto);
         }
-
         $toko->delete();
 
-        return redirect()->route('toko.tampil')->with('success', 'Toko berhasil dihapus');
+        return redirect()->route('toko.tampil');
     }
 }

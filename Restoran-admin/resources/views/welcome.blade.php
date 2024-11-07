@@ -37,7 +37,7 @@
                     <div class="col-sm-4">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Data Kategori </h5>
+                                <h5 class="card-title">Data Global Kategori </h5>
                                 <h6 class="card-subtitle mb-2 text-body-secondary">Total</h6>
                                 <h1 class="">
                                     @php
@@ -52,7 +52,7 @@
                     <div class="col-sm-4">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Data Toko </h5>
+                                <h5 class="card-title">Data Global Toko </h5>
                                 <h6 class="card-subtitle mb-2 text-body-secondary">Total</h6>
                                 <h1 class="">
                                     @php
@@ -67,7 +67,7 @@
                     <div class="col-sm-4">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Data Produk </h5>
+                                <h5 class="card-title">Data Global Produk </h5>
                                 <h6 class="card-subtitle mb-2 text-body-secondary">Total</h6>
                                 <h1 class="">
                                     @php

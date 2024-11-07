@@ -68,6 +68,12 @@
                                     </div>
 
                                     <div class="mb-3">
+                                        <label class="fw-bolder my-2">Deskripsi</label>
+                                        <textarea class="form-control form-control-lg" id="deskripsi" name="deskripsi"
+                                            placeholder="Masukkan deskripsi" required></textarea>
+                                    </div>
+
+                                    <div class="mb-3">
                                         <label class="fw-bolder my-2">Rating</label>
                                         <input type="range" step="0.1" min="0" max="5"
                                             class="form-control form-control-lg" id="rating" name="rating"

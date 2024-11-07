@@ -34,6 +34,10 @@
     <link href="{{ asset('template/css/style.css') }}" rel="stylesheet">
 </head>
 <style>
+    .rounded-5 {
+        border-radius: 20px;
+    }
+
     .searching {
         position: relative;
     }
@@ -114,6 +118,15 @@
         box-shadow: none;
         border: none;
     }
+
+    .ratings i {
+
+        color: #cecece;
+    }
+
+    .rating-color {
+        color: #fbc634 !important;
+    }
 </style>
 
 <body style="background: linear-gradient(rgba(15, 23, 43, .9), rgba(15, 23, 43, .9))">
@@ -131,33 +144,31 @@
         <div class="container-xxl py-5">
             <div class="container-fluid">
                 <!-- Komponen Kategori Makanan -->
-                <div class="row align-items-center">
-                    <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-                        <img class="img-fluid rounded" src="{{ asset('template/img/makan.jpeg') }}" alt=""
-                            style="width: 100%;">
+                <div class="d-flex align-items-center">
+                    <div class="mb-4 mb-md-0 me-lg-5">
+                        <img class="img-fluid rounded-5" src="{{ asset('storage/'. $produk->foto) }}" alt=""
+                            style="width:50rem;">
                     </div>
-                    <div class="col-lg-6 col-md-12">
+                    <div class="container">
                         <h5 class="d-flex justify-content-between">
-                            <span>Chicken Burger</span>
-                            <span class="text-primary">$115</span>
+                            <span>{{ $produk->nama }}</span>
+                            <span class="text-primary">Rp.{{ $produk->harga }}</span>
                         </h5>
-                        <h6 class="d-block border-bottom pb-2 text-muted">Makanan</h6>
+                        <h6 class="d-block border-bottom pb-2 text-muted">{{ $produk->kategori->nama_kategori }}</h6>
                         <!-- Label Makanan di bawah Chicken Burger -->
-                        <small class="fst-italic">Lorem Ipsum is simply dummy text of the printing and typesetting
-                            industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when
-                            an unknown printer took a galley of type and scrambled it to make a type specimen
-                            book.</small>
+                        <small class="fst-italic">{{ $produk->deskripsi}}</small>
 
                         <!-- Komponen Rating -->
-                        <div class="mt-3">
-                            <span class="text-warning">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-alt"></i>
-                            </span>
-                            <span>(4.5/5)</span>
+                        <div class="d-flex ratings text-nowrap">
+                            @php
+                            $rating = $produk->rating;
+                            @endphp
+                            <div class="ratings">
+                                @for ($i = 1; $i <= 5; $i++) <i
+                                    class="fa fa-star {{ $i <= $rating ? 'rating-color' : '' }}"></i>
+                                    @endfor
+                            </div>
+                            <small class="ms-2 fw-lighther">{{ $produk->rating }}</small>
                         </div>
 
                         <!-- Tombol Pesan -->
@@ -174,19 +185,22 @@
                             style="width: 80px; height: 80px; border-radius: 50%;" class="me-3">
                         <!-- Ganti dengan logo toko -->
                         <div>
-                            <h6 class="text-primary">Nama Toko</h6>
+                            <h6 class="text-primary">{{ $produk->toko->nama_toko }}</h6>
                             <!-- Ganti "Nama Toko" dengan nama toko yang sebenarnya -->
-                            <p class="mb-1">Rating: <span class="text-warning">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-half-alt"></i>
-                                </span> (4.5/5)</p>
-                            <p>Deskripsi: Toko ini menyediakan berbagai macam makanan lezat yang siap untuk Anda pesan.
-                            </p>
-                            <a href="/toko/nama-toko" class="btn btn-outline-primary">Kunjungi Toko</a>
-                            <!-- Ganti dengan link yang sesuai -->
+                            <div class="d-flex ratings text-nowrap">
+                                @php
+                                $rating = $produk->toko->rating;
+                                @endphp
+                                <div class="ratings">
+                                    @for ($i = 1; $i <= 5; $i++) <i
+                                        class="fa fa-star {{ $i <= $rating ? 'rating-color' : '' }}"></i>
+                                        @endfor
+                                </div>
+                                <small class="ms-2 fw-lighther">{{ $produk->toko->rating }}</small>
+                            </div>
+                            <p>Deskripsi: {{ $produk->toko->deskripsi }}</p>
+                            <a href="{{ route('toko.detail', $produk->id) }}" class="btn btn-outline-primary">Kunjungi
+                                Toko</a>
                         </div>
                     </div>
                 </div>
@@ -199,7 +213,8 @@
                     <form>
                         <div class="mb-3">
                             <label for="userComment" class="form-label">Komentar</label>
-                            <textarea class="form-control" id="userComment" rows="3" placeholder="Tulis komentar Anda di sini"></textarea>
+                            <textarea class="form-control" id="userComment" rows="3"
+                                placeholder="Tulis komentar Anda di sini"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Kirim Komentar</button>
                     </form>

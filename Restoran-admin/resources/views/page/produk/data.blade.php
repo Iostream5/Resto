@@ -41,6 +41,7 @@
                                 <th>ID</th>
                                 <th>Nama</th>
                                 <th>Deskripsi</th>
+                                <th>Harga</th>
                                 <th>Kategori</th>
                                 <th>Toko</th>
                                 <th>Foto</th>
@@ -78,6 +79,7 @@
                 { data: 'id', name: 'id' },
                 { data: 'nama', name: 'nama' },
                 { data: 'deskripsi', name: 'deskripsi' },
+                { data: 'harga', name: 'harga' },
                 { data: 'kategori', name: 'kategori' },
                 { data: 'toko', name: 'toko' },
                 { data: 'foto', name: 'foto', orderable: false, searchable: false },
