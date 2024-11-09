@@ -24,20 +24,20 @@
                 <a href="/kategori" class="nav-item nav-link">Category</a>
                 <a href="/form" class="nav-item nav-link">form</a>
             </div>
-
-            <!-- Tombol Masuk & Daftar -->
             @if (Auth::check())
-            <div class="d-flex align-items-center mb-2 order-1 order-lg-3" style="width:50px; height:50px;">
+            <div class=" d-flex align-items-center mb-2 order-1 order-lg-3">
                 <a href="/profil">
-                    <img src="{{ asset('/img/logo.png') }}" alt="Profile Image" class="profile-image">
+                    <img src="{{ asset('/img/logo.png') }}" height="70" width="70" alt="Profile Image"
+                        class="profile-image">
                 </a>
             </div>
             @else
-            <div class="d-flex align-items-center order-3 order-lg-2">
+            <div class=" d-flex align-items-center order-3 order-lg-2">
                 <a href="{{ route('login') }}" class="btn btn-primary me-2">Masuk</a>
                 <a href="{{ route('register') }}" class="btn btn-outline-primary me-3">Daftar</a>
             </div>
             @endif
+
         </div>
     </div>
 </nav>

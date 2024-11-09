@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\DataController;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\TokoController;
@@ -75,10 +77,16 @@ Route::middleware([
     Route::put('produk/{id}', [ProdukController::class, 'update'])->name('produk.update');
     Route::delete('produk/{id}', [ProdukController::class, 'hapus'])->name('produk.destroy');
 
+    // Routes untuk Favorite
+    Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
+    Route::post('/favorites/tambah/{produkId}', [FavoriteController::class, 'tambah'])->name('favorites.tambah');
+    Route::delete('/favorites/hapus/{produkId}', [FavoriteController::class, 'hapus'])->name('favorites.hapus');
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    // Routes untuk Cart
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/tambah/{produkId}', [CartController::class, 'tambah'])->name('cart.tambah');
+    Route::delete('/cart/hapus/{produkId}', [CartController::class, 'hapus'])->name('cart.hapus');
+    Route::put('/cart/update/{produkId}', [CartController::class, 'update'])->name('cart.update');
 });
 Route::get('/form',function(){
     return view('page.form');
