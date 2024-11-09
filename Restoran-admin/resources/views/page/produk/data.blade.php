@@ -10,12 +10,9 @@
 </head>
 
 <body>
-    <!--  Body Wrapper -->
     <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed">
-        <!-- Sidebar Start -->
         <aside class="left-sidebar">
-            <!-- Sidebar scroll-->
             <div>
                 <div class="brand-logo d-flex align-items-center justify-content-between">
                     <a href="./index.html" class="text-nowrap logo-img">
@@ -25,37 +22,35 @@
                         <i class="ti ti-x fs-8"></i>
                     </div>
                 </div>
-                <!-- Sidebar navigation-->
 
                 @include('bagian.nav')
 
-                <!-- End Sidebar navigation -->
             </div>
-            <!-- End Sidebar scroll-->
         </aside>
-        <!--  Sidebar End -->
-        <!--  Main wrapper -->
         <div class="body-wrapper">
-            <!--  Header Start -->
 
             @include('bagian.header')
 
-            <!--  Header End -->
             <div class="container-fluid">
-                <!--  Row 1 -->
                 <div class="container">
                     <h1>Produk</h1>
-                    <a href="{{ route('') }}" class="btn btn-primary">Add Produk</a>
+                    <a href="{{ route('produk.tambah') }}" class="btn btn-primary">Add Produk</a>
                     <table id="produkTable" class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Nama Produk</th>
+                                <th>ID</th>
+                                <th>Nama</th>
+                                <th>Deskripsi</th>
                                 <th>Harga</th>
-                                <th>Toko</th>
                                 <th>Kategori</th>
-                                <th>Aksi</th>
+                                <th>Toko</th>
+                                <th>Foto</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
+                        <tbody>
+
+                        </tbody>
                     </table>
                 </div>
 
@@ -76,19 +71,22 @@
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#produkTable').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '{{ route('produk.data') }}',
-                columns: [
-                    { data: 'nama', name: 'nama' },
-                    { data: 'harga', name: 'harga' },
-                    { data: 'toko.nama_toko', name: 'toko.nama_toko' }, // Ambil nama toko dari relasi
-                    { data: 'kategori.nama_kategori', name: 'kategori.nama_kategori' }, // Ambil nama kategori dari relasi
-                    { data: 'action', name: 'action', orderable: false, searchable: false }
-                ]
-            });
+        $('#produkTable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{{ route('produk.data') }}',
+            columns: [
+                { data: 'id', name: 'id' },
+                { data: 'nama', name: 'nama' },
+                { data: 'deskripsi', name: 'deskripsi' },
+                { data: 'harga', name: 'harga' },
+                { data: 'kategori', name: 'kategori' },
+                { data: 'toko', name: 'toko' },
+                { data: 'foto', name: 'foto', orderable: false, searchable: false },
+                { data: 'action', name: 'action', orderable: false, searchable: false }
+            ]
         });
+    });
     </script>
 </body>
 

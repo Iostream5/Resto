@@ -13,12 +13,6 @@
 
         <!-- Navbar Collapse -->
         <div class="collapse navbar-collapse" id="navbarCollapse">
-            <!-- Profil Icon (Akan muncul di atas pada tampilan mobile) -->
-            <div class="d-flex align-items-center mb-2 order-1 order-lg-3" style="width:50px; height:50px;">
-                <a href="/profil">
-                    <img src="{{ asset('/img/logo.png') }}" alt="Profile Image" class="profile-image">
-                </a>
-            </div>
 
             <!-- Menu Nav Links -->
             <div class="navbar-nav ms-auto py-0 pe-4 order-2 order-lg-1">
@@ -29,15 +23,22 @@
             </div>
 
             <!-- Tombol Masuk & Daftar -->
-            <div class="d-flex align-items-center order-3 order-lg-2">
-                <a href="" class="btn btn-primary me-2">Masuk</a>
-                <a href="" class="btn btn-outline-primary me-3">Daftar</a>
+            @if (Auth::check())
+            <div class="d-flex align-items-center mb-2 order-1 order-lg-3" style="width:50px; height:50px;">
+                <a href="/profil">
+                    <img src="{{ asset('/img/logo.png') }}" alt="Profile Image" class="profile-image">
+                </a>
             </div>
+            @else
+            <div class="d-flex align-items-center order-3 order-lg-2">
+                <a href="{{ route('login') }}" class="btn btn-primary me-2">Masuk</a>
+                <a href="{{ route('register') }}" class="btn btn-outline-primary me-3">Daftar</a>
+            </div>
+            @endif
         </div>
     </div>
 </nav>
 
-<!-- CSS untuk Menyeimbangkan Posisi Vertikal dan Styling Gambar Profil -->
 <style>
     .navbar {
         padding-top: 0.5rem;

@@ -34,6 +34,15 @@
     <link href="{{ asset('template/css/style.css') }}" rel="stylesheet">
 </head>
 <style>
+    .ratings i {
+
+        color: #cecece;
+    }
+
+    .rating-color {
+        color: #fbc634 !important;
+    }
+
     .searching {
         position: relative;
     }
@@ -131,219 +140,106 @@
         <div class="container-xxl  py-5">
             <div class="container">
                 <div class="text-center wow fadeInUp my-5" data-wow-delay="0.1s">
-                    <h1 class="mb-5">Cari Makanan Yang Kamu Inginkan!</h1>
+                    <h1 class="mb-5">Cari Makanan Atau Toko</h1>
                 </div>
                 <div class="col-12 my-4">
                     <div class="searching">
                         <i class="fa fa-search"></i>
-                        <input type="text" class="form-control form-inputs" placeholder="Search anything...">
-                        <span class="left-pan"><i class="fa fa-microphone"></i></span>
+                        <form action="{{ route('produk.search') }}" method="GET">
+                            <input type="text" name="search" class="form-control form-inputs"
+                                placeholder="Search anything..." value="{{ request()->input('search') }}">
+                            <span class="left-pan"><i class="fa fa-microphone"></i></span>
+                        </form>
                     </div>
                 </div>
-                <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.1s">
+                <div class="tab-class wow fadeInUp" data-wow-delay="0.1s">
                     <div id="tab-1" class="tab-pane fade show p-0 active">
-                        <div class="row g-4">
-                            <div class="col-lg-6 mb-4">
+                        <div class="row g-4 ">
+                            @if ($produk->isEmpty())
+
+                            @else
+
+                            <h4 class="fw-bold text-start text-decoration-underline">Makanan</h4>
+                            @endif
+                            @foreach ($produk as $item)
+                            <a href="{{ route('detail', $item->id) }}" class="ms-auto col-lg-3 col-md-5 col-6">
+                                <img src="{{ asset('storage/'. $item->foto) }}" style="border-radius:10px;" width="70%"
+                                    class=" rounded-5" alt="...">
+                                <div class="card-body">
+                                    <p class="text-dark text-start produk fw-bold m-0">{{ $item->nama}}
+                                    </p>
+                                    <small class="text-dark text-start produk fw-lighter">{{ $item->deskripsi}}
+                                    </small>
+                                    <h5 class="text-primary fw-bold text-nowrap">{{ $item->harga }}</h5>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="ratings text-nowrap">
+                                            @php
+                                            $rating = $item->rating;
+                                            @endphp
+                                            <div class="ratings">
+                                                @for ($i = 1; $i <= 5; $i++) <i
+                                                    class="fa fa-star {{ $i <= $rating ? 'rating-color' : '' }}">
+                                                    </i>
+                                                    @endfor
+                                            </div>
+                                            <h5 class="review-count">12 Reviews</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            @endforeach
+                            {{ $produk->links() }}
+
+                            @if ($toko->isEmpty())
+                            @else
+                            <h4 class="fw-bold text-start text-decoration-underline">Toko</h4>
+                            @endif
+                            @foreach ($toko as $item)
+                            <a href="{{ route('toko.detail', $item->id) }}" class="col-lg-6 mb-4 text-dark">
                                 <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded"
-                                        src="{{ asset('template/img/menu-1.jpg') }}" alt=""
-                                        style="width: 80px;">
+                                    <img class="flex-shrink-0 img-fluid" src="{{ asset('storage/'. $item->foto ) }}"
+                                        alt="" style="width: 100px; border-radius:10px;">
                                     <div class="w-100 d-flex flex-column text-start ps-4">
                                         <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
+                                            <span>{{ $item->nama_toko }}</span>
+                                            <div class="d-flex ratings text-nowrap">
+                                                @php
+                                                $rating = $item->rating;
+                                                @endphp
+                                                <div class="ratings">
+                                                    @for ($i = 1; $i <= 5; $i++) <i
+                                                        class="fa fa-star fs-6 {{ $i <= $rating ? 'rating-color' : '' }}">
+                                                        </i>
+                                                        @endfor
+                                                </div>
+                                                <small class="ms-2 fw-lighther">{{ $item->rating }}</small>
+                                            </div>
                                         </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
+                                        <small class="fst-italic">{{ $item->deskripsi }}</small>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded"
-                                        src="{{ asset('template/img/menu-2.jpg') }}" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded"
-                                        src="{{ asset('template/img/menu-3.jpg') }}" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded"
-                                        src="{{ asset('template/img/menu-4.jpg') }}" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded"
-                                        src="{{ asset('template/img/menu-5.jpg') }}" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded"
-                                        src="{{ asset('template/img/menu-6.jpg') }}" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded"
-                                        src="{{ asset('template/img/menu-7.jpg') }}" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded"
-                                        src="{{ asset('template/img/menu-8.jpg') }}" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-5">
-                            <div class="row mx-auto">
-                                <div class="container text-start">
-                                    <h4>Cari toko</h4>
-                                </div>
-                                <div class="col-12 my-2 mx-auto">
-                                    <div class="searching" style="width:500px;">
-                                        <i class="fa fa-search"></i>
-                                        <input type="text" class="form-control form-inputs"
-                                            placeholder="Search anything..." style="width:">
-                                        <span class="left-pan"><i class="fa fa-microphone"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                                <div class="d-flex align-items-center mt-2">
-                                    <img class="flex-shrink-0 img-fluid rounded"
-                                        src="{{ asset('template/img/menu-1.jpg') }}" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded"
-                                        src="{{ asset('template/img/menu-2.jpg') }}" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded"
-                                        src="{{ asset('template/img/menu-3.jpg') }}" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded"
-                                        src="{{ asset('template/img/menu-3.jpg') }}" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
+                            </a>
+                            @endforeach
+                            {{ $toko->links() }}
                         </div>
                     </div>
                 </div>
-
             </div>
+
         </div>
+    </div>
 
 
-        <!-- Menu End -->
+    <!-- Menu End -->
 
 
-        <!-- Footer Start -->
-        @include('bagian.footer')
-        <!-- Footer End -->
+    <!-- Footer Start -->
+    @include('bagian.footer')
+    <!-- Footer End -->
 
 
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
     <!-- JavaScript Libraries -->
@@ -360,6 +256,26 @@
 
     <!-- Template Javascript -->
     <script src="{{ asset('template/js/main.js') }}"></script>
+    <script>
+        function searchProducts() {
+        var input = document.getElementById('searchInput');
+        var filter = input.value.toLowerCase();
+        var produkList = document.getElementById('produkList');
+        var produkItems = produkList.getElementsByClassName('product-item'); 
+        
+
+        for (var i = 0; i < produkItems.length; i++) { var item=produkItems[i]; var
+            productName=item.getElementsByTagName('span')[0].textContent.toLowerCase();
+            productDescription=item.getElementsByTagName('small')[0].textContent.toLowerCase();
+            apakah nama atau deskripsi produk mengandung query pencarian if (productName.indexOf(filter)> -1 ||
+            productDescription.indexOf(filter) > -1) {
+            item.style.display = "";
+            } else {
+            item.style.display = "none";
+            }
+            }
+            }
+    </script>
 </body>
 
 </html>
