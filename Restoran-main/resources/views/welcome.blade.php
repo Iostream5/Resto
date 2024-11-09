@@ -428,9 +428,9 @@
                             <img class="flex-shrink-0 img-fluid rounded" src="img/menu-1.jpg" alt=""
                                 style="width: 80px;">
                             <div class="w-100 d-flex flex-column text-start ps-4">
-                                <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                <h5 class="d-flex justify-content-between border-bottom pb-2 text-center">
                                     <span>Warung Kholiq</span>
-                                    <a href="#" class="btn btn-sm btn-primary">Kunjungi</a>
+                                    <a href="#" class="btn btn-primary text-center">Kunjungi</a>
                                 </h5>
                                 <small class="fst-italic">Masakan Padang, Aneka Nasi, Ayam</small>
                             </div>
