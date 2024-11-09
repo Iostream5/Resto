@@ -111,16 +111,13 @@
                 <div id="carouselExampleInterval" class="carousel slide p-4" data-bs-ride="carousel">
                     <div class="carousel-inner overflow-hidden">
                         <div class="carousel-item  active" data-bs-interval="1000">
-                            <img src="{{ asset('gambar/slider 1.png') }}" class="d-block w-100 rounded-5"
-                                alt="...">
+                            <img src="{{ asset('gambar/slider 1.png') }}" class="d-block w-100 rounded-5" alt="...">
                         </div>
                         <div class="carousel-item " data-bs-interval="4000">
-                            <img src="{{ asset('gambar/slider 3.png') }}" class="d-block w-100 rounded-5"
-                                alt="...">
+                            <img src="{{ asset('gambar/slider 3.png') }}" class="d-block w-100 rounded-5" alt="...">
                         </div>
                         <div class="carousel-item " data-bs-interval="4000">
-                            <img src="{{ asset('gambar/slider 4.png') }}" class="d-block w-100 rounded-5"
-                                alt="...">
+                            <img src="{{ asset('gambar/slider 4.png') }}" class="d-block w-100 rounded-5" alt="...">
                         </div>
                     </div>
                 </div>
@@ -136,185 +133,16 @@
                     <h5 class="fw-bolder border-bottom border-3" style="width: 250px">Mau Makan Apa Hari Ini?</h5>
                 </div>
                 <div class="col-12 mt-3 kategori d-flex container overflow-auto">
-                    <div class="mx-lg-2 mx-1">
-                        <a href="#">
+                    <div class="mx-lg-2 mx-1 d-flex gap-4">
+                        @foreach ($kategori as $item)
+                        <a href="{{ route('kategori', $item->id) }}">
                             <div class="bg-dark rounded-pill d-flex align-items-center p-2"
                                 style="width: 130px; height:50px;">
-                                <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
-                                    alt="">
+                                <h6 class="text-light">{{ $item->nama_kategori }}</h6>
+                                <img class="" src="{{ asset('storage/'. $item->foto) }}" height="50" alt="">
                             </div>
                         </a>
-                    </div>
-                    <div class="mx-lg-2 mx-1">
-                        <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
-                                style="width: 130px; height:50px;">
-                                <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
-                                    alt="">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="mx-lg-2 mx-1">
-                        <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
-                                style="width: 130px; height:50px;">
-                                <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
-                                    alt="">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="mx-lg-2 mx-1">
-                        <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
-                                style="width: 130px; height:50px;">
-                                <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
-                                    alt="">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="mx-lg-2 mx-1">
-                        <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
-                                style="width: 130px; height:50px;">
-                                <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
-                                    alt="">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="mx-lg-2 mx-1">
-                        <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
-                                style="width: 130px; height:50px;">
-                                <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
-                                    alt="">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="mx-lg-2 mx-1">
-                        <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
-                                style="width: 130px; height:50px;">
-                                <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
-                                    alt="">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="mx-lg-2 mx-1">
-                        <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
-                                style="width: 130px; height:50px;">
-                                <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
-                                    alt="">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="mx-lg-2 mx-1">
-                        <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
-                                style="width: 130px; height:50px;">
-                                <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
-                                    alt="">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="mx-lg-2 mx-1">
-                        <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
-                                style="width: 130px; height:50px;">
-                                <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
-                                    alt="">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="mx-lg-2 mx-1">
-                        <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
-                                style="width: 130px; height:50px;">
-                                <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
-                                    alt="">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="mx-lg-2 mx-1">
-                        <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
-                                style="width: 130px; height:50px;">
-                                <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
-                                    alt="">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="mx-lg-2 mx-1">
-                        <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
-                                style="width: 130px; height:50px;">
-                                <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
-                                    alt="">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="mx-lg-2 mx-1">
-                        <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
-                                style="width: 130px; height:50px;">
-                                <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
-                                    alt="">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="mx-lg-2 mx-1">
-                        <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
-                                style="width: 130px; height:50px;">
-                                <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
-                                    alt="">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="mx-lg-2 mx-1">
-                        <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
-                                style="width: 130px; height:50px;">
-                                <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
-                                    alt="">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="mx-lg-2 mx-1">
-                        <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
-                                style="width: 130px; height:50px;">
-                                <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
-                                    alt="">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="mx-lg-2 mx-1">
-                        <a href="#">
-                            <div class="bg-dark rounded-pill d-flex align-items-center p-2"
-                                style="width: 130px; height:50px;">
-                                <h6 class="text-light">Cemilan</h6>
-                                <img class="" src="{{ asset('gambar/burjer.png') }}" height="50"
-                                    alt="">
-                            </div>
-                        </a>
+                        @endforeach
                     </div>
                 </div>
                 <div class="col-12 my-4">
@@ -326,90 +154,32 @@
                     </div>
                 </div>
                 <div class="row mt-4 col-12">
-                    <a href="#" class="ms-auto col-lg-3 col-md-5 col-6">
-                        <img src="{{ asset('gambar/produk.png') }}" class="card-img-top rounded-5" alt="...">
+                    @foreach ($produk as $item)
+                    <a href="{{ route('detail', [$item->id, $item->nama]) }}" class="ms-auto col-lg-3 col-md-5 col-6">
+                        <img src="{{ asset('storage/'. $item->foto) }}" width="70%" class=" rounded-5" alt="...">
                         <div class="card-body">
-                            <p class="text-dark text-start produk card-text fw-bold">Chicken Burger by Hangry - Cikini.
+                            <p class="text-dark text-start produk fw-bold m-0">{{ $item->nama}}
                             </p>
-                            <h5 class="text-primary fw-bold text-nowrap">Rp.1.000.000</h5>
+                            <small class="text-dark text-start produk fw-lighter">{{ $item->deskripsi}}
+                            </small>
+                            <h5 class="text-primary fw-bold text-nowrap">{{ $item->harga }}</h5>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="ratings text-nowrap">
                                     @php
-                                        $rating = 4;
+                                    $rating = $item->rating;
                                     @endphp
                                     <div class="ratings">
-                                        @for ($i = 1; $i <= 5; $i++)
-                                            <i class="fa fa-star {{ $i <= $rating ? 'rating-color' : '' }}"></i>
-                                        @endfor
+                                        @for ($i = 1; $i <= 5; $i++) <i
+                                            class="fa fa-star {{ $i <= $rating ? 'rating-color' : '' }}"></i>
+                                            @endfor
                                     </div>
                                     <h5 class="review-count">12 Reviews</h5>
                                 </div>
                             </div>
                         </div>
                     </a>
-                    <a href="#" class="ms-auto col-lg-3 col-md-5 col-6">
-                        <img src="{{ asset('gambar/produk.png') }}" class="card-img-top rounded-5" alt="...">
-                        <div class="card-body">
-                            <p class="text-dark text-start produk card-text fw-bold">Chicken Burger by Hangry - Cikini.
-                            </p>
-                            <h5 class="text-primary fw-bold text-nowrap">Rp.1.000.000</h5>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="ratings text-nowrap">
-                                    @php
-                                        $rating = 4;
-                                    @endphp
-                                    <div class="ratings">
-                                        @for ($i = 1; $i <= 5; $i++)
-                                            <i class="fa fa-star {{ $i <= $rating ? 'rating-color' : '' }}"></i>
-                                        @endfor
-                                    </div>
-                                    <h5 class="review-count">12 Reviews</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#" class="ms-auto col-lg-3 col-md-5 col-6">
-                        <img src="{{ asset('gambar/produk.png') }}" class="card-img-top rounded-5" alt="...">
-                        <div class="card-body">
-                            <p class="text-dark text-start produk card-text fw-bold">Chicken Burger by Hangry - Cikini.
-                            </p>
-                            <h5 class="text-primary fw-bold text-nowrap">Rp.1.000.000</h5>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="ratings text-nowrap">
-                                    @php
-                                        $rating = 4;
-                                    @endphp
-                                    <div class="ratings">
-                                        @for ($i = 1; $i <= 5; $i++)
-                                            <i class="fa fa-star {{ $i <= $rating ? 'rating-color' : '' }}"></i>
-                                        @endfor
-                                    </div>
-                                    <h5 class="review-count">12 Reviews</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#" class="ms-auto col-lg-3 col-md-5 col-6">
-                        <img src="{{ asset('gambar/produk.png') }}" class="card-img-top rounded-5" alt="...">
-                        <div class="card-body">
-                            <p class="text-dark text-start produk card-text fw-bold">Chicken Burger by Hangry - Cikini.
-                            </p>
-                            <h5 class="text-primary fw-bold text-nowrap">Rp.1.000.000</h5>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="ratings text-nowrap">
-                                    @php
-                                        $rating = 4;
-                                    @endphp
-                                    <div class="ratings">
-                                        @for ($i = 1; $i <= 5; $i++)
-                                            <i class="fa fa-star {{ $i <= $rating ? 'rating-color' : '' }}"></i>
-                                        @endfor
-                                    </div>
-                                    <h5 class="review-count">12 Reviews</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
+                    @endforeach
+                    {{ $produk->links() }}
                 </div>
             </div>
         </div>
@@ -420,85 +190,28 @@
         <div class="container-xxl py-5">
             <div class="container-fluid row">
                 <div class="col-12">
-                    <h5 class="fw-bolder border-bottom border-3" style="width: 150px">Cari di Resto</h5>
+                    <h5 class="fw-bolder border-bottom border-3" style="width: 150px">Cari di Toko</h5>
                 </div>
                 <div class="row col-12 g-4">
-                    <div class="col-lg-6">
-                        <div class="d-flex align-items-center">
-                            <img class="flex-shrink-0 img-fluid rounded" src="img/menu-1.jpg" alt=""
-                                style="width: 80px;">
-                            <div class="w-100 d-flex flex-column text-start ps-4">
-                                <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                    <span>Warung Kholiq</span>
-                                    <a href="#" class="btn btn-sm btn-primary">Kunjungi</a>
-                                </h5>
-                                <small class="fst-italic">Masakan Padang, Aneka Nasi, Ayam</small>
-                            </div>
+                    @foreach ($toko as $item)
+                    <div class="d-flex align-items-center col-lg-6 mb-4">
+                        <img class="flex-shrink-0 img-fluid rounded" src="{{ asset('storage/'. $item->foto ) }}" alt=""
+                            style="width: 100px;">
+                        <div class="w-100 d-flex flex-column text-start ps-4">
+                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                <span>{{ $item->nama_toko }}</span>
+                                <a href="{{ route('toko.detail', $item->id) }}"
+                                    class="btn btn-sm btn-primary">Kunjungi</a>
+                            </h5>
+                            <small class="fst-italic">{{ $item->deskripsi }}</small>
                         </div>
                     </div>
-
+                    @endforeach
+                    {{ $toko->links() }}
                 </div>
+
             </div>
         </div>
-        <!-- About End -->
-
-
-        <!-- Testimonial Start -->
-        {{-- <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
-            <div class="container">
-                <div class="text-center">
-                    <h5 class="section-title ff-secondary text-center text-primary fw-normal">Testimonial</h5>
-                    <h1 class="mb-5">Our Clients Say!!!</h1>
-                </div>
-                <div class="owl-carousel testimonial-carousel">
-                    <div class="testimonial-item bg-transparent border rounded p-4">
-                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                        <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
-                        <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-1.jpg" style="width: 50px; height: 50px;">
-                            <div class="ps-3">
-                                <h5 class="mb-1">Client Name</h5>
-                                <small>Profession</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-item bg-transparent border rounded p-4">
-                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                        <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
-                        <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-2.jpg" style="width: 50px; height: 50px;">
-                            <div class="ps-3">
-                                <h5 class="mb-1">Client Name</h5>
-                                <small>Profession</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-item bg-transparent border rounded p-4">
-                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                        <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
-                        <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-3.jpg" style="width: 50px; height: 50px;">
-                            <div class="ps-3">
-                                <h5 class="mb-1">Client Name</h5>
-                                <small>Profession</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-item bg-transparent border rounded p-4">
-                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                        <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
-                        <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-4.jpg" style="width: 50px; height: 50px;">
-                            <div class="ps-3">
-                                <h5 class="mb-1">Client Name</h5>
-                                <small>Profession</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-        <!-- Testimonial End -->
 
 
         <!-- Footer Start -->

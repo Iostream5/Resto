@@ -6,9 +6,8 @@ use App\Models\Kategori;
 use App\Models\Produk;
 use App\Models\Toko;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Storage;
 
 class ProdukController extends Controller
 {
@@ -19,11 +18,7 @@ class ProdukController extends Controller
 
     public function data()
     {
-        $produk = Produk::with(['kategori', 'toko'])
-            ->whereHas('toko', function ($query) {
-                $query->where('user_id', Auth::id());
-            })
-            ->get();
+        $produk = Produk::with(['kategori', 'toko'])->get();
 
         return DataTables::of($produk)
             ->addColumn('kategori', function ($produk) {
@@ -49,30 +44,19 @@ class ProdukController extends Controller
             ->make(true);
     }
 
+
+
     public function tambah()
     {
-        $toko = Toko::where('user_id', Auth::id())->get();
+        $toko = Toko::all();
         $kategori = Kategori::all();
         return view('page.produk.tambah', compact('toko', 'kategori'));
     }
 
     public function simpan(Request $request)
     {
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
-            'harga' => 'required|numeric',
-            'rating' => 'nullable|numeric|between:0,5',
-            'kategori_id' => 'required|exists:kategoris,id',
-            'toko_id' => 'required|exists:tokos,id',
-            'foto' => 'image|mimes:jpeg,png,jpg|max:2048'
-        ]);
-
-        // Pastikan toko milik user yang sedang login
-        $toko = Toko::where('id', $request->toko_id)->where('user_id', Auth::id())->firstOrFail();
-
         $produk = new Produk();
-        $produk->toko_id = $toko->id;
+        $produk->toko_id = $request->toko_id;
         $produk->nama = $request->nama;
         $produk->deskripsi = $request->deskripsi;
         $produk->harga = $request->harga;
@@ -81,60 +65,42 @@ class ProdukController extends Controller
         $produk->foto = $request->file('foto')->store('produk', 'public');
         $produk->save();
 
-        return redirect()->route('produk.tampil')->with('success', 'Produk berhasil ditambahkan');
+        return redirect()->route('produk.tampil');
     }
 
     public function edit($id)
     {
-        $produk = Produk::with(['kategori', 'toko'])
-            ->whereHas('toko', function ($query) {
-                $query->where('user_id', Auth::id());
-            })
-            ->findOrFail($id);
-        $toko = Toko::where('user_id', Auth::id())->get();
+        $produk = Produk::with(['kategori', 'toko'])->findOrFail($id);
+        $toko = Toko::all();
         $kategori = Kategori::all();
+
         return view('page.produk.edit', compact('produk', 'toko', 'kategori'));
     }
 
+
     public function update(Request $request, $id)
     {
-        $produk = Produk::whereHas('toko', function ($query) {
-            $query->where('user_id', Auth::id());
-        })->findOrFail($id);
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
-            'harga' => 'required|numeric',
-            'rating' => 'nullable|numeric|between:0,5',
-            'kategori_id' => 'required|exists:kategoris,id',
-            'toko_id' => 'required|exists:tokos,id',
-            'foto' => 'image|mimes:jpeg,png,jpg|max:2048'
-        ]);
-
-        // Validasi toko milik user yang sedang login
-        $toko = Toko::where('id', $request->toko_id)->where('user_id', Auth::id())->firstOrFail();
-
+        $produk = Produk::findOrFail($id);
+        $produk->toko_id = $request->toko_id;
         $produk->nama = $request->nama;
         $produk->deskripsi = $request->deskripsi;
         $produk->harga = $request->harga;
         $produk->rating = $request->rating;
         $produk->kategori_id = $request->kategori_id;
         $produk->foto = $request->file('foto')->store('produk', 'public');
-        $produk->save();
+        $produk->update();
 
-        return redirect()->route('produk.tampil')->with('success', 'Produk berhasil diperbarui');
+        return redirect()->route('produk.tampil');
     }
 
     public function hapus($id)
     {
-        $produk = Produk::whereHas('toko', function ($query) {
-            $query->where('user_id', Auth::id());
-        })->findOrFail($id);
+        $produk = Produk::findOrFail($id);
         if ($produk->foto) {
             Storage::disk('public')->delete($produk->foto);
         }
         $produk->delete();
 
-        return redirect()->route('produk.tampil')->with('success', 'Produk berhasil dihapus');
+        return redirect()->route('produk.tampil');
     }
 }

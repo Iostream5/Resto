@@ -34,86 +34,7 @@
     <link href="{{ asset('template/css/style.css') }}" rel="stylesheet">
 </head>
 <style>
-    .searching {
-        position: relative;
-    }
 
-    .form-inputs {
-        padding-left: 2.5rem;
-        /* Jarak untuk ikon search di kiri */
-        padding-right: 2.5rem;
-        /* Jarak untuk ikon microphone di kanan */
-        height: 55px;
-        text-indent: 33px;
-        border-radius: 10px;
-    }
-
-    .searching .fa-search,
-    .searching .fa-microphone {
-        color: #6c757d;
-        /* Warna ikon, sesuaikan sesuai kebutuhan */
-    }
-
-    .form-inputs:focus {
-
-        box-shadow: none;
-        border: none;
-    }
-
-    .b {
-        border-left: 1px solid rgba(141, 141, 141, 0.6);
-
-    }
-
-    .c {
-        margin-left: 14px;
-    }
-
-    .searching {
-
-        position: relative;
-    }
-
-    .searching .fa-search {
-
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        color: #9ca3af;
-
-    }
-
-    .searching span {
-
-        position: absolute;
-        right: 17px;
-        top: 13px;
-        padding: 2px;
-        border-left: 1px solid #d1d5db;
-
-    }
-
-    .left-pan {
-        padding-left: 7px;
-    }
-
-    .left-pan i {
-
-        padding-left: 10px;
-    }
-
-    .form-inputs {
-
-        height: 55px;
-        text-indent: 33px;
-        border-radius: 10px;
-    }
-
-    .form-inputs:focus {
-
-        box-shadow: none;
-        border: none;
-    }
 </style>
 
 <body style="background: linear-gradient(rgba(15, 23, 43, .9), rgba(15, 23, 43, .9))">
@@ -131,126 +52,40 @@
         <div class="container-xxl  py-5">
             <div class="container">
                 <div class="text-center wow fadeInUp my-5" data-wow-delay="0.1s">
-                    <h1 class="mb-5">Category!</h1>
+                    <h1 class="mb-5">Kategori Makanan: {{ $kategori->nama_kategori }}</h1>
                 </div>
-                
-                <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.1s">
-                    <div id="tab-1" class="tab-pane fade show p-0 active">
-                        <div class="row g-4">
-                            <div class="col-lg-6 mb-4">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded"
-                                        src="{{ asset('template/img/menu-1.jpg') }}" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded"
-                                        src="{{ asset('template/img/menu-2.jpg') }}" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded"
-                                        src="{{ asset('template/img/menu-3.jpg') }}" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded"
-                                        src="{{ asset('template/img/menu-4.jpg') }}" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded"
-                                        src="{{ asset('template/img/menu-5.jpg') }}" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded"
-                                        src="{{ asset('template/img/menu-6.jpg') }}" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded"
-                                        src="{{ asset('template/img/menu-7.jpg') }}" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 mb-4">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded"
-                                        src="{{ asset('template/img/menu-8.jpg') }}" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
+                <div class="tab-class wow fadeInUp" data-wow-delay="0.1s">
+                    <div id="tab-1" class="tab-pane fade show p-0 active">
+                        <div class="row mt-4 col-12">
+                            @foreach ($kategori->produk as $item)
+                            <a href="{{ route('detail', $item->id) }}" class="ms-auto col-lg-3 col-md-5 col-6">
+                                <img src="{{ asset('storage/'. $item->foto) }}" class="card-img-top rounded-5"
+                                    alt="...">
+                                <div class="card-body">
+                                    <p class="text-dark text-start produk fw-bold m-0">{{ $item->nama }}</p>
+                                    <small class="text-dark text-start produk fw-lighter mb-5">{{
+                                        $item->deskripsi}}</small>
+                                    <h5 class="text-primary fw-bold text-nowrap">Rp.{{ $item->harga }}</h5>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="ratings text-nowrap">
+                                            @php
+                                            $rating = $item->rating;
+                                            @endphp
+                                            <div class="ratings">
+                                                @for ($i = 1; $i <= 5; $i++) <i
+                                                    class="fa fa-star {{ $i <= $rating ? 'rating-color' : '' }}">
+                                                    </i>
+                                                    @endfor
+                                            </div>
+                                            <h5 class="review-count">12 Reviews</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            @endforeach
+                            {{ $kategori->links() }}
+                        </div>
                     </div>
                 </div>
 
