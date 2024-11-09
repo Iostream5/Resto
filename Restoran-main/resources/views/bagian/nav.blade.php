@@ -28,6 +28,7 @@
                 <a href="/favorit" class="nav-item nav-link">Populer</a>
                 <a href="/toko" class="nav-item nav-link">Toko</a>
                 <a href="/kategori" class="nav-item nav-link">Category</a>
+                <a href="/form" class="nav-item nav-link">form</a>
             </div>
 
             <!-- Tombol Masuk & Daftar -->

@@ -34,3 +34,6 @@ Route::get('/kategori',function(){
     return view('page.kategori');
 })->name('kategori');
 
+Route::get('/form',function(){
+    return view('page.form');
+})->name('form');
