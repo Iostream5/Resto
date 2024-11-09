@@ -80,3 +80,6 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+Route::get('/form',function(){
+    return view('page.form');
+})->name('form');
