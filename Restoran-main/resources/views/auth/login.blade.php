@@ -22,7 +22,13 @@
 
             <div class="mt-4">
                 <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+                <div class="relative">
+                    <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+                    
+                    <!-- Checkbox/Toggle untuk Menampilkan Password -->
+                    <input type="checkbox" id="togglePassword" class="absolute top-2 right-2 mt-1" style="border-radius: 5px;">
+                    <label for="togglePassword" class="text-sm cursor-pointer">Show Password</label>
+                </div>
             </div>
 
             <div class="block mt-4">
@@ -46,3 +52,13 @@
         </form>
     </x-authentication-card>
 </x-guest-layout>
+<script>
+    // JavaScript untuk toggle visibility
+    const passwordInput = document.getElementById('password');
+    const togglePassword = document.getElementById('togglePassword');
+
+    togglePassword.addEventListener('change', function() {
+        // Toggle tipe password dan text
+        passwordInput.type = this.checked ? 'text' : 'password';
+    });
+</script>
