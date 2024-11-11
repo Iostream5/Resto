@@ -203,9 +203,9 @@
                         <div class="col-md-4 text-center">
                             <div class="card profile-card">
                                 <div class="profile-img-wrapper">
-                                    @if (Auth::user()->foto)
-                                    <img src="{{ asset('storage/'. Autk::user()->foto) }}" class="profile-img"
-                                        alt="Profil">
+                                    @if (Auth::user()->profile_photo_path)
+                                    <img src="{{ asset('storage/'. Auth::user()->profile_photo_path) }}"
+                                        class="profile-img" alt="Profil">
                                     @else
                                     <img src="https://via.placeholder.com/300" class="profile-img" alt="Profil">
                                     @endif
@@ -215,10 +215,15 @@
                                 {{ Auth::user()->name }}
                             </p>
                             <p class="card-text">
+                                @if (Auth::user()->bio)
                                 {{ Auth::user()->bio }}
+                                @else
+                                Kamu Belum Menambahkan Biodata
+                                @endif
                             </p>
                             <div class="d-flex justify-content-around">
-                                <a href="#" class="btn btn-primary">Edit Profil</a>
+                                <a href="{{ route('profile.edit', Auth::user()->id) }}" class="btn btn-primary">Edit
+                                    Profil</a>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <button type="submit" class="btn btn-danger">Log Out</button>
@@ -226,7 +231,7 @@
                             </div>
 
                         </div>
-                        <div class="col-md-8 mt-4">
+                        <div class="col-md-4 mt-4">
                             <h2>Informasi Pengguna</h2>
                             <ul class="list-group">
                                 <li class="list-group-item">
@@ -284,6 +289,7 @@
                                 </li>
                             </ul>
 
+                            @if (Auth::user())
                             <h3 class="mt-4">Keranjang</h3>
                             <table class="table">
                                 <thead>
@@ -318,6 +324,98 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            @endif
+
+                        </div>
+                        <div class="col-md-4 mt-4">
+                            <h2>Informasi Toko</h2>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    Nama Toko:
+                                    @if (Auth::user()->toko->nama_toko)
+                                    <small class="fw-bold" id="nama_toko">{{ Auth::user()->toko->nama_toko }}</small
+                                        class="fw-bold">
+                                    @else
+                                    <small class="fw-bold" id="nama_toko">Tambahkan nama_toko Anda</small
+                                        class="fw-bold">
+                                    @endif
+                                </li>
+                                <li class="list-group-item">
+                                    Deskripsi:
+                                    @if (Auth::user()->toko->deskripsi)
+                                    <small class="fw-bold" id="deskripsi">{{ Auth::user()->toko->deskripsi }}</small
+                                        class="fw-bold">
+                                    @else
+                                    <small class="fw-bold" id="deskripsi"><i>Tambahkan Nomor deskripsi Anda</i></small>
+                                    @endif
+
+                                </li>
+                                <li class="list-group-item">
+                                    Alamat:
+                                    @if (Auth::user()->toko->alamat)
+                                    <small class="fw-bold" id="alamat">{{ Auth::user()->toko->alamat }}</small
+                                        class="fw-bold">
+                                    @else
+                                    <small class="fw-bold" id="alamat"><i>Tambahkan Alamat Anda</i></small>
+                                    @endif
+
+                                </li>
+
+                                <li class="list-group-item d-flex">
+                                    Rating Toko:
+                                    @if (Auth::user()->toko->rating)
+                                    <div class="d-flex ratings text-nowrap ms-2">
+                                        @php
+                                        $rating = Auth::user()->toko->rating;
+                                        @endphp
+                                        <div class="ratings">
+                                            @for ($i = 1; $i <= 5; $i++) <i
+                                                class="fa fa-star {{ $i <= $rating ? 'rating-color' : '' }}"></i>
+                                                @endfor
+                                        </div>
+                                        <small class="ms-2 fw-lighther">{{ Auth::user()->toko->rating }}</small>
+                                    </div>
+                                    @else
+                                    <small class="fw-bold" id="Rating"><i>Tambahkan Rating Anda</i></small>
+                                    @endif
+
+                                </li>
+                            </ul>
+
+                            {{-- <h3 class="mt-4">Keranjang</h3>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">No</th>
+                                        <th scope="col">Nama Makanan</th>
+                                        <th scope="col">Tanggal Pesan</th>
+                                        <th scope="col">Status</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Nasi Goreng Spesial</td>
+                                        <td>1 November 2024</td>
+                                        <td><span class="badge bg-success">Selesai</span></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Pizza Margherita</td>
+                                        <td>30 Oktober 2024</td>
+                                        <td><span class="badge bg-warning text-dark">Dalam Proses</span></td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Sushi Campuran</td>
+                                        <td>28 Oktober 2024</td>
+                                        <td><span class="badge bg-danger">Dibatalkan</span></td>
+
+                                    </tr>
+                                </tbody>
+                            </table> --}}
                         </div>
                     </div>
                 </div>
@@ -348,8 +446,8 @@
                                             d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.37 2.37 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0M1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5M4 15h3v-5H4zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zm3 0h-2v3h2z" />
                                     </svg>
                                     <div class="ps-3">
-                                        <small class="text-body">Toko</small>
-                                        <h6 class="mt-n1 mb-0">Langganan</h6>
+                                        <small class="text-body">Toko Anda</small>
+                                        <h6 class="mt-n1 mb-0">{{ Auth::user()->toko->nama_toko }}</h6>
                                     </div>
                                 </a>
                             </li>
@@ -368,297 +466,78 @@
                 </div>
                 <div class="tab-content  fadeInUp" data-wow-delay="0.1s">
                     <div id="tab-1" class="tab-pane fade show p-0 active fadeInUp" data-wow-delay="0.1s">
-                        <div class="row g-4 wow fadeInUp" data-wow-delay="0.1s">
-                            <div class="col-lg-6">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="img/menu-1.jpg" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
+                        @if(Auth::user()->favorite)
+                        <div class="row">
+                            @foreach ($favorite as $items)
+                            <a href="{{ route('detail', [$items->produk->id, $items->produk->nama]) }}"
+                                class="ms-auto col-lg-3 text-dark col-md-5 col-6 position-relative">
+                                <div class=" mb-4">
+                                    <div class="card" style="border: none">
+                                        <!-- Jika belum ada di favorit, tampilkan tombol untuk menambah favorit -->
+                                        <form action="{{ route('favorites.hapus', $items->produk_id) }}" method="POST"
+                                            class="position-absolute top-0 end-0 m-1">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-transparent">
+                                                <i class="fa fa-heart text-danger fa-2x"></i> <!-- Favorit sudah ada -->
+                                            </button>
+                                        </form>
+                                        <img src="{{ asset('storage/' . $items->produk->foto) }}" class="card-img-top"
+                                            alt="{{ $items->produk->nama }}" style="border-radius: 15px">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ $items->produk->nama }}</h5>
+                                            <p class="card-text">{{ $items->produk->deskripsi }}</p>
+                                            <h5 class="text-primary">Rp.{{ number_format($items->produk->harga, 0, ',',
+                                                '.') }}</h5>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="img/menu-2.jpg" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="img/menu-3.jpg" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="img/menu-4.jpg" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="img/menu-5.jpg" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="img/menu-6.jpg" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="img/menu-7.jpg" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="img/menu-8.jpg" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
+                            </a>
+                            @endforeach
                         </div>
+                        @else
+                        <p>Anda belum memiliki produk favorit.</p>
+                        @endif
                     </div>
+
+                    @if (Auth::user()->toko)
                     <div id="tab-2" class="tab-pane fade show p-0">
-                        <div class="row g-4 wow fadeInUp" data-wow-delay="0.1s">
-                            <div class="col-lg-6">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="img/menu-1.jpg" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
+                        <div class="d-flex justify-content-around">
+                            <a href="{{ route('produk.tambah') }}" class="btn btn-success btn-sm mb-3 fadeInUp"
+                                data-wow-delay="0.1s">Tambahkan
+                                Produk</a>
+                            <a href="{{ route('toko.edit', Auth::user()->toko->id) }}"
+                                class="btn btn-warning text-light btn-sm mb-3 fadeInUp" data-wow-delay="0.1s">Edit Toko
+                                Anda</a>
+                        </div>
+                        <div class="row mt-4">
+                            @foreach (Auth::user()->produk as $item)
+                            <a href="{{ route('produk.edit', [$item->id, $item->nama]) }}"
+                                class="ms-auto col-lg-3 text-dark col-md-5 col-6 position-relative">
+                                <div class=" mb-4">
+                                    <div class="card" style="border: none">
+                                        <img src="{{ asset('storage/' . $item->foto) }}" class="card-img-top"
+                                            alt="{{ $item->nama }}" style="border-radius: 15px">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ $item->nama }}</h5>
+                                            <p class="card-text">{{ $item->deskripsi }}</p>
+                                            <h5 class="text-primary">Rp.{{ number_format($item->harga, 0, ',',
+                                                '.') }}</h5>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="img/menu-2.jpg" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="img/menu-3.jpg" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="img/menu-4.jpg" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="img/menu-5.jpg" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="img/menu-6.jpg" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="img/menu-7.jpg" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid rounded" src="img/menu-8.jpg" alt=""
-                                        style="width: 80px;">
-                                    <div class="w-100 d-flex flex-column text-start ps-4">
-                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                            <span>Chicken Burger</span>
-                                            <span class="text-primary">$115</span>
-                                        </h5>
-                                        <small class="fst-italic">Ipsum ipsum clita erat amet dolor justo diam</small>
-                                    </div>
-                                </div>
-                            </div>
+                            </a>
+                            @endforeach
                         </div>
                     </div>
+                    @else
+                    <small>Buat Toko Anda!</small>
+                    @endif
+
                 </div>
             </div>
         </div>
         <!-- menu End -->
-
-
-        <!-- Toko Start -->
-        <!-- About End -->
-
-
-        <!-- Testimonial Start -->
-        {{-- <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
-            <div class="container">
-                <div class="text-center">
-                    <h5 class="section-title ff-secondary text-center text-primary fw-normal">Testimonial</h5>
-                    <h1 class="mb-5">Our Clients Say!!!</h1>
-                </div>
-                <div class="owl-carousel testimonial-carousel">
-                    <div class="testimonial-item bg-transparent border rounded p-4">
-                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                        <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore
-                            diam</p>
-                        <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-1.jpg"
-                                style="width: 50px; height: 50px;">
-                            <div class="ps-3">
-                                <h5 class="mb-1">Client Name</h5>
-                                <small>Profession</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-item bg-transparent border rounded p-4">
-                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                        <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore
-                            diam</p>
-                        <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-2.jpg"
-                                style="width: 50px; height: 50px;">
-                            <div class="ps-3">
-                                <h5 class="mb-1">Client Name</h5>
-                                <small>Profession</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-item bg-transparent border rounded p-4">
-                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                        <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore
-                            diam</p>
-                        <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-3.jpg"
-                                style="width: 50px; height: 50px;">
-                            <div class="ps-3">
-                                <h5 class="mb-1">Client Name</h5>
-                                <small>Profession</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-item bg-transparent border rounded p-4">
-                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                        <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore
-                            diam</p>
-                        <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-4.jpg"
-                                style="width: 50px; height: 50px;">
-                            <div class="ps-3">
-                                <h5 class="mb-1">Client Name</h5>
-                                <small>Profession</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-        <!-- Testimonial End -->
-
-
         <!-- Footer Start -->
         @include('bagian.footer')
         <!-- Footer End -->

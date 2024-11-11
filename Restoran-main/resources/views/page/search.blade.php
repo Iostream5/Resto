@@ -188,7 +188,9 @@
                                 </div>
                             </a>
                             @endforeach
-                            {{ $produk->links() }}
+                            <div class="d-flex justify-content-center">
+                                {{ $produk->links('pagination::bootstrap-5') }}
+                            </div>
 
                             @if ($toko->isEmpty())
                             @else
@@ -220,7 +222,9 @@
                                 </div>
                             </a>
                             @endforeach
-                            {{ $toko->links() }}
+                            <div class="d-flex justify-content-center">
+                                {{ $toko->links('pagination::bootstrap-5') }}
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -178,7 +178,9 @@
                         </div>
                     </a>
                     @endforeach
-                    {{ $produk->links() }}
+                    <div class="d-flex justify-content-center">
+                        {{ $produk->links('pagination::bootstrap-5') }}
+                    </div>
                 </div>
             </div>
 

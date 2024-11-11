@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -63,5 +62,32 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
+
+    public function cartProducts()
+    {
+        return $this->belongsToMany(Produk::class, 'carts', 'user_id', 'produk_id')
+            ->withPivot('quantity');
+    }
+
+    public function produk()
+    {
+        return $this->hasManyThrough(Produk::class, Toko::class);
+    }
+
+    public function toko()
+    {
+        return $this->hasOne(Toko::class);  // Relasi hasOne untuk menunjukkan bahwa setiap user memiliki satu toko
+    }
+
+    public function favorite()
+    {
+        return $this->hasMany(Favorite::class);
     }
 }

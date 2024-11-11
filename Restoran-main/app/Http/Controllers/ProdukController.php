@@ -14,7 +14,7 @@ class ProdukController extends Controller
 {
     public function tampil()
     {
-        return view('page.produk.data');
+        return view('page.profil');
     }
 
     public function data()
@@ -53,24 +53,27 @@ class ProdukController extends Controller
     {
         $toko = Toko::where('user_id', Auth::id())->get();
         $kategori = Kategori::all();
-        return view('page.produk.tambah', compact('toko', 'kategori'));
+        return view('form.produk', compact('toko', 'kategori'));
     }
 
     public function simpan(Request $request)
     {
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
-            'harga' => 'required|numeric',
-            'rating' => 'nullable|numeric|between:0,5',
-            'kategori_id' => 'required|exists:kategoris,id',
-            'toko_id' => 'required|exists:tokos,id',
-            'foto' => 'image|mimes:jpeg,png,jpg|max:2048'
-        ]);
+        // // Validasi toko_id dan pastikan toko milik user yang sedang login
+        // $request->validate([
+        //     'toko_id' => 'required|exists:tokos,id,user_id,' . Auth::id(), // Validasi toko_id milik user yang sedang login
+        //     'nama' => 'required|string|max:255',
+        //     'deskripsi' => 'required|string|max:255',
+        //     'harga' => 'required|numeric',
+        //     'kategori_id' => 'required|exists:kategoris,id',
+        //     'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        // ]);
 
-        // Pastikan toko milik user yang sedang login
-        $toko = Toko::where('id', $request->toko_id)->where('user_id', Auth::id())->firstOrFail();
+        // // Mendapatkan toko berdasarkan toko_id dan user_id
+        $toko = Toko::where('id', $request->toko_id)
+            ->where('user_id', Auth::id())
+            ->firstOrFail(); // Jika tidak ditemukan, akan mengembalikan 404
 
+        // Proses penyimpanan produk
         $produk = new Produk();
         $produk->toko_id = $toko->id;
         $produk->nama = $request->nama;
@@ -81,8 +84,9 @@ class ProdukController extends Controller
         $produk->foto = $request->file('foto')->store('produk', 'public');
         $produk->save();
 
-        return redirect()->route('produk.tampil')->with('success', 'Produk berhasil ditambahkan');
+        return redirect()->route('profil');
     }
+
 
     public function edit($id)
     {
@@ -93,7 +97,7 @@ class ProdukController extends Controller
             ->findOrFail($id);
         $toko = Toko::where('user_id', Auth::id())->get();
         $kategori = Kategori::all();
-        return view('page.produk.edit', compact('produk', 'toko', 'kategori'));
+        return view('form.edit.produk', compact('produk', 'toko', 'kategori'));
     }
 
     public function update(Request $request, $id)
@@ -101,19 +105,22 @@ class ProdukController extends Controller
         $produk = Produk::whereHas('toko', function ($query) {
             $query->where('user_id', Auth::id());
         })->findOrFail($id);
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
-            'harga' => 'required|numeric',
-            'rating' => 'nullable|numeric|between:0,5',
-            'kategori_id' => 'required|exists:kategoris,id',
-            'toko_id' => 'required|exists:tokos,id',
-            'foto' => 'image|mimes:jpeg,png,jpg|max:2048'
-        ]);
+        // $request->validate([
+        //     'nama' => 'required|string|max:255',
+        //     'deskripsi' => 'nullable|string',
+        //     'harga' => 'required|numeric',
+        //     'rating' => 'nullable|numeric|between:0,5',
+        //     'kategori_id' => 'required|exists:kategoris,id',
+        //     'toko_id' => 'required|exists:tokos,id',
+        //     'foto' => 'image|mimes:jpeg,png,jpg|max:2048'
+        // ]);
 
         // Validasi toko milik user yang sedang login
-        $toko = Toko::where('id', $request->toko_id)->where('user_id', Auth::id())->firstOrFail();
+        $toko = Toko::where('id', $request->toko_id)
+            ->where('user_id', Auth::id())
+            ->firstOrFail();
 
+        $produk->toko_id = $toko->id;
         $produk->nama = $request->nama;
         $produk->deskripsi = $request->deskripsi;
         $produk->harga = $request->harga;

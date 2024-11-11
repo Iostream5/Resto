@@ -97,6 +97,32 @@
         box-shadow: none;
         border: none;
     }
+
+    /* Tombol Favorit di kanan atas gambar produk */
+    .favorite-btn {
+        font-size: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .favorite-btn:hover {
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .favorite-btn i {
+        color: #ff6347;
+        /* Warna merah untuk ikon hati */
+    }
+
+    /* Warna hati favorit (terisi) */
+    .favorite-btn .fa-heart {
+        color: #ff6347;
+    }
+
+    /* Warna hati belum favorit (kosong) */
+    .favorite-btn .fa-heart-o {
+        color: #ccc;
+    }
 </style>
 
 <body style="background: linear-gradient(rgba(15, 23, 43, .9), rgba(15, 23, 43, .9))">
@@ -155,31 +181,44 @@
                 </div>
                 <div class="row mt-4 col-12">
                     @foreach ($produk as $item)
-                    <a href="{{ route('detail', [$item->id, $item->nama]) }}" class="ms-auto col-lg-3 col-md-5 col-6">
-                        <img src="{{ asset('storage/'. $item->foto) }}" width="70%" class=" rounded-5" alt="...">
+                    <a href="{{ route('detail', [$item->id, $item->nama]) }}"
+                        class="ms-auto col-lg-3 col-md-5 col-6 position-relative">
+
+                        <!-- Tombol Favorit -->
+                        @if (Auth::check() && Auth::user()->favorite->contains('produk_id', $item->id))
+                        <!-- Jika sudah ada di favorit, tampilkan tombol untuk menghapus favorit -->
+                        <form action="{{ route('favorites.hapus', $item->id) }}" method="POST"
+                            class="position-absolute top-0 end-0 m-1">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-transparent">
+                                <i class="fa fa-heart text-danger fa-2x"></i> <!-- Favorit sudah ada -->
+                            </button>
+                        </form>
+                        @elseif (Auth::check())
+                        <!-- Jika belum ada di favorit, tampilkan tombol untuk menambah favorit -->
+                        <form action="{{ route('favorites.tambah', $item->id) }}" method="POST"
+                            class="position-absolute top-0 end-0 m-1">
+                            @csrf
+                            <button type="submit" class="btn btn-transparent">
+                                <i class="fa fa-heart text-muted fa-2x"></i> <!-- Favorit belum ada -->
+                            </button>
+                        </form>
+                        @endif
+
+                        <!-- Gambar Produk -->
+                        <img src="{{ asset('storage/'. $item->foto) }}" width="100%" class="rounded-5" alt="...">
+
                         <div class="card-body">
-                            <p class="text-dark text-start produk fw-bold m-0">{{ $item->nama}}
-                            </p>
-                            <small class="text-dark text-start produk fw-lighter">{{ $item->deskripsi}}
-                            </small>
-                            <h5 class="text-primary fw-bold text-nowrap">{{ $item->harga }}</h5>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="ratings text-nowrap">
-                                    @php
-                                    $rating = $item->rating;
-                                    @endphp
-                                    <div class="ratings">
-                                        @for ($i = 1; $i <= 5; $i++) <i
-                                            class="fa fa-star {{ $i <= $rating ? 'rating-color' : '' }}"></i>
-                                            @endfor
-                                    </div>
-                                    <h5 class="review-count">12 Reviews</h5>
-                                </div>
-                            </div>
+                            <p class="text-dark text-start produk fw-bold m-0">{{ $item->nama }}</p>
+                            <small class="text-dark text-start produk fw-lighter">{{ $item->deskripsi }}</small>
+                            <h5 class="text-primary fw-bold text-nowrap">Rp.{{ $item->harga }}</h5>
                         </div>
                     </a>
                     @endforeach
-                    {{ $produk->links() }}
+                    <div class="d-flex justify-content-center">
+                        {{ $produk->links('pagination::bootstrap-5') }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -198,16 +237,22 @@
                         <img class="flex-shrink-0 img-fluid rounded" src="{{ asset('storage/'. $item->foto ) }}" alt=""
                             style="width: 100px;">
                         <div class="w-100 d-flex flex-column text-start ps-4">
-                            <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                <span>{{ $item->nama_toko }}</span>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                    <span>{{ $item->nama_toko }}</span>
+                                </h5>
                                 <a href="{{ route('toko.detail', $item->id) }}"
                                     class="btn btn-sm btn-primary">Kunjungi</a>
-                            </h5>
+                            </div>
+
                             <small class="fst-italic">{{ $item->deskripsi }}</small>
                         </div>
                     </div>
                     @endforeach
-                    {{ $toko->links() }}
+                    <div class="d-flex justify-content-center">
+                        {{ $toko->links('pagination::bootstrap-5') }}
+                    </div>
+
                 </div>
 
             </div>
@@ -241,6 +286,29 @@
     </script>
 
     <!-- Template Javascript -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.favorite-btn').on('click', function() {
+                var productId = $(this).data('product-id');
+                var isFavorited = $(this).data('is-favorited') === '1';
+    
+                var url = isFavorited ? '/product/' + productId + '/unfavorite' : '/product/' + productId + '/favorite';
+                var newIconClass = isFavorited ? 'fa-heart-o' : 'fa-heart';
+                var newIsFavorited = isFavorited ? '0' : '1';
+    
+                // Kirim request AJAX untuk mengubah status favorit
+                $.post(url, function(response) {
+                    // Update tombol favorit
+                    $('#product-' + productId + ' .favorite-btn')
+                        .data('is-favorited', newIsFavorited)
+                        .find('i')
+                        .removeClass('fa-heart fa-heart-o')
+                        .addClass(newIconClass);
+                });
+            });
+        });
+    </script>
     <script src="{{ asset('template/js/main.js') }}"></script>
 </body>
 

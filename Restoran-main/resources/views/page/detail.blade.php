@@ -199,7 +199,8 @@
                                 <small class="ms-2 fw-lighther">{{ $produk->toko->rating }}</small>
                             </div>
                             <p>Deskripsi: {{ $produk->toko->deskripsi }}</p>
-                            <a href="{{ route('toko.detail', $produk->id) }}" class="btn btn-outline-primary">Kunjungi
+                            <a href="{{ route('toko.detail', $produk->toko->id) }}"
+                                class="btn btn-outline-primary">Kunjungi
                                 Toko</a>
                         </div>
                     </div>

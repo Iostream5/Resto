@@ -38,52 +38,59 @@
 <body>
 
 
-        <!-- Spinner Start -->
-        <!-- Spinner End -->
+    <!-- Spinner Start -->
+    <!-- Spinner End -->
 
 
-        <!-- Navbar & Hero End -->
+    <!-- Navbar & Hero End -->
 
-        <!-- About Form Start -->
-        <div class="form-container container mt-5">
-            <h2 class="text-center">Sign Up Form</h2>
-            <form action="#" method="POST">
-                <!-- Input Nama -->
-                <div class="mb-3">
-                    <label for="name" class="form-label">Full Name</label>
-                    <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name" required>
-                </div>
+    <!-- About Form Start -->
+    <div class="form-container container mt-5">
+        <h2 class="text-center">Buat Toko Anda</h2>
+        <form action="{{ route('toko.simpan') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="mb-3">
+                <label class="fw-bolder my-2">Nama Toko</label>
+                <input type="text" class="form-control" id="nama_toko" name="nama_toko" placeholder="Masukkan Nama Toko"
+                    required>
+            </div>
 
-                <!-- Input Email -->
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
-                </div>
+            <div class="mb-3">
+                <label class="fw-bolder my-2">Alamat</label>
+                <textarea class="form-control" id="alamat" name="alamat" placeholder="Masukkan Alamat"
+                    required></textarea>
+            </div>
 
-                <!-- Input Pesan -->
-                <div class="mb-3">
-                    <label for="message" class="form-label">Message</label>
-                    <textarea id="message" name="message" class="form-control" rows="4" placeholder="Enter your message"></textarea>
-                </div>
+            <div class="mb-3">
+                <label class="fw-bolder my-2">Deskripsi</label>
+                <textarea class="form-control" id="deskripsi" name="deskripsi" placeholder="Masukkan deskripsi"
+                    required></textarea>
+            </div>
 
-                <!-- Tombol Submit -->
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary px-5">Submit</button>
-                </div>
-            </form>
-        </div>
-        <!-- About Form End -->
+            <div class="mb-3">
+                <label class="fw-bolder my-2">Foto</label>
+                <input type="file" class="form-control" id="foto" name="foto" onchange="previewImage(event)">
+            </div>
 
-        <!-- Footer Start -->
-        {{-- Footer --}}
-        @include('bagian.footer')
-        <!-- Footer End -->
+            <div class="mb-3">
+                <img id="imagePreview" src="#" alt="Preview Foto" style="max-width: 150px; display: none;">
+            </div>
 
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top">
-            <i class="bi bi-arrow-up"></i>
-        </a>
-    
+            <button type="submit" class="btn btn-primary">Simpan</button>
+        </form>
+    </div>
+    <!-- About Form End -->
+
+    <!-- Footer Start -->
+    {{-- Footer --}}
+    @include('bagian.footer')
+    <!-- Footer End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top">
+        <i class="bi bi-arrow-up"></i>
+    </a>
+
 
 
 

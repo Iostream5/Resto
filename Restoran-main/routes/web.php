@@ -7,6 +7,8 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\TokoController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+
 
 Route::get('/', [DataController::class, 'home'])->name('home');
 
@@ -27,9 +29,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
 
-    Route::get('/profil', function () {
-        return view('page.profil');
-    })->name('profil');
+    Route::get('/profil', [DataController::class, 'profil'])->name('profil');
 
     Route::get('/favorit', function () {
         return view('page.favorit');
@@ -40,6 +40,9 @@ Route::middleware([
     Route::get('/detail/{id:nama}', [DataController::class, 'detail'])->name('detail');
 
 
+
+
+    Route::post('/produk/{produkId}/favorite', [FavoriteController::class, 'toggleFavorite'])->name('produk.favorite');
 
 
 
@@ -70,7 +73,7 @@ Route::middleware([
 
     //produk
     Route::get('produk', [ProdukController::class, 'tampil'])->name('produk.tampil');
-    Route::post('produk', [ProdukController::class, 'simpan'])->name('produk.simpan');
+    Route::post('Produk', [ProdukController::class, 'simpan'])->name('produk.simpan');
     Route::get('produk/data', [ProdukController::class, 'data'])->name('produk.data');
     Route::get('produk/tambah', [ProdukController::class, 'tambah'])->name('produk.tambah');
     Route::get('produk/{id}/edit', [ProdukController::class, 'edit'])->name('produk.edit');
@@ -88,6 +91,13 @@ Route::middleware([
     Route::delete('/cart/hapus/{produkId}', [CartController::class, 'hapus'])->name('cart.hapus');
     Route::put('/cart/update/{produkId}', [CartController::class, 'update'])->name('cart.update');
 });
-Route::get('/form',function(){
-    return view('page.form');
-})->name('form');
+
+
+
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('user', [ProdukController::class, 'tampil'])->name('user.tampil');
+    Route::get('profile/edit', [UserController::class, 'edit'])->name('profile.edit');
+    Route::put('profile', [UserController::class, 'update'])->name('profile.update');
+});

@@ -12,7 +12,11 @@ class TokoController extends Controller
 {
     public function tampil()
     {
-        return view('page.toko.data');
+        $produk = Auth::user()->produk;
+        $favorite = Auth::user()->favorite()->with('produk')->get();
+        $user = Auth::user();
+        $user->load(['produk', 'toko']);
+        return view('page.profil', compact('user', 'favorite', 'produk'));
     }
 
     public function data(Request $request)
@@ -40,6 +44,7 @@ class TokoController extends Controller
 
     public function tambah()
     {
+
         return view('page.toko.tambah');
     }
 
@@ -48,6 +53,7 @@ class TokoController extends Controller
         $toko = new Toko();
         $toko->nama_toko = $request->nama_toko;
         $toko->alamat = $request->alamat;
+        $toko->deskripsi = $request->deskripsi;
         $toko->rating = $request->rating;
         $toko->foto = $request->file('foto')->store('toko', 'public');
         $toko->user_id = Auth::id();
@@ -59,7 +65,7 @@ class TokoController extends Controller
     public function edit($id)
     {
         $toko = Toko::where('user_id', Auth::id())->findOrFail($id);
-        return view('page.toko.edit', compact('toko'));
+        return view('form.edit.toko', compact('toko'));
     }
 
     public function update(Request $request, $id)
@@ -67,12 +73,13 @@ class TokoController extends Controller
         $toko = Toko::where('user_id', Auth::id())->findOrFail($id);
         $toko->nama_toko = $request->nama_toko;
         $toko->alamat = $request->alamat;
+        $toko->deskripsi = $request->deskripsi;
         $toko->rating = $request->rating;
         $toko->foto = $request->file('foto')->store('toko', 'public');
 
         $toko->save();
 
-        return redirect()->route('toko.tampil')->with('success', 'Toko berhasil diperbarui');
+        return redirect()->route('toko.tampil');
     }
 
     public function hapus($id)

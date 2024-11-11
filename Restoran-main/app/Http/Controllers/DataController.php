@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Kategori;
 use App\Models\Produk;
 use App\Models\Toko;
+use App\Models\User;
+use App\Models\Favorite;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class DataController extends Controller
 {
@@ -15,7 +19,9 @@ class DataController extends Controller
         $kategori = Kategori::all();
         $toko = Toko::paginate(10);
 
-        return view('welcome', compact('produk', 'kategori', 'toko'));
+        $user = Auth::user();
+
+        return view('welcome', compact('produk', 'kategori', 'toko', 'user'));
     }
 
     public function search(Request $request)
@@ -62,5 +68,17 @@ class DataController extends Controller
         $produk = $kategori->produk()->inRandomOrder()->paginate(20);
 
         return view('page.kategori', compact('kategori', 'produk'));
+    }
+
+
+    //profile
+
+    public function profil()
+    {
+        $produk = Auth::user()->produk;
+        $favorite = Auth::user()->favorite()->with('produk')->get();
+        $user = Auth::user();
+        $user->load(['produk', 'toko']);
+        return view('page.profil', compact('user', 'favorite', 'produk'));
     }
 }

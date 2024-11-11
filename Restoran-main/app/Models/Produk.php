@@ -27,5 +27,9 @@ class Produk extends Model
     {
         return $this->belongsTo(User::class);
     }
-    
+
+    public function favorite()
+    {
+        return $this->hasMany(Favorite::class);
+    }
 }

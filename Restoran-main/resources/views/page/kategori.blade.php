@@ -84,7 +84,9 @@
                                 </div>
                             </a>
                             @endforeach
-                            {{ $kategori->links() }}
+                            <div class="d-flex justify-content-center">
+                                {{ $produk->links('pagination::bootstrap-5') }}
+                            </div>
                         </div>
                     </div>
                 </div>
