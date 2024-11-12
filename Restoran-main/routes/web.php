@@ -19,8 +19,8 @@ Route::get('/about', function () {
 Route::get('/search', [DataController::class, 'search'])->name('produk.search');
 Route::get('/searching', [DataController::class, 'searching'])->name('search');
 
-Route::get('/toko/{id}', [DataController::class, 'tokoDetail'])->name('toko.detail');
 
+Route::get('/toko/{id}', [DataController::class, 'tokoDetail'])->name('toko.detail');
 Route::get('/kategori/{id}', [DataController::class, 'kategori'])->name('kategori');
 
 Route::middleware([
@@ -31,22 +31,9 @@ Route::middleware([
 
     Route::get('/profil', [DataController::class, 'profil'])->name('profil');
 
-    Route::get('/favorit', function () {
-        return view('page.favorit');
-    });
-
-
-
     Route::get('/detail/{id:nama}', [DataController::class, 'detail'])->name('detail');
 
-
-
-
-    Route::post('/produk/{produkId}/favorite', [FavoriteController::class, 'toggleFavorite'])->name('produk.favorite');
-
-
-
-
+    //toko
     Route::get('/toko', [TokoController::class, 'tampil'])->name('toko.tampil');
     Route::get('/toko/data', [TokoController::class, 'data'])->name('toko.data');
     Route::get('/toko/tambah', [TokoController::class, 'tambah'])->name('toko.tambah');
@@ -55,11 +42,7 @@ Route::middleware([
     Route::put('/toko/{id}', [TokoController::class, 'update'])->name('toko.update');
     Route::delete('/toko/{id}', [TokoController::class, 'hapus'])->name('toko.hapus');
 
-
-
-
     //kategori
-
     // Route::get('/kategori', [KategoriController::class, 'tampil'])->name('kategori.tampil');
     // Route::get('/kategori/datas/all', [KategoriController::class, 'data'])->name('kategori.data');
     // Route::get('/kategori/tambah', [KategoriController::class, 'tambah'])->name('kategori.tambah');
@@ -68,8 +51,6 @@ Route::middleware([
     // Route::get('/kategori/edit/{id}', [KategoriController::class, 'edit'])->name('kategori.edit');
     // Route::put('/kategori/{id}', [KategoriController::class, 'update'])->name('kategori.update');
     // Route::delete('/kategori/{id}', [KategoriController::class, 'hapus'])->name('kategori.hapus');
-
-
 
     //produk
     Route::get('produk', [ProdukController::class, 'tampil'])->name('produk.tampil');
@@ -80,16 +61,20 @@ Route::middleware([
     Route::put('produk/{id}', [ProdukController::class, 'update'])->name('produk.update');
     Route::delete('produk/{id}', [ProdukController::class, 'hapus'])->name('produk.destroy');
 
-    // Routes untuk Favorite
+    // Favorit
     Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
     Route::post('/favorites/tambah/{produkId}', [FavoriteController::class, 'tambah'])->name('favorites.tambah');
     Route::delete('/favorites/hapus/{produkId}', [FavoriteController::class, 'hapus'])->name('favorites.hapus');
+    Route::post('/produk/{produkId}/favorite', [FavoriteController::class, 'toggleFavorite'])->name('produk.favorite');
 
-    // Routes untuk Cart
-    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-    Route::post('/cart/tambah/{produkId}', [CartController::class, 'tambah'])->name('cart.tambah');
-    Route::delete('/cart/hapus/{produkId}', [CartController::class, 'hapus'])->name('cart.hapus');
-    Route::put('/cart/update/{produkId}', [CartController::class, 'update'])->name('cart.update');
+    // keranjang
+    Route::get('/keranjang', [CartController::class, 'keranjang'])->name('keranjang');
+    Route::post('/keranjang/tambah/{produkId}', [CartController::class, 'tambah'])->name('cart.tambah');
+    Route::delete('/keranjang/hapus/{produkId}', [CartController::class, 'hapus'])->name('cart.hapus');
+    Route::post('/keranjang/checkout', [CartController::class, 'checkout'])->name('keranjang.checkout');
+
+    //chekout
+    Route::post('/keranjang/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 });
 
 

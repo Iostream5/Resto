@@ -64,18 +64,6 @@ class User extends Authenticatable
         ];
     }
 
-
-    public function carts()
-    {
-        return $this->hasMany(Cart::class);
-    }
-
-    public function cartProducts()
-    {
-        return $this->belongsToMany(Produk::class, 'carts', 'user_id', 'produk_id')
-            ->withPivot('quantity');
-    }
-
     public function produk()
     {
         return $this->hasManyThrough(Produk::class, Toko::class);
@@ -89,5 +77,10 @@ class User extends Authenticatable
     public function favorite()
     {
         return $this->hasMany(Favorite::class);
+    }
+
+    public function cart()
+    {
+        return $this->hasMany(Cart::class);
     }
 }

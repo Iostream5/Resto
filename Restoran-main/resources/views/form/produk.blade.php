@@ -46,7 +46,7 @@
 
     <!-- About Form Start -->
     <div class="form-container container mt-5">
-        <h2 class="text-center">Buat Toko Anda</h2>
+        <h2 class="text-center">Buat Produk Anda</h2>
         <form action="{{ route('produk.simpan') }}" method="POST" enctype="multipart/form-data">
             @csrf
             {{-- <label class="fw-bolder my-2">Nama Toko</label> --}}

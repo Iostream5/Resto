@@ -22,6 +22,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
+
     <!-- Libraries Stylesheet -->
     <link href="{{ asset('template/lib/animate/animate.min.css') }}" rel="stylesheet">
     <link href="{{ asset('template/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
@@ -205,6 +206,13 @@
                             </button>
                         </form>
                         @endif
+                        {{-- <form action="{{ route('cart.tambah', $item->id) }}" method="POST"
+                            class="position-absolute top-0 end-auto m-1">
+                            @csrf
+                            <button type="submit" style="background: none; border: none; cursor: pointer;">
+                                <i class="bi bi-cart-plus text-light fa-2x"></i>
+                            </button>
+                        </form> --}}
 
                         <!-- Gambar Produk -->
                         <img src="{{ asset('storage/'. $item->foto) }}" width="100%" class="rounded-5" alt="...">
@@ -214,6 +222,12 @@
                             <small class="text-dark text-start produk fw-lighter">{{ $item->deskripsi }}</small>
                             <h5 class="text-primary fw-bold text-nowrap">Rp.{{ $item->harga }}</h5>
                         </div>
+                        <form action="{{ route('cart.tambah', $item->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" style="background: none; border: none; cursor: pointer;">
+                                Tambah Ke Keranjang<i class="bi bi-cart-plus text-dark"></i>
+                            </button>
+                        </form>
                     </a>
                     @endforeach
                     <div class="d-flex justify-content-center">

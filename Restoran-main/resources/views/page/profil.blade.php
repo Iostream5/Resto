@@ -269,72 +269,60 @@
                                     @endif
 
                                 </li>
-                                <li class="list-group-item">
-                                    Alamat:
-                                    @if (Auth::user()->telepon)
-                                    <small class="fw-bold" id="alamat">Jalan ***** No. ***</small class="fw-bold">
-                                    <button onclick="toggleVisibility('alamat', '{{ Auth::user()->telepon }}')">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
-                                            <path
-                                                d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z" />
-                                            <path
-                                                d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" />
-                                        </svg>
-                                    </button>
-                                    @else
-                                    <small class="fw-bold" id="alamat"><i>Tambahkan Alamat Anda</i></small>
-                                    @endif
-
-                                </li>
                             </ul>
 
                             @if (Auth::user())
                             <h3 class="mt-4">Keranjang</h3>
-                            <table class="table">
+                            <table class="table" style="max-width: auto">
                                 <thead>
                                     <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Nama Makanan</th>
-                                        <th scope="col">Tanggal Pesan</th>
-                                        <th scope="col">Status</th>
-                                        <th></th>
+                                        <th class="text-center" scope="col">No</th>
+                                        <th class="text-center" scope="col">Nama Produk</th>
+                                        <th class="text-center" scope="col">Tanggal Ditambahkan</th>
+                                        <th class="text-center" scope="col">Jumlah</th>
+                                        <th class="text-center" scope="col">Harga</th>
+                                        <th class="text-center" scope="col">Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($keranjang as $index => $keranjang)
                                     <tr>
-                                        <th scope="row">1</th>
-                                        <td>Nasi Goreng Spesial</td>
-                                        <td>1 November 2024</td>
-                                        <td><span class="badge bg-success">Selesai</span></td>
+                                        <th class="text-center" style="white-space: nowrap;" scope="row">{{ $index + 1
+                                            }}</th>
+                                        <td class="text-center" style="white-space: nowrap;">{{ $keranjang->produk->nama
+                                            }}</td>
+                                        <td class="text-center" style="white-space: nowrap;">{{
+                                            $keranjang->created_at->format('d F Y') }}
+                                        </td>
+                                        <td class="text-center" style="white-space: nowrap;">{{ $keranjang->quantity }}
+                                        </td>
+                                        <td class="text-center" style="white-space: nowrap;">Rp.{{
+                                            number_format($keranjang->produk->harga,
+                                            0, ',', '.') }}</td>
+                                        <td class="text-center" style="white-space: nowrap;">Rp.{{
+                                            number_format($keranjang->produk->harga *
+                                            $keranjang->quantity, 0,
+                                            ',', '.') }}</td>
                                     </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Pizza Margherita</td>
-                                        <td>30 Oktober 2024</td>
-                                        <td><span class="badge bg-warning text-dark">Dalam Proses</span></td>
-
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Sushi Campuran</td>
-                                        <td>28 Oktober 2024</td>
-                                        <td><span class="badge bg-danger">Dibatalkan</span></td>
-
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
+                            <a href="{{ route('keranjang', $keranjang) }}" class="btn btn-info btn-sm">Lihat
+                                Detail</a>
                             @endif
 
                         </div>
+                        @if (Auth::user()->toko)
                         <div class="col-md-4 mt-4">
                             <h2>Informasi Toko</h2>
                             <ul class="list-group">
                                 <li class="list-group-item">
                                     Nama Toko:
                                     @if (Auth::user()->toko->nama_toko)
-                                    <small class="fw-bold" id="nama_toko">{{ Auth::user()->toko->nama_toko }}</small
-                                        class="fw-bold">
+                                    <a href="{{ route('toko.detail', Auth::user()->toko->id) }}">
+                                        <small class="fw-bold" id="nama_toko">{{ Auth::user()->toko->nama_toko}}</small>
+                                    </a>
+
                                     @else
                                     <small class="fw-bold" id="nama_toko">Tambahkan nama_toko Anda</small
                                         class="fw-bold">
@@ -380,43 +368,17 @@
                                     @endif
 
                                 </li>
+                                <a href="{{ route('toko.edit', Auth::user()->toko->id) }}"
+                                    class="btn btn-warning text-light btn-sm mb-3 my-3 fadeInUp"
+                                    data-wow-delay="0.1s">Edit
+                                    Toko Anda
+                                </a>
+                                <a href="{{ route('produk.tambah') }}" class="btn btn-success btn-sm mb-3 fadeInUp"
+                                    data-wow-delay="0.1s">Tambahkan Produk
+                                </a>
                             </ul>
-
-                            {{-- <h3 class="mt-4">Keranjang</h3>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Nama Makanan</th>
-                                        <th scope="col">Tanggal Pesan</th>
-                                        <th scope="col">Status</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Nasi Goreng Spesial</td>
-                                        <td>1 November 2024</td>
-                                        <td><span class="badge bg-success">Selesai</span></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Pizza Margherita</td>
-                                        <td>30 Oktober 2024</td>
-                                        <td><span class="badge bg-warning text-dark">Dalam Proses</span></td>
-
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Sushi Campuran</td>
-                                        <td>28 Oktober 2024</td>
-                                        <td><span class="badge bg-danger">Dibatalkan</span></td>
-
-                                    </tr>
-                                </tbody>
-                            </table> --}}
                         </div>
+                        @endif
                     </div>
                 </div>
                 <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.1s">
@@ -446,7 +408,7 @@
                                             d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.37 2.37 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0M1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5M4 15h3v-5H4zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zm3 0h-2v3h2z" />
                                     </svg>
                                     <div class="ps-3">
-                                        <small class="text-body">Toko Anda</small>
+                                        <small class="text-body">Kelola Toko Anda</small>
                                         <h6 class="mt-n1 mb-0">{{ Auth::user()->toko->nama_toko }}</h6>
                                     </div>
                                 </a>
@@ -466,7 +428,7 @@
                 </div>
                 <div class="tab-content  fadeInUp" data-wow-delay="0.1s">
                     <div id="tab-1" class="tab-pane fade show p-0 active fadeInUp" data-wow-delay="0.1s">
-                        @if(Auth::user()->favorite)
+                        @if(Auth::user()->favorite->isNotEmpty())
                         <div class="row">
                             @foreach ($favorite as $items)
                             <a href="{{ route('detail', [$items->produk->id, $items->produk->nama]) }}"
@@ -495,21 +457,15 @@
                             </a>
                             @endforeach
                         </div>
-                        @else
-                        <p>Anda belum memiliki produk favorit.</p>
+                        @elseif(Auth::user()->favorite->isEmpty())
+                        <div id="tab-1" class="tab-pane fade show p-0 active fadeInUp" data-wow-delay="0.1s">
+                            <p>Anda belum memiliki produk favorit.</p>
+                        </div>
                         @endif
                     </div>
 
                     @if (Auth::user()->toko)
                     <div id="tab-2" class="tab-pane fade show p-0">
-                        <div class="d-flex justify-content-around">
-                            <a href="{{ route('produk.tambah') }}" class="btn btn-success btn-sm mb-3 fadeInUp"
-                                data-wow-delay="0.1s">Tambahkan
-                                Produk</a>
-                            <a href="{{ route('toko.edit', Auth::user()->toko->id) }}"
-                                class="btn btn-warning text-light btn-sm mb-3 fadeInUp" data-wow-delay="0.1s">Edit Toko
-                                Anda</a>
-                        </div>
                         <div class="row mt-4">
                             @foreach (Auth::user()->produk as $item)
                             <a href="{{ route('produk.edit', [$item->id, $item->nama]) }}"
@@ -531,7 +487,9 @@
                         </div>
                     </div>
                     @else
-                    <small>Buat Toko Anda!</small>
+                    <div id="tab-2" class="tab-pane fade show p-0">
+                        <small>Buat Toko Anda!</small>
+                    </div>
                     @endif
 
                 </div>

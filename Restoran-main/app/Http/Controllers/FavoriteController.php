@@ -16,7 +16,7 @@ class FavoriteController extends Controller
             'produk_id' => $produkId,
         ]);
 
-        return back()->with('success', 'Produk ditambahkan ke favorit!');
+        return back();
     }
 
     public function hapus($produkId)

@@ -11,11 +11,13 @@ class Cart extends Model
 
     protected $fillable = ['user_id', 'produk_id', 'quantity'];
 
+    // Relasi ke produk
     public function produk()
     {
         return $this->belongsTo(Produk::class);
     }
 
+    // Relasi ke pengguna
     public function user()
     {
         return $this->belongsTo(User::class);
