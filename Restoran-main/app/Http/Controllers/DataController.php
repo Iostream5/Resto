@@ -81,6 +81,7 @@ class DataController extends Controller
         $favorite = Auth::user()->favorite()->with('produk')->get();
         $user = Auth::user();
         $user->load(['produk', 'toko']);
+
         return view('page.profil', compact('user', 'favorite', 'produk', 'keranjang'));
     }
 }

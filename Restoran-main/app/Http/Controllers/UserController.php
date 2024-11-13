@@ -44,6 +44,6 @@ class UserController extends Controller
         }
         $user->save();
 
-        return redirect()->route('toko.tampil');
+        return redirect()->route('profil');
     }
 }
