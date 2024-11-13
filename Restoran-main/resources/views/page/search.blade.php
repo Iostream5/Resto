@@ -33,97 +33,6 @@
     <!-- Template Stylesheet -->
     <link href="{{ asset('template/css/style.css') }}" rel="stylesheet">
 </head>
-<style>
-    .ratings i {
-
-        color: #cecece;
-    }
-
-    .rating-color {
-        color: #fbc634 !important;
-    }
-
-    .searching {
-        position: relative;
-    }
-
-    .form-inputs {
-        padding-left: 2.5rem;
-        /* Jarak untuk ikon search di kiri */
-        padding-right: 2.5rem;
-        /* Jarak untuk ikon microphone di kanan */
-        height: 55px;
-        text-indent: 33px;
-        border-radius: 10px;
-    }
-
-    .searching .fa-search,
-    .searching .fa-microphone {
-        color: #6c757d;
-        /* Warna ikon, sesuaikan sesuai kebutuhan */
-    }
-
-    .form-inputs:focus {
-
-        box-shadow: none;
-        border: none;
-    }
-
-    .b {
-        border-left: 1px solid rgba(141, 141, 141, 0.6);
-
-    }
-
-    .c {
-        margin-left: 14px;
-    }
-
-    .searching {
-
-        position: relative;
-    }
-
-    .searching .fa-search {
-
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        color: #9ca3af;
-
-    }
-
-    .searching span {
-
-        position: absolute;
-        right: 17px;
-        top: 13px;
-        padding: 2px;
-        border-left: 1px solid #d1d5db;
-
-    }
-
-    .left-pan {
-        padding-left: 7px;
-    }
-
-    .left-pan i {
-
-        padding-left: 10px;
-    }
-
-    .form-inputs {
-
-        height: 55px;
-        text-indent: 33px;
-        border-radius: 10px;
-    }
-
-    .form-inputs:focus {
-
-        box-shadow: none;
-        border: none;
-    }
-</style>
 
 <body style="background: linear-gradient(rgba(15, 23, 43, .9), rgba(15, 23, 43, .9))">
 
@@ -162,30 +71,41 @@
                             <h4 class="fw-bold text-start text-decoration-underline">Makanan</h4>
                             @endif
                             @foreach ($produk as $item)
-                            <a href="{{ route('detail', $item->id) }}" class="ms-auto col-lg-3 col-md-5 col-6">
-                                <img src="{{ asset('storage/'. $item->foto) }}" style="border-radius:10px;" width="70%"
-                                    class=" rounded-5" alt="...">
+                            <a href="{{ route('detail', [$item->id, $item->nama]) }}"
+                                class="ms-auto col-lg-3 col-md-5 col-6 position-relative">
+                                @if (Auth::check() && Auth::user()->favorite->contains('produk_id', $item->id))
+                                <form action="{{ route('favorites.hapus', $item->id) }}" method="POST"
+                                    class="position-absolute top-0 end-0 m-1">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-transparent">
+                                        <i class="fa fa-heart text-danger fa-2x"></i>
+                                    </button>
+                                </form>
+                                @elseif (Auth::check())
+                                <form action="{{ route('favorites.tambah', $item->id) }}" method="POST"
+                                    class="position-absolute top-0 end-0 m-1">
+                                    @csrf
+                                    <button type="submit" class="btn btn-transparent">
+                                        <i class="fa fa-heart text-muted fa-2x"></i>
+                                    </button>
+                                </form>
+                                @endif
+                                <img src="{{ asset('storage/'. $item->foto) }}" width="100%" class="rounded-5"
+                                    alt="...">
                                 <div class="card-body">
-                                    <p class="text-dark text-start produk fw-bold m-0">{{ $item->nama}}
-                                    </p>
-                                    <small class="text-dark text-start produk fw-lighter">{{ $item->deskripsi}}
-                                    </small>
-                                    <h5 class="text-primary fw-bold text-nowrap">{{ $item->harga }}</h5>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="ratings text-nowrap">
-                                            @php
-                                            $rating = $item->rating;
-                                            @endphp
-                                            <div class="ratings">
-                                                @for ($i = 1; $i <= 5; $i++) <i
-                                                    class="fa fa-star {{ $i <= $rating ? 'rating-color' : '' }}">
-                                                    </i>
-                                                    @endfor
-                                            </div>
-                                            <h5 class="review-count">12 Reviews</h5>
-                                        </div>
-                                    </div>
+                                    <p class="text-dark text-start produk fw-bold m-0">{{ $item->nama }}</p>
+                                    <small class="text-dark text-start produk fw-lighter">{{ $item->deskripsi }}</small>
+                                    <h5 class="text-primary fw-bold text-nowrap">Rp.{{ $item->harga }}</h5>
                                 </div>
+                                <form action="{{ route('cart.tambah', $item->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-warning btn-sm">
+                                        <small style="font-size: 10px">
+                                            Tambah Ke Keranjang<i class="bi bi-cart-plus ms-2"></i>
+                                        </small>
+                                    </button>
+                                </form>
                             </a>
                             @endforeach
                             <div class="d-flex justify-content-center">
