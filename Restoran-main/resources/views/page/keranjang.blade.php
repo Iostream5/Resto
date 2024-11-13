@@ -135,7 +135,6 @@
                 <div class="text-center wow fadeInUp my-5" data-wow-delay="0.1s">
                     <h1 class="mb-5">Keranjang || Ayo Checkout Sekarang!!</h1>
                 </div>
-
                 <div class="tab-content">
                     <div class="tab-pane fade show p-0 active">
                         <div class="row g-4">
