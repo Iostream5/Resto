@@ -33,7 +33,155 @@
     <!-- Template Stylesheet -->
     <link href="{{ asset('template/css/style.css') }}" rel="stylesheet">
 </head>
+<style>
+    .kategori::-webkit-scrollbar {
+        display: none;
+    }
 
+
+    .rounded-5 {
+        border-radius: 15px
+    }
+
+    .ratings i {
+
+        color: #cecece;
+    }
+
+    .rating-color {
+        color: #fbc634 !important;
+    }
+
+    .searching {
+
+        position: relative;
+    }
+
+    .searching .fa-search {
+
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        color: #9ca3af;
+
+    }
+
+    .searching span {
+
+        position: absolute;
+        right: 17px;
+        top: 13px;
+        padding: 2px;
+        border-left: 1px solid #d1d5db;
+
+    }
+
+    .left-pan {
+        padding-left: 7px;
+    }
+
+    .left-pan i {
+
+        padding-left: 10px;
+    }
+
+    .form-inputs {
+
+        height: 55px;
+        text-indent: 33px;
+        border-radius: 10px;
+    }
+
+    .form-inputs:focus {
+
+        box-shadow: none;
+        border: none;
+    }
+
+    .profile-card {
+        border-radius: 50%;
+        overflow: hidden;
+        width: 300px;
+        height: 300px;
+        margin: auto;
+        position: relative;
+    }
+
+    .profile-img-wrapper {
+        width: 100%;
+        height: auto;
+        border-radius: 50%;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+
+    .profile-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .username {
+        text-align: center;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    .red-heart path {
+        fill: #FF4545;
+    }
+
+    .list-group {
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+    }
+
+    .list-group-item {
+        background-color: transparent;
+        border: none;
+        padding: 8px 0;
+    }
+
+    .list-group-item button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+    }
+
+    .list-group-item svg {
+        fill: black;
+        transition: fill 0.3s ease;
+    }
+
+    .list-group-item button:focus svg path:nth-child(2) {
+        fill: black;
+        color: black
+    }
+
+    .list-group-item button:focus {
+        outline: none;
+    }
+
+    @media (max-width: 360px) {
+        .nav-item {
+            width: 50%;
+        }
+
+
+    }
+
+
+    .toko-section {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: relative;
+        z-index: 1;
+    }
+</style>
 
 <body style="background: linear-gradient(rgba(15, 23, 43, .9), rgba(15, 23, 43, .9))">
     <div class="container-xxl bg-white p-0">
