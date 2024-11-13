@@ -153,16 +153,19 @@
                         }
                     }
     </script>
-    <script>
-        function updateRatingValue(value) {
-                    document.getElementById("rating-value").textContent = value;
-                }
-            
-                document.addEventListener("DOMContentLoaded", function() {
-                    document.getElementById("rating").value = {{ old('rating', $toko->rating) }};
-                    updateRatingValue({{ old('rating', $toko->rating) }});
-                });
-    </script>
+<script>
+    function updateRatingValue(value) {
+        document.getElementById("rating-value").textContent = value;
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Mengatur nilai rating dengan cara yang aman
+        let ratingValue = {{ old('rating', $toko->rating) }};
+        document.getElementById("rating").value = ratingValue;
+        updateRatingValue(ratingValue);
+    });
+</script>
+
 </body>
 
 </html>

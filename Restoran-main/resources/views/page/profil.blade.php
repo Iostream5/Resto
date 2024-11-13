@@ -489,6 +489,9 @@
                                     </div>
                                 </div>
                             </a>
+                            <div class="d-flex justify-content-end">
+                                <a href="produk.delete" class="btn btn-sm btn-danger">Delete</a>
+                            </div>
                             @endforeach
                         </div>
                     </div>

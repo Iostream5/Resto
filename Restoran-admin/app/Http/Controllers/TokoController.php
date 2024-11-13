@@ -57,7 +57,7 @@ class TokoController extends Controller
 
     public function edit($id)
     {
-        $toko = Toko::findOrFail($id);
+        $toko = Toko::find($id);
         return view('page.toko.edit', compact('toko'));
     }
 
