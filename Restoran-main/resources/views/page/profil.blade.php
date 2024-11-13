@@ -490,7 +490,11 @@
                                 </div>
                             </a>
                             <div class="d-flex justify-content-end">
-                                <a href="produk.delete" class="btn btn-sm btn-danger">Delete</a>
+                                <form action="{{ route('produk.destroy', $item->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE ')
+                                    <button class="btn btn-sm btn-danger">Hapus</button>
+                                </form>
                             </div>
                             @endforeach
                         </div>

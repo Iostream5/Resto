@@ -142,6 +142,6 @@ class ProdukController extends Controller
         }
         $produk->delete();
 
-        return redirect()->route('produk.tampil')->with('success', 'Produk berhasil dihapus');
+        return redirect()->route('profil')->with('success', 'Produk berhasil dihapus');
     }
 }
