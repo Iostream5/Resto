@@ -72,8 +72,8 @@
                 <input type="file" class="form-control" id="foto" name="foto" onchange="previewImage(event)">
             </div>
 
-            <div class="mb-3">
-                <img id="imagePreview" src="#" alt="Preview Foto" style="max-width: 150px; display: none;">
+            <div class="my-3">
+                <img id="imagePreview" src="" alt="Preview Foto" style="max-width: 300px; display: none;">
             </div>
 
             <button type="submit" class="btn btn-primary">Simpan</button>
@@ -108,6 +108,23 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script>
+        function previewImage(event) {
+                            const input = event.target;
+                            const preview = document.getElementById('imagePreview');
+        
+                            if (input.files && input.files[0]) {
+                                const reader = new FileReader();
+                
+                                reader.onload = function(e) {
+                                    preview.src = e.target.result; 
+                                    preview.style.display = 'block';
+                                };
+                
+                                reader.readAsDataURL(input.files[0]);
+                            }
+                        }
+    </script>
 </body>
 
 </html>

@@ -153,6 +153,16 @@
                         }
                     }
     </script>
+    <script>
+        function updateRatingValue(value) {
+                    document.getElementById("rating-value").textContent = value;
+                }
+            
+                document.addEventListener("DOMContentLoaded", function() {
+                    document.getElementById("rating").value = {{ old('rating', $toko->rating) }};
+                    updateRatingValue({{ old('rating', $toko->rating) }});
+                });
+    </script>
 </body>
 
 </html>

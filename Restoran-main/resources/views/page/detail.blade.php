@@ -173,7 +173,10 @@
 
                         <!-- Tombol Pesan -->
                         <div class="mt-3">
-                            <button class="btn btn-success">Pesan</button>
+                            <form action="{{ route('cart.tambah', $produk->id) }}" method="POST">
+                                @csrf
+                                <button class="btn btn-success">Pesan</button>
+                            </form>
                         </div>
                     </div>
                 </div>

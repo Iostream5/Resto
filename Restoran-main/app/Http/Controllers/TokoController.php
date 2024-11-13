@@ -44,8 +44,7 @@ class TokoController extends Controller
 
     public function tambah()
     {
-
-        return view('page.toko.tambah');
+        return view('form.toko');
     }
 
     public function simpan(Request $request)
@@ -59,7 +58,7 @@ class TokoController extends Controller
         $toko->user_id = Auth::id();
         $toko->save();
 
-        return redirect()->route('toko.tampil')->with('success', 'Toko berhasil dibuat');
+        return redirect()->route('profil');
     }
 
     public function edit($id)
@@ -79,7 +78,7 @@ class TokoController extends Controller
 
         $toko->save();
 
-        return redirect()->route('toko.tampil');
+        return redirect()->route('profil');
     }
 
     public function hapus($id)

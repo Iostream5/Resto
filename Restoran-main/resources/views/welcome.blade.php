@@ -224,8 +224,8 @@
                         </div>
                         <form action="{{ route('cart.tambah', $item->id) }}" method="POST">
                             @csrf
-                            <button type="submit" style="background: none; border: none; cursor: pointer;">
-                                Tambah Ke Keranjang<i class="bi bi-cart-plus text-dark"></i>
+                            <button type="submit" class="btn btn-danger">
+                                Tambah Ke Keranjang<i class="bi bi-cart-plus ms-2"></i>
                             </button>
                         </form>
                     </a>

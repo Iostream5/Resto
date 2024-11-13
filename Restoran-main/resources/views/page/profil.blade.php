@@ -273,40 +273,46 @@
 
                             @if (Auth::user())
                             <h3 class="mt-4">Keranjang</h3>
-                            <table class="table" style="max-width: auto">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center" scope="col">No</th>
-                                        <th class="text-center" scope="col">Nama Produk</th>
-                                        <th class="text-center" scope="col">Tanggal Ditambahkan</th>
-                                        <th class="text-center" scope="col">Jumlah</th>
-                                        <th class="text-center" scope="col">Harga</th>
-                                        <th class="text-center" scope="col">Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($keranjang as $index => $keranjang)
-                                    <tr>
-                                        <th class="text-center" style="white-space: nowrap;" scope="row">{{ $index + 1
-                                            }}</th>
-                                        <td class="text-center" style="white-space: nowrap;">{{ $keranjang->produk->nama
-                                            }}</td>
-                                        <td class="text-center" style="white-space: nowrap;">{{
-                                            $keranjang->created_at->format('d F Y') }}
-                                        </td>
-                                        <td class="text-center" style="white-space: nowrap;">{{ $keranjang->quantity }}
-                                        </td>
-                                        <td class="text-center" style="white-space: nowrap;">Rp.{{
-                                            number_format($keranjang->produk->harga,
-                                            0, ',', '.') }}</td>
-                                        <td class="text-center" style="white-space: nowrap;">Rp.{{
-                                            number_format($keranjang->produk->harga *
-                                            $keranjang->quantity, 0,
-                                            ',', '.') }}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                            <div class="container overflow-auto">
+                                <table class="table" style="min-width: 300px">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center" scope="col">No</th>
+                                            <th class="text-center" scope="col">Nama Produk</th>
+                                            <th class="text-center" scope="col">Tanggal Ditambahkan</th>
+                                            <th class="text-center" scope="col">Jumlah</th>
+                                            <th class="text-center" scope="col">Harga</th>
+                                            <th class="text-center" scope="col">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($keranjang as $index => $keranjang)
+                                        <tr>
+                                            <th class="text-center" style="white-space: nowrap;" scope="row">{{ $index +
+                                                1
+                                                }}</th>
+                                            <td class="text-center" style="white-space: nowrap;">{{
+                                                $keranjang->produk->nama
+                                                }}</td>
+                                            <td class="text-center" style="white-space: nowrap;">{{
+                                                $keranjang->created_at->format('d F Y') }}
+                                            </td>
+                                            <td class="text-center" style="white-space: nowrap;">{{ $keranjang->quantity
+                                                }}
+                                            </td>
+                                            <td class="text-center" style="white-space: nowrap;">Rp.{{
+                                                number_format($keranjang->produk->harga,
+                                                0, ',', '.') }}</td>
+                                            <td class="text-center" style="white-space: nowrap;">Rp.{{
+                                                number_format($keranjang->produk->harga *
+                                                $keranjang->quantity, 0,
+                                                ',', '.') }}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+
                             <a href="{{ route('keranjang', $keranjang) }}" class="btn btn-info btn-sm">Lihat
                                 Detail</a>
                             @endif
@@ -417,9 +423,9 @@
                             <li class="nav-item col-6 col-md-4 text-center">
                                 <a class="d-flex align-items-center justify-content-center text-start pb-3"
                                     data-bs-toggle="pill" href="#tab-2">
-                                    <button class="btn btn-success rounded text-light">
+                                    <a href="{{ route('toko.tambah') }}" class="btn btn-success rounded text-light">
                                         Buat Toko
-                                    </button>
+                                    </a>
                                 </a>
                             </li>
                             @endif

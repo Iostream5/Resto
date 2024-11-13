@@ -20,7 +20,7 @@ Route::get('/search', [DataController::class, 'search'])->name('produk.search');
 Route::get('/searching', [DataController::class, 'searching'])->name('search');
 
 
-Route::get('/toko/{id}', [DataController::class, 'tokoDetail'])->name('toko.detail');
+Route::get('/toko/{id}/me', [DataController::class, 'tokoDetail'])->name('toko.detail');
 Route::get('/kategori/{id}', [DataController::class, 'kategori'])->name('kategori');
 
 Route::middleware([
