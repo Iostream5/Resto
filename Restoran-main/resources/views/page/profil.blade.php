@@ -552,24 +552,36 @@
                     <div id="tab-3" class="tab-pane fade show p-0">
                         <div class="container mt-5">
                             <h2>Analisa Penjualan Produk</h2>
+                            @if ($produk)
                             <table class="table table-bordered mt-4">
-                                <thead class="thead-dark">
+                                <thead>
                                     <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Nama Produk</th>
-                                        <th scope="col">Jumlah Terjual</th>
-                                        <th scope="col">Total Keuntungan</th>
+                                        <th>#</th>
+                                        <th>Nama Produk</th>
+                                        <th>Harga Jual</th>
+                                        <th>Harga Beli</th>
+                                        <th>Jumlah Terjual</th>
+                                        <th>Total Harga</th>
+                                        <th>Keuntungan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row"></th>
-                                        <td>#</td>
-                                        <td>#</td>
-                                        <td>#</td>
-                                    </tr>
+                                    @foreach ($produk as $produk)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $produk->nama }}</td>
+                    <td>{{ number_format($produk->harga, 2) }}</td>
+                    <td>{{ number_format($produk->harga_beli, 2) }}</td>
+                    <td>{{ $produk->jumlah_terjual }}</td>
+                    <td>{{ $produk->total_harga }}</td>
+                    <td>{{ number_format($produk->keuntungan, 2) }}</td>
+                </tr>
+            @endforeach
                                 </tbody>
                             </table>
+                            @else
+    <p>Produk tidak ditemukan.</p>
+@endif
                         </div>
                     </div>
 

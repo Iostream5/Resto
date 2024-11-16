@@ -120,4 +120,31 @@ class CartController extends Controller
         $totalHarga = $penjualan->produk->harga * $penjualan->jumlah_terjual;
         return view('page.detail.struk', compact('penjualan', 'totalHarga'));
     }
+
+    public function analisa(Request $request)
+{
+    // Ambil semua produk milik pengguna yang sedang login
+    $produk = Produk::where('user_id', Auth::id())->with('penjualan')->get();
+
+    // Validasi jumlah terjual
+    $request->validate([
+        'jumlah_terjual' => 'required|integer|min:1',
+    ]);
+
+    // Ambil jumlah terjual dari request
+    $jumlahTerjual = $request->jumlah_terjual;
+
+    // Menghitung total harga dan keuntungan untuk setiap produk
+    foreach ($produk as $produk) {
+        $produk->total_harga = $produk->harga * $jumlahTerjual;
+        $produk->keuntungan = ($produk->harga - $produk->harga_beli) * $jumlahTerjual;
+    }
+
+    // Kirim data produk dan jumlah terjual ke view
+    return view('page.profil', compact('produks', 'jumlahTerjual'));
+}
+
+    
+
+
 }
