@@ -99,16 +99,20 @@
                         <div class="card-body">
                             <p class="text-dark text-start produk fw-bold m-0">{{ $item->nama }}</p>
                             <small class="text-dark text-start produk fw-lighter">{{ $item->deskripsi }}</small>
-                            <h5 class="text-primary fw-bold text-nowrap">Rp.{{ $item->harga }}</h5>
+                            <div class="d-flex justify-content-between align-items-center gap-2">
+                                <h6 class="text-primary fw-bold text-nowrap">Rp.{{ $item->harga }}</h6>
+                                <form class="my-3 justify-content-between d-flex"
+                                    action="{{ route('cart.tambah', $item->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-warning btn-lg-sm float-end">
+                                        <small class="d-md-block d-none" style="font-size: 10px">
+                                            Tambah Ke Keranjang<i class="bi bi-cart-plus ms-2"></i>
+                                        </small>
+                                        <i class="d-md-none d-block bi bi-cart-plus"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </div>
-                        <form class="my-3" action="{{ route('cart.tambah', $item->id) }}" method="POST">
-                            @csrf
-                            <button type="submit" class="btn btn-warning btn-sm">
-                                <small style="font-size: 10px">
-                                    Tambah Ke Keranjang<i class="bi bi-cart-plus ms-2"></i>
-                                </small>
-                            </button>
-                        </form>
                     </a>
                     @endforeach
                     <div class="d-flex justify-content-center">

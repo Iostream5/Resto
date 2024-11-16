@@ -32,7 +32,7 @@
 
     <div class="container-xxl bg-white p-0">
         @include('bagian.nav')
-        <div class="container-fluid bg-dark hero-header py-2" style="width: 100%">
+        <div class="container-fluid bg-dark py-2 d-lg-block d-none" style="width: 100%">
             <div class="container py-3 py-lg-3 my-lg-3">
             </div>
         </div>
@@ -49,7 +49,6 @@
                             @foreach ($kategori->produk as $item)
                             <a href="{{ route('detail', [$item->id, $item->nama]) }}"
                                 class="ms-auto col-lg-3 col-md-5 col-6 position-relative">
-
                                 @if (Auth::check() && Auth::user()->favorite->contains('produk_id', $item->id))
                                 <form action="{{ route('favorites.hapus', $item->id) }}" method="POST"
                                     class="position-absolute top-0 end-0 m-1">
@@ -68,24 +67,27 @@
                                     </button>
                                 </form>
                                 @endif
-
-                                <img src="{{ asset('storage/'. $item->foto) }}" width="100%" style="border-radius: 15px"
+                                <img src="{{ asset('storage/'. $item->foto) }}" width="100%" class="rounded-5"
                                     alt="...">
-
                                 <div class="card-body">
                                     <p class="text-dark text-start produk fw-bold m-0">{{ $item->nama }}</p>
                                     <small class="text-dark text-start produk fw-lighter">{{ $item->deskripsi }}</small>
-                                    <h5 class="text-primary fw-bold text-nowrap">Rp.{{ $item->harga }}</h5>
+                                    <div class="d-flex justify-content-between align-items-center gap-2">
+                                        <h6 class="text-primary fw-bold text-nowrap">Rp.{{ $item->harga }}</h6>
+                                        <form class="my-3 justify-content-between d-flex"
+                                            action="{{ route('cart.tambah', $item->id) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="btn p-1 btn-warning btn-lg-sm float-end">
+                                                <small class="d-md-block d-none" style="font-size: 10px">
+                                                    <span style="font-size: 10px" class="d-md-block d-none text-nowrap">
+                                                        Tambah Ke Keranjang </span>
+                                                    <i class="bi bi-cart-plus ms-2"></i>
+                                                </small>
+                                                <i class="d-md-none d-block bi bi-cart-plus"></i>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
-                                <form action="{{ route('cart.tambah', $item->id) }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-warning btn-sm">
-                                        <small style="font-size: 10px">
-                                            Tambah Ke Keranjang<i class="bi bi-cart-plus ms-2"></i>
-                                        </small>
-
-                                    </button>
-                                </form>
                             </a>
                             @endforeach
                             <div class="d-flex justify-content-center">

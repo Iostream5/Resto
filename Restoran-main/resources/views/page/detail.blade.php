@@ -32,7 +32,7 @@
 
     <div class="container-xxl bg-white p-0">
         @include('bagian.nav')
-        <div class="container-fluid bg-dark hero-header py-2" style="width: 100%;">
+        <div class="container-fluid bg-dark py-2 d-lg-block d-none" style="width: 100%">
             <div class="container py-3 py-lg-3 my-lg-3">
             </div>
         </div>

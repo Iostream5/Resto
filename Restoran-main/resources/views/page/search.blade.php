@@ -40,12 +40,53 @@
         <!-- Navbar & Hero Start -->
         @include('bagian.nav')
         <!-- Navbar & Hero End -->
-        <div class="container-fluid bg-dark hero-header py-2" style="width: 100%">
+        <div class="container-fluid bg-dark py-2 d-lg-block d-none" style="width: 100%">
             <div class="container py-3 py-lg-3 my-lg-3">
             </div>
         </div>
 
         <!-- Menu Start -->
+        <div class="container-fluid bg-dark hero-header">
+            <div class="container pb-3 pb-lg-3 mb-lg-5">
+                <div class="overflow-hidden">
+                    <div class="row container-fluid">
+                        <div class="col-12">
+                            <h1 class="text-primary text-center m-0">
+                                Selamat Datang di <br>
+                                <i class="fa fa-utensils me-3"></i>Restoran!
+                            </h1>
+                        </div>
+                        <div class="col-lg-5">
+                            <img class="img-fluid h-auto" src="{{ asset('gambar/3d.png') }}" alt="...">
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="p-4 mb-4 bg-dark text-lg-start text-center rounded-3 shadow-lg">
+                                <p class="fw-bold text-light mt-lg-5" style="font-size: 1.2rem; line-height: 1.6;">
+                                    Nikmati kemudahan hidup di ujung jari Anda! <span
+                                        style="color: #f39c12;">Restoran</span> hadir sebagai
+                                    solusi
+                                    lengkap untuk memenuhi berbagai kebutuhan harian Anda, mulai dari pemesanan makanan
+                                    favorit, belanja di
+                                    toko-toko
+                                    terdekat, hingga layanan transportasi yang cepat dan aman. Kami menghubungkan Anda
+                                    dengan ribuan mitra
+                                    berkualitas yang
+                                    siap memberikan layanan terbaik.
+                                </p>
+                                {{-- <p class="fw-bold text -light" style="font-size: 1.2rem; line-height: 1.6;">
+                                    Temukan pilihan yang tak terbatas, mulai dari kuliner lokal hingga kebutuhan
+                                    sehari-hari. Dengan beberapa kali
+                                    sentuhan,
+                                    pesan, dan terima langsung di depan pintu Anda. Yuk, coba kemudahan hidup bersama
+                                    <span style="color: #f39c12;">Restoran</span> sekarang!
+                                </p> --}}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container-xxl  py-5">
             <div class="container">
                 <div class="text-center wow fadeInUp my-5" data-wow-delay="0.1s">
@@ -96,16 +137,22 @@
                                 <div class="card-body">
                                     <p class="text-dark text-start produk fw-bold m-0">{{ $item->nama }}</p>
                                     <small class="text-dark text-start produk fw-lighter">{{ $item->deskripsi }}</small>
-                                    <h5 class="text-primary fw-bold text-nowrap">Rp.{{ $item->harga }}</h5>
+                                    <div class="d-flex justify-content-between align-items-center gap-2">
+                                        <h6 class="text-primary fw-bold text-nowrap">Rp.{{ $item->harga }}</h6>
+                                        <form class="my-3 justify-content-between d-flex"
+                                            action="{{ route('cart.tambah', $item->id) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="btn p-1 btn-warning btn-lg-sm float-end">
+                                                <small class="d-md-block d-none" style="font-size: 10px">
+                                                    <span style="font-size: 10px" class="d-md-block d-none text-nowrap">
+                                                        Tambah Ke Keranjang </span>
+                                                    <i class="bi bi-cart-plus ms-2"></i>
+                                                </small>
+                                                <i class="d-md-none d-block bi bi-cart-plus"></i>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
-                                <form action="{{ route('cart.tambah', $item->id) }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-warning btn-sm">
-                                        <small style="font-size: 10px">
-                                            Tambah Ke Keranjang<i class="bi bi-cart-plus ms-2"></i>
-                                        </small>
-                                    </button>
-                                </form>
                             </a>
                             @endforeach
                             <div class="d-flex justify-content-center">

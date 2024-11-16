@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Penjualan;
 use App\Models\Produk;
 use App\Models\Toko;
 use Illuminate\Http\Request;
@@ -84,23 +85,39 @@ class CartController extends Controller
 
     public function checkout(Request $request)
     {
-        $selectedProducts = $request->input('selected_products'); // Produk yang dipilih
-        $userId = Auth::id();
+        // Ambil produk berdasarkan ID
+        $produk = Produk::find($request->produk_id);
 
-        // Proses checkout dan hapus produk yang sudah dibeli
-        foreach ($selectedProducts as $product) {
-            $keranjangItem = Cart::where('user_id', $userId)
-                ->where('produk_id', $product['productId'])
-                ->first();
+        // Simpan data penjualan
+        $penjualan = new Penjualan;
+        $penjualan->user_id = Auth::id();
+        $penjualan->produk_id = $produk->id; // Pastikan produk_id valid
+        $penjualan->jumlah_terjual = $request->jumlah_terjual;
 
-            if ($keranjangItem) {
-                // Hapus produk yang sudah dibeli
-                $keranjangItem->delete();
-            }
+        // Hitung total harga
+        $penjualan->total_harga = $produk->harga * $request->jumlah_terjual;
 
-            // Anda bisa menambahkan logika untuk mengurangi stok produk, membuat transaksi, dll.
-        }
+        $penjualan->save();
 
-        return response()->json(['success' => true]);
+        // Hapus item keranjang
+        Cart::where('user_id', Auth::id())
+            ->where('produk_id', $produk->id)
+            ->delete();
+
+        return redirect()->route('transaksi')->with('success', 'Checkout berhasil!');
+    }
+
+
+    public function transaksi()
+    {
+        $penjualan = Penjualan::where('user_id', Auth::id())->with('produk')->get();
+        return view('page.detail.transaksi', compact('penjualan'));
+    }
+
+    public function struk($id)
+    {
+        $penjualan = Penjualan::with('produk')->find($id);
+        $totalHarga = $penjualan->produk->harga * $penjualan->jumlah_terjual;
+        return view('page.detail.struk', compact('penjualan', 'totalHarga'));
     }
 }

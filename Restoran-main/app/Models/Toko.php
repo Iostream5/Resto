@@ -18,6 +18,6 @@ class Toko extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');  // Relasi belongsTo untuk menghubungkan dengan User
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

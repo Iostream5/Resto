@@ -189,11 +189,10 @@
         {{-- nav --}}
         @include('bagian.nav')
 
-        <div class="container-fluid bg-dark hero-header py-2" style="width: 100%">
-            <div class="container py-3 py-lg-3 my-lg-5">
+        <div class="container-fluid bg-dark py-2 d-lg-block d-none" style="width: 100%">
+            <div class="container py-3 py-lg-3 my-lg-3">
             </div>
         </div>
-
 
         <!-- menu Start -->
         <div class="py-lg-5 py-2">
@@ -272,49 +271,53 @@
                             </ul>
 
                             @if (Auth::user())
-                            <h3 class="mt-4">Keranjang</h3>
-                            <div class="container overflow-auto">
-                                <table class="table" style="min-width: 300px">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center" scope="col">No</th>
-                                            <th class="text-center" scope="col">Nama Produk</th>
-                                            <th class="text-center" scope="col">Tanggal Ditambahkan</th>
-                                            <th class="text-center" scope="col">Jumlah</th>
-                                            <th class="text-center" scope="col">Harga</th>
-                                            <th class="text-center" scope="col">Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($keranjang as $index => $keranjang)
-                                        <tr>
-                                            <th class="text-center" style="white-space: nowrap;" scope="row">{{ $index +
-                                                1
-                                                }}</th>
-                                            <td class="text-center" style="white-space: nowrap;">{{
-                                                $keranjang->produk->nama
-                                                }}</td>
-                                            <td class="text-center" style="white-space: nowrap;">{{
-                                                $keranjang->created_at->format('d F Y') }}
-                                            </td>
-                                            <td class="text-center" style="white-space: nowrap;">{{ $keranjang->quantity
-                                                }}
-                                            </td>
-                                            <td class="text-center" style="white-space: nowrap;">Rp.{{
-                                                number_format($keranjang->produk->harga,
-                                                0, ',', '.') }}</td>
-                                            <td class="text-center" style="white-space: nowrap;">Rp.{{
-                                                number_format($keranjang->produk->harga *
-                                                $keranjang->quantity, 0,
-                                                ',', '.') }}</td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                            <h3 class="mt-4">Lainnya</h3>
+
+
+
+                            <div class="d-flex my-5 text-center ">
+                                <div class="container">
+                                    <a href="{{ route('keranjang', Auth::user()->$keranjang) }}"
+                                        class="btn text-center btn-info"><svg height="30" viewBox="0 0 24 24"
+                                            fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                            </g>
+                                            <g id="SVGRepo_iconCarrier">
+                                                <path
+                                                    d="M6.29977 5H21L19 12H7.37671M20 16H8L6 3H3M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z"
+                                                    stroke="#ffffff" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round"></path>
+                                            </g>
+                                        </svg>
+                                    </a>
+                                    <h6>Keranjang</h6>
+                                </div>
+                                <div class="container">
+                                    <a href="{{ route('transaksi', Auth::user()) }}" class="btn btn-success">
+                                        <svg viewBox="0 0 24 24" height="30" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                stroke-linejoin="round"></g>
+                                            <g id="SVGRepo_iconCarrier">
+                                                <path
+                                                    d="M10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C21.672 6.01511 21.9082 7.22882 21.9743 9.25H2.02572C2.09185 7.22882 2.32803 6.01511 3.17157 5.17157C4.34315 4 6.22876 4 10 4Z"
+                                                    fill="#ffffff"></path>
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M21.9995 12.8175L21.591 12.409C20.7123 11.5303 19.2877 11.5303 18.409 12.409L17.6076 13.2104C17.2878 12.3573 16.4648 11.75 15.5 11.75C14.2574 11.75 13.25 12.7574 13.25 14V15.7638C12.7601 15.8183 12.2847 16.0334 11.909 16.409C11.0303 17.2877 11.0303 18.7123 11.909 19.591L12.318 20H10C6.22876 20 4.34315 20 3.17157 18.8284C2 17.6569 2 15.7712 2 12C2 11.5581 2 11.142 2.00189 10.75H21.9981C22 11.142 22 11.5581 22 12C22 12.283 22 12.5553 21.9995 12.8175ZM6 15.25C5.58579 15.25 5.25 15.5858 5.25 16C5.25 16.4142 5.58579 16.75 6 16.75H10C10.4142 16.75 10.75 16.4142 10.75 16C10.75 15.5858 10.4142 15.25 10 15.25H6Z"
+                                                    fill="#ffffff"></path>
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M15.5 13.25C15.9142 13.25 16.25 13.5858 16.25 14V18.1893L16.9697 17.4697C17.2626 17.1768 17.7374 17.1768 18.0303 17.4697C18.3232 17.7626 18.3232 18.2374 18.0303 18.5303L16.0303 20.5303C15.7374 20.8232 15.2626 20.8232 14.9697 20.5303L12.9697 18.5303C12.6768 18.2374 12.6768 17.7626 12.9697 17.4697C13.2626 17.1768 13.7374 17.1768 14.0303 17.4697L14.75 18.1893V14C14.75 13.5858 15.0858 13.25 15.5 13.25ZM19.4697 13.4697C19.7626 13.1768 20.2374 13.1768 20.5303 13.4697L22.5303 15.4697C22.8232 15.7626 22.8232 16.2374 22.5303 16.5303C22.2374 16.8232 21.7626 16.8232 21.4697 16.5303L20.75 15.8107V20C20.75 20.4142 20.4142 20.75 20 20.75C19.5858 20.75 19.25 20.4142 19.25 20V15.8107L18.5303 16.5303C18.2374 16.8232 17.7626 16.8232 17.4697 16.5303C17.1768 16.2374 17.1768 15.7626 17.4697 15.4697L19.4697 13.4697Z"
+                                                    fill="#ffffff"></path>
+                                            </g>
+                                        </svg></a>
+                                    <h6>Transaksi</h6>
+                                </div>
                             </div>
 
-                            <a href="{{ route('keranjang', $keranjang) }}" class="btn btn-info btn-sm">Lihat
-                                Detail</a>
+
                             @endif
 
                         </div>
@@ -376,8 +379,7 @@
                                 </li>
                                 <a href="{{ route('toko.edit', Auth::user()->toko->id) }}"
                                     class="btn btn-warning text-light btn-sm mb-3 my-3 fadeInUp"
-                                    data-wow-delay="0.1s">Edit
-                                    Toko Anda
+                                    data-wow-delay="0.1s">Edit Toko Anda
                                 </a>
                                 <a href="{{ route('produk.tambah') }}" class="btn btn-success btn-sm mb-3 fadeInUp"
                                     data-wow-delay="0.1s">Tambahkan Produk
@@ -404,6 +406,7 @@
                                     </div>
                                 </a>
                             </li>
+
                             @if (Auth::user()->toko)
                             <li class="nav-item col-6 col-md-4 text-center">
                                 <a class="d-flex align-items-center justify-content-center text-start pb-3"
@@ -429,11 +432,33 @@
                                 </a>
                             </li>
                             @endif
+                            @if (Auth::user()->produk->isNotEmpty())
+                            <li class="nav-item col-6 col-md-4 text-center">
+                                <a class="d-flex align-items-center justify-content-center text-start pb-3"
+                                    data-bs-toggle="pill" href="#tab-3">
+                                    <svg fill="#42d9ff" width="25px" height="25px" viewBox="0 0 1920 1920"
+                                        xmlns="http://www.w3.org/2000/svg" stroke="#42d9ff">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+                                        </g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <path
+                                                d="M746.667 106.667H1173.33V1493.33H746.667V106.667ZM533.333 533.333H106.667V1493.33H533.333V533.333ZM1920 1706.67H0V1824H1920V1706.67ZM1813.33 746.667H1386.67V1493.33H1813.33V746.667Z">
+                                            </path>
+                                        </g>
+                                    </svg>
+                                    <div class="ps-3">
+                                        <small class="text-body">Analisa</small>
+                                        <h6 class="mt-n1 mb-0">Produk</h6>
+                                    </div>
+                                </a>
+                            </li>
+                            @endif
                         </ul>
                     </div>
                 </div>
                 <div class="tab-content  fadeInUp" data-wow-delay="0.1s">
-                    <div id="tab-1" class="tab-pane fade show p-0 active fadeInUp" data-wow-delay="0.1s">
+                    <div id="tab-1" class="tab-pane fade show p-0 fadeInUp" data-wow-delay="0.1s">
                         @if(Auth::user()->favorite->isNotEmpty())
                         <div class="row">
                             @foreach ($favorite as $items)
@@ -472,38 +497,81 @@
 
                     @if (Auth::user()->toko)
                     <div id="tab-2" class="tab-pane fade show p-0">
-                        <div class="row mt-4">
+                        <div class="row container-fluid mt-4">
                             @foreach (Auth::user()->produk as $item)
-                            <a href="{{ route('produk.edit', [$item->id, $item->nama]) }}"
-                                class="ms-auto col-lg-3 text-dark col-md-5 col-6 position-relative">
-                                <div class=" mb-4">
-                                    <div class="card" style="border: none">
-                                        <img src="{{ asset('storage/' . $item->foto) }}" class="card-img-top"
-                                            alt="{{ $item->nama }}" style="border-radius: 15px">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ $item->nama }}</h5>
-                                            <p class="card-text">{{ $item->deskripsi }}</p>
-                                            <h5 class="text-primary">Rp.{{ number_format($item->harga, 0, ',',
-                                                '.') }}</h5>
+                            <div class="positioin-relative ms-auto col-lg-3 text-dark col-md-4 col-6">
+                                <div class="filter">
+                                    <a class="icon" href="#" data-bs-toggle="dropdown">
+                                        <i class="bi bi-three-dots"></i>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown-header text-start">
+                                            <h6>Operasi</h6>
+                                        </li>
+                                        <li>
+                                            <form class="dropdown-item"
+                                                action="{{ route('produk.destroy', $item->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button style="border:none;background:none;outline:none;">Hapus</button>
+                                            </form>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('produk.edit', [$item->id, $item->nama]) }}"
+                                                class="dropdown-item">
+                                                <button style="border:none;background:none;outline:none;">Perbarui
+                                                    Produk</button>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="position-relative">
+                                    <div class="mb-4">
+                                        <div class="card" style="border: none">
+                                            <img src="{{ asset('storage/' . $item->foto) }}" class="card-img-top"
+                                                alt="{{ $item->nama }}" style="border-radius: 15px">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{ $item->nama }}</h5>
+                                                <p class="card-text">{{ $item->deskripsi }}</p>
+                                                <h5 class="text-primary">Rp.{{ $item->harga }}</h5>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </a>
-                            <div class="d-flex justify-content-end">
-                                <form action="{{ route('produk.destroy', $item->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE ')
-                                    <button class="btn btn-sm btn-danger">Hapus</button>
-                                </form>
                             </div>
+
                             @endforeach
                         </div>
                     </div>
+
                     @else
                     <div id="tab-2" class="tab-pane fade show p-0">
                         <small>Buat Toko Anda!</small>
                     </div>
                     @endif
+                    <div id="tab-3" class="tab-pane fade show p-0">
+                        <div class="container mt-5">
+                            <h2>Analisa Penjualan Produk</h2>
+                            <table class="table table-bordered mt-4">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">No</th>
+                                        <th scope="col">Nama Produk</th>
+                                        <th scope="col">Jumlah Terjual</th>
+                                        <th scope="col">Total Keuntungan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row"></th>
+                                        <td>#</td>
+                                        <td>#</td>
+                                        <td>#</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
                 </div>
             </div>

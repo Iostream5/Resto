@@ -71,7 +71,7 @@ class User extends Authenticatable
 
     public function toko()
     {
-        return $this->hasOne(Toko::class);  // Relasi hasOne untuk menunjukkan bahwa setiap user memiliki satu toko
+        return $this->hasOne(Toko::class);
     }
 
     public function favorite()
@@ -82,5 +82,10 @@ class User extends Authenticatable
     public function cart()
     {
         return $this->hasMany(Cart::class);
+    }
+
+    public function analisa()
+    {
+        return $this->hasMany(Analisa::class);
     }
 }

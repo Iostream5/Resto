@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnalisaController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\DataController;
 use App\Http\Controllers\FavoriteController;
@@ -8,7 +9,7 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\TokoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-
+use App\Models\Cart;
 
 Route::get('/', [DataController::class, 'home'])->name('home');
 
@@ -71,10 +72,14 @@ Route::middleware([
     Route::get('/keranjang', [CartController::class, 'keranjang'])->name('keranjang');
     Route::post('/keranjang/tambah/{produkId}', [CartController::class, 'tambah'])->name('cart.tambah');
     Route::delete('/keranjang/hapus/{produkId}', [CartController::class, 'hapus'])->name('cart.hapus');
-    Route::post('/keranjang/checkout', [CartController::class, 'checkout'])->name('keranjang.checkout');
 
     //chekout
     Route::post('/keranjang/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+    Route::get('/transaksi', [CartController::class, 'transaksi'])->name('transaksi');
+    Route::get('/struk/{id}', [CartController::class, 'struk'])->name('struk');
+
+    //analisis produk
+    Route::get('/analisa', [DataController::class, 'index'])->name('analisa.produk');
 });
 
 

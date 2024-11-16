@@ -28,6 +28,11 @@ class Produk extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function penjualan()
+    {
+        return $this->belongsTo(penjualan::class);
+    }
+
     public function favorite()
     {
         return $this->hasMany(Favorite::class);
@@ -36,5 +41,10 @@ class Produk extends Model
     public function cart()
     {
         return $this->hasMany(Cart::class);
+    }
+
+    public function analisa()
+    {
+        return $this->hasMany(Analisa::class);
     }
 }

@@ -60,12 +60,12 @@
                 @endforeach
             </select>
 
-            <div class="mb-3">
+            {{-- <div class="mb-3">
                 <label class="fw-bolder my-2">Rating</label>
                 <input type="range" step="0.1" min="0" max="5" class="form-control form-control-lg" id="rating"
                     name="rating" placeholder="Masukkan Rating (0-5)" oninput="updateRatingValue(this.value)">
                 <span id="rating-value">{{ old('rating', $produk->rating) }}</span>
-            </div>
+            </div> --}}
 
             <label class="fw-bolder my-2">Foto Makanan</label>
             <input required name="foto" class="form-control form-control-lg" id="formFileLg" type="file"
@@ -127,8 +127,8 @@
                         }
                     }
     </script>
-<script>
-    function updateRatingValue(value) {
+    {{-- <script>
+        function updateRatingValue(value) {
         document.getElementById("rating-value").textContent = value;
     }
 
@@ -138,7 +138,7 @@
         document.getElementById("rating").value = ratingValue;
         updateRatingValue(ratingValue);
     });
-</script>
+    </script> --}}
 
 </body>
 
