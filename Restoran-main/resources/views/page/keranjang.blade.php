@@ -45,8 +45,9 @@
                                 @foreach ($keranjang as $item)
                                 <div class="col-lg-6">
                                     <div class="d-flex align-items-center">
-                                        <input type="checkbox" class="product-checkbox me-4" name="produk_id"
-                                            value="{{ $item->id }}" data-price="{{ $item->produk->harga }}"
+                                        <!-- Mengubah produk_id menjadi array -->
+                                        <input type="checkbox" class="product-checkbox me-4" name="produk_id[]"
+                                            value="{{ $item->produk->id }}" data-price="{{ $item->produk->harga }}"
                                             data-name="{{ $item->produk->nama }}">
                                         <img class="flex-shrink-0 img-fluid rounded"
                                             src="{{ asset('storage/' . $item->produk->foto) }}" alt=""
@@ -62,10 +63,9 @@
                                                 <div class="mb-3 d-flex align-items-center">
                                                     <button type="button" class="btn btn-outline-secondary"
                                                         data-action="decrease" data-id="{{ $item->id }}">-</button>
-                                                    <input name="jumlah_terjual" type="text" class="text-center"
-                                                        style="width: 50px" name="quantity[{{ $item->id }}]"
-                                                        id="quantity_{{ $item->id }}" value="{{ $item->quantity }}"
-                                                        class="form-control" readonly>
+                                                    <input name="jumlah_terjual[]" type="text" class="text-center"
+                                                        style="width: 50px" id="quantity_{{ $item->id }}"
+                                                        value="{{ $item->quantity }}" class="form-control" readonly>
                                                     <button type="button" class="btn btn-outline-secondary"
                                                         data-action="increase" data-id="{{ $item->id }}">+</button>
                                                 </div>
@@ -74,16 +74,18 @@
                                     </div>
                                 </div>
                                 @endforeach
+
                                 <!-- Input hidden untuk menyimpan data produk yang dipilih -->
                                 <input type="hidden" name="selected_products" id="selectedProductsInput">
 
                                 <div class="col-12 text-end mt-3">
-                                    <button type="button" class="btn btn-primary" id="checkout-btn">Checkout !</button>
+                                    <button type="submit" class="btn btn-primary"
+                                        onclick="showSuccessMessage()">Checkout !</button>
                                 </div>
                             </form>
 
                             <!-- Modal untuk konfirmasi checkout -->
-                            <div class="modal fade" id="checkoutModal" tabindex="-1"
+                            {{-- <div class="modal fade" id="checkoutModal" tabindex="-1"
                                 aria-labelledby="checkoutModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-scrollable">
                                     <div class="modal-content">
@@ -107,7 +109,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -115,7 +117,6 @@
         </div>
         @include('bagian.footer')
     </div>
-
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -129,7 +130,7 @@
     <script src="{{ asset('template/lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
     <script src="{{ asset('templatelib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
     <script src="{{ asset('template/js/main.js') }}"></script>
-    <script>
+    {{-- <script>
         document.addEventListener('DOMContentLoaded', function () {
         // Event listener untuk tombol Increment (tambah jumlah)
         document.querySelectorAll('button[data-action="increase"]').forEach(function (button) {
@@ -154,65 +155,91 @@
         }
         });
         });
+        );
         
         // Event listener untuk tombol checkout
-        document.getElementById('checkout-btn').addEventListener('click', function () {
-        var selectedProducts = [];
-        var totalPrice = 0;
+        // document.getElementById('checkout-btn').addEventListener('click', function () {
+        // var selectedProducts = [];
+        // var totalPrice = 0;
         
-        // Loop untuk mengambil produk yang dicentang
-        document.querySelectorAll('.product-checkbox:checked').forEach(function (checkbox) {
-        var productId = checkbox.value;
-        var quantity = parseInt(document.getElementById('quantity_' + productId).value);
-        var price = parseFloat(checkbox.getAttribute('data-price'));
-        var productName = checkbox.getAttribute('data-name');
+        // // Loop untuk mengambil produk yang dicentang
+        // document.querySelectorAll('.product-checkbox:checked').forEach(function (checkbox) {
+        // var productId = checkbox.value;
+        // var quantity = parseInt(document.getElementById('quantity_' + productId).value);
+        // var price = parseFloat(checkbox.getAttribute('data-price'));
+        // var productName = checkbox.getAttribute('data-name');
         
-        // Menambahkan data produk yang dipilih ke array
-        selectedProducts.push({
-        productId: productId,
-        productName: productName,
-        price: price,
-        quantity: quantity,
-        total: price * quantity
-        });
+        // // Menambahkan data produk yang dipilih ke array
+        // selectedProducts.push({
+        // productId: productId,
+        // productName: productName,
+        // price: price,
+        // quantity: quantity,
+        // total: price * quantity
+        // });
         
-        totalPrice += price * quantity; // Menghitung total harga
-        });
+        // totalPrice += price * quantity; // Menghitung total harga
+        // });
         
-        if (selectedProducts.length === 0) {
-        alert("Silakan pilih produk terlebih dahulu.");
-        return;
-        }
+        // if (selectedProducts.length === 0) {
+        // alert("Silakan pilih produk terlebih dahulu.");
+        // return;
+        // }
         
-        // Menampilkan detail produk yang dipilih di dalam modal
-        var checkoutDetails = document.getElementById('checkoutDetails');
-        checkoutDetails.innerHTML = ''; // Clear previous content
-        selectedProducts.forEach(function (product) {
-        checkoutDetails.innerHTML += `
-        <p>${product.productName} - ${product.quantity} x Rp. ${product.price.toLocaleString()} = Rp.
-            ${product.total.toLocaleString()}</p>
-        `;
-        });
+        // // Menampilkan detail produk yang dipilih di dalam modal
+        // var checkoutDetails = document.getElementById('checkoutDetails');
+        // checkoutDetails.innerHTML = ''; // Clear previous content
+        // selectedProducts.forEach(function (product) {
+        // checkoutDetails.innerHTML += `
+        // <p>${product.productName} - ${product.quantity} x Rp. ${product.price.toLocaleString()} = Rp.
+        //     ${product.total.toLocaleString()}</p>
+        // `;
+        // });
         
-        // Menampilkan total harga
-        document.getElementById('totalPrice').innerText = 'Rp. ' + totalPrice.toLocaleString();
+        // // Menampilkan total harga
+        // document.getElementById('totalPrice').innerText = 'Rp. ' + totalPrice.toLocaleString();
         
-        // Menyimpan data produk yang dipilih ke dalam input hidden
-        document.getElementById('selectedProductsInput').value = JSON.stringify(selectedProducts);
+        // // Menyimpan data produk yang dipilih ke dalam input hidden
+        // document.getElementById('selectedProductsInput').value = JSON.stringify(selectedProducts);
         
-        // Tampilkan modal konfirmasi checkout
-        var checkoutModal = new bootstrap.Modal(document.getElementById('checkoutModal'));
-        checkoutModal.show();
-        });
+        // // Tampilkan modal konfirmasi checkout
+        // var checkoutModal = new bootstrap.Modal(document.getElementById('checkoutModal'));
+        // checkoutModal.show();
+        // });
         
-        // Event listener untuk konfirmasi checkout
-        document.getElementById('confirmCheckoutBtn').addEventListener('click', function () {
-        var form = document.getElementById('checkoutForm');
-        form.submit(); // Submit form setelah konfirmasi checkout
-        });
-        });
-    </script>
+        // // Event listener untuk konfirmasi checkout
+        // document.getElementById('confirmCheckoutBtn').addEventListener('click', function () {
+        // var form = document.getElementById('checkoutForm');
+        // form.submit(); // Submit form setelah konfirmasi checkout
+        // });
+        // });
+    </script> --}}
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        // Fungsi untuk menangani tombol tambah (+)
+        document.querySelectorAll('button[data-action="increase"]').forEach(function (button) {
+        button.addEventListener('click', function () {
+        var productId = this.getAttribute('data-id'); // Ambil ID produk
+        var quantityInput = document.getElementById('quantity_' + productId); // Ambil input quantity berdasarkan ID produk
+        
+        var currentValue = parseInt(quantityInput.value) || 0; // Ambil nilai saat ini, jika kosong set default 0
+        quantityInput.value = currentValue + 1; // Tambah jumlah
+        });
+        });
+        
+        // Fungsi untuk menangani tombol kurang (-)
+        document.querySelectorAll('button[data-action="decrease"]').forEach(function (button) {
+        button.addEventListener('click', function () {
+        var productId = this.getAttribute('data-id'); // Ambil ID produk
+        var quantityInput = document.getElementById('quantity_' + productId); // Ambil input quantity berdasarkan ID produk
+        
+        var currentValue = parseInt(quantityInput.value) || 0; // Ambil nilai saat ini, jika kosong set default 0
+        if (currentValue > 1) { // Pastikan jumlah tidak kurang dari 1
+        quantityInput.value = currentValue - 1; // Kurangi jumlah
+        }
+        });
+        });
+        });
         function showSuccessMessage() {
             Swal.fire({
                 title: 'Berhasil Checkout!',

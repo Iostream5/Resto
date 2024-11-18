@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    // Fungsi untuk menambah produk ke keranjang
     public function tambah($produkId)
     {
         $cartItem = Cart::firstOrCreate(
@@ -24,7 +23,6 @@ class CartController extends Controller
             ]
         );
 
-        // Jika item sudah ada di keranjang, cukup tambahkan quantity
         if (!$cartItem->wasRecentlyCreated) {
             $cartItem->increment('quantity');
         }
@@ -32,7 +30,6 @@ class CartController extends Controller
         return back();
     }
 
-    // Fungsi untuk menghapus item dari keranjang
     public function hapus($produkId)
     {
         Cart::where('user_id', Auth::id())->where('produk_id', $produkId)->delete();
@@ -40,7 +37,6 @@ class CartController extends Controller
         return back()->with('success', 'Produk dihapus dari keranjang!');
     }
 
-    // Fungsi untuk menampilkan semua item di keranjang
     public function index()
     {
         $keranjang = Cart::where('user_id', Auth::id())->with('produk')->get();
@@ -85,24 +81,35 @@ class CartController extends Controller
 
     public function checkout(Request $request)
     {
-        // Ambil produk berdasarkan ID
-        $produk = Produk::find($request->produk_id);
+        // Pastikan produk_id dan jumlah_terjual adalah array
+        $produkIds = $request->produk_id;
+        $jumlahTerjual = $request->jumlah_terjual;
 
-        // Simpan data penjualan
-        $penjualan = new Penjualan;
-        $penjualan->user_id = Auth::id();
-        $penjualan->produk_id = $produk->id; // Pastikan produk_id valid
-        $penjualan->jumlah_terjual = $request->jumlah_terjual;
+        if (empty($produkIds) || empty($jumlahTerjual)) {
+            return redirect()->back()->with('error', 'Tidak ada produk yang dipilih.');
+        }
 
-        // Hitung total harga
-        $penjualan->total_harga = $produk->harga * $request->jumlah_terjual;
+        foreach ($produkIds as $index => $produkId) {
+            $produk = Produk::find($produkId);
 
-        $penjualan->save();
+            if (!$produk) {
+                return redirect()->back()->with('error', 'Produk tidak ditemukan.');
+            }
 
-        // Hapus item keranjang
-        Cart::where('user_id', Auth::id())
-            ->where('produk_id', $produk->id)
-            ->delete();
+            $penjualan = new Penjualan;
+            $penjualan->user_id = Auth::id();
+            $penjualan->produk_id = $produk->id;
+            $penjualan->jumlah_terjual = $jumlahTerjual[$index];
+            $penjualan->total_harga = $produk->harga * $jumlahTerjual[$index];
+
+            // Simpan penjualan
+            $penjualan->save();
+
+            // Hapus produk dari keranjang setelah checkout
+            Cart::where('user_id', Auth::id())
+                ->where('produk_id', $produk->id)
+                ->delete();
+        }
 
         return redirect()->route('transaksi')->with('success', 'Checkout berhasil!');
     }
@@ -111,6 +118,7 @@ class CartController extends Controller
     public function transaksi()
     {
         $penjualan = Penjualan::where('user_id', Auth::id())->with('produk')->get();
+
         return view('page.detail.transaksi', compact('penjualan'));
     }
 
@@ -118,33 +126,36 @@ class CartController extends Controller
     {
         $penjualan = Penjualan::with('produk')->find($id);
         $totalHarga = $penjualan->produk->harga * $penjualan->jumlah_terjual;
+
+        Penjualan::where('user_id', Auth::id())
+            ->where('produk_id', $penjualan->id)
+            ->delete();
+
         return view('page.detail.struk', compact('penjualan', 'totalHarga'));
     }
 
     public function analisa(Request $request)
-{
-    // Ambil semua produk milik pengguna yang sedang login
-    $produk = Produk::where('user_id', Auth::id())->with('penjualan')->get();
+    {
+        $produk = Produk::where('user_id', Auth::id())->with('penjualan')->get();
 
-    // Validasi jumlah terjual
-    $request->validate([
-        'jumlah_terjual' => 'required|integer|min:1',
-    ]);
+        $request->validate([
+            'jumlah_terjual' => 'required|integer|min:1',
+        ]);
 
-    // Ambil jumlah terjual dari request
-    $jumlahTerjual = $request->jumlah_terjual;
+        $jumlahTerjual = $request->jumlah_terjual;
 
-    // Menghitung total harga dan keuntungan untuk setiap produk
-    foreach ($produk as $produk) {
-        $produk->total_harga = $produk->harga * $jumlahTerjual;
-        $produk->keuntungan = ($produk->harga - $produk->harga_beli) * $jumlahTerjual;
+        foreach ($produk as $produk) {
+            $produk->total_harga = $produk->harga * $jumlahTerjual;
+            $produk->keuntungan = ($produk->harga - $produk->harga_beli) * $jumlahTerjual;
+        }
+
+        return view('page.profil', compact('produks', 'jumlahTerjual'));
     }
 
-    // Kirim data produk dan jumlah terjual ke view
-    return view('page.profil', compact('produks', 'jumlahTerjual'));
-}
-
-    
-
-
+    public function hapusRiwayat($id)
+    {
+        $penjualan = Penjualan::find($id);
+        $penjualan->delete();
+        return redirect()->route('transaksi');
+    }
 }

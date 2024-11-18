@@ -77,6 +77,7 @@ Route::middleware([
     Route::post('/keranjang/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
     Route::get('/transaksi', [CartController::class, 'transaksi'])->name('transaksi');
     Route::get('/struk/{id}', [CartController::class, 'struk'])->name('struk');
+    Route::delete('/struk/Del/{id}', [CartController::class, 'hapusRiwayat'])->name('hapus.riwayat');
 
     //analisis produk
     Route::get('/analisa', [DataController::class, 'index'])->name('analisa.produk');

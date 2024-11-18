@@ -56,9 +56,19 @@
 
                                 </div>
                                 <div class="col-12 text-end mt-3">
-                                    <a href="{{ route('struk', $item->id) }}" type="button" class="btn btn-primary"
-                                        id="checkout-btn">Lihat
-                                        Struk</a>
+                                    <div class="d-flex align-items-center justify-content-end gap-4">
+                                        <a href="{{ route('struk', $item->id) }}" type="button"
+                                            class="btn btn-sm btn-primary" id="checkout-btn">Lihat
+                                            Struk</a>
+                                        <form action="{{ route('hapus.riwayat',$item->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                Hapus Riwayat
+                                            </button>
+                                        </form>
+                                    </div>
+
                                 </div>
                             </div>
                             @endforeach
