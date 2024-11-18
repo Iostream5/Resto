@@ -31,7 +31,7 @@
             <div class="container-fluid">
                 <div class="container">
                     <h1>Kategori</h1>
-                    <a href="{{ route('kategori.tambah') }}" class="btn btn-primary">Add Produk</a>
+                    <a href="{{ route('kategori.tambah') }}" class="btn btn-primary">Add Kategori</a>
                     <table id="kategori-table" class="table table-bordered">
                         <thead>
                             <tr>

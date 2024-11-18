@@ -136,11 +136,8 @@ class CartController extends Controller
 
     public function analisa(Request $request)
     {
-        $produk = Produk::where('user_id', Auth::id())->with('penjualan')->get();
+        $produk = Produk::with('penjualan')->where('user_id', Auth::id())->get();
 
-        $request->validate([
-            'jumlah_terjual' => 'required|integer|min:1',
-        ]);
 
         $jumlahTerjual = $request->jumlah_terjual;
 
@@ -149,7 +146,7 @@ class CartController extends Controller
             $produk->keuntungan = ($produk->harga - $produk->harga_beli) * $jumlahTerjual;
         }
 
-        return view('page.profil', compact('produks', 'jumlahTerjual'));
+        return view('page.profil', compact('produk', 'jumlahTerjual'));
     }
 
     public function hapusRiwayat($id)
