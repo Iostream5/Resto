@@ -50,7 +50,7 @@
         <div class="py-lg-5 py-2">
             <div class="row pe-0 container-fluid">
                 <div class="col-12 mt-3">
-                    <h5 class="fw-bolder border-bottom border-3" style="width: 250px">Mau Makan Apa Hari Ini?</h5>
+                    <h5 class="fw-bolder border-bottom border-3" style="width: 250px">Mau Makan Apa Hari Ini??</h5>
                 </div>
                 <div class="col-12 mt-3 kategori d-flex container overflow-auto">
                     <div class="mx-lg-2 mx-1 d-flex gap-4">
