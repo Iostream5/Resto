@@ -92,3 +92,13 @@ Route::middleware('auth')->group(function () {
     Route::get('profile/edit', [UserController::class, 'edit'])->name('profile.edit');
     Route::put('profile', [UserController::class, 'update'])->name('profile.update');
 });
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
