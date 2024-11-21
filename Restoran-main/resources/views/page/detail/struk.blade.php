@@ -67,16 +67,21 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach($penjualanData as $item)
                 <tr>
-                    <td>{{ $penjualan->produk->nama }}</td>
-                    <td>{{ $penjualan->jumlah_terjual }}</td>
-                    <td>Rp {{ number_format($penjualan->produk->harga, 0, ',', '.') }}</td>
+                    <td>{{ $item->produk->nama }}</td>
+                    <td>{{ $item->jumlah_terjual }}</td>
+                    <td>Rp {{ number_format($item->produk->harga, 0, ',', '.') }}</td>
                 </tr>
             </tbody>
         </table>
         <p class="total"><strong>Total:</strong> Rp {{ number_format($totalHarga) }}</p>
     </div>
-    <button class="no-print" onclick="window.print()">Cetak Struk</button>
+    <script>
+        window.addEventListener('load', function () {
+                window.print(); // Cetak otomatis
+            });
+    </script>
 </body>
 
 </html>

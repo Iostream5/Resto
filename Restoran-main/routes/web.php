@@ -79,6 +79,7 @@ Route::middleware([
     Route::get('/struk/{id}', [CartController::class, 'struk'])->name('struk');
     Route::delete('/struk/Del/{id}', [CartController::class, 'hapusRiwayat'])->name('hapus.riwayat');
 
+
     //analisis produk
     Route::get('/analisa', [DataController::class, 'index'])->name('analisa.produk');
 });

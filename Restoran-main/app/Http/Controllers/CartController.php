@@ -89,6 +89,9 @@ class CartController extends Controller
             return redirect()->back()->with('error', 'Tidak ada produk yang dipilih.');
         }
 
+        $penjualanData = [];
+        $totalHarga = 0;
+
         foreach ($produkIds as $index => $produkId) {
             $produk = Produk::find($produkId);
 
@@ -105,14 +108,28 @@ class CartController extends Controller
             // Simpan penjualan
             $penjualan->save();
 
+            // Simpan data untuk dikembalikan ke view
+            $penjualanData[] = [
+                'produk_nama' => $produk->nama,
+                'jumlah' => $jumlahTerjual[$index],
+                'harga' => $produk->harga,
+                'total' => $produk->harga * $jumlahTerjual[$index],
+            ];
+
+            // Hitung total harga keseluruhan
+            $totalHarga += $produk->harga * $jumlahTerjual[$index];
+
             // Hapus produk dari keranjang setelah checkout
             Cart::where('user_id', Auth::id())
                 ->where('produk_id', $produk->id)
                 ->delete();
         }
+        $penjualan = Penjualan::where('user_id', Auth::id())->with('produk')->get();
 
-        return redirect()->route('transaksi')->with('success', 'Checkout berhasil!');
+        // Redirect ke halaman yang sama dengan data untuk mencetak struk
+        return redirect()->route('transaksi');
     }
+
 
 
     public function transaksi()
@@ -122,15 +139,11 @@ class CartController extends Controller
         return view('page.detail.transaksi', compact('penjualan'));
     }
 
+
     public function struk($id)
     {
         $penjualan = Penjualan::with('produk')->find($id);
         $totalHarga = $penjualan->produk->harga * $penjualan->jumlah_terjual;
-
-        Penjualan::where('user_id', Auth::id())
-            ->where('produk_id', $penjualan->id)
-            ->delete();
-
         return view('page.detail.struk', compact('penjualan', 'totalHarga'));
     }
 
