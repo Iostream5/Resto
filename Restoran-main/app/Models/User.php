@@ -64,4 +64,30 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function toko()
+    {
+        return $this->hasOne(Toko::class);
+    }
+
+
+    public function favorite()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
+    public function cart()
+    {
+        return $this->hasMany(Cart::class);
+    }
+
+    public function analisa()
+    {
+        return $this->hasMany(Analisa::class);
+    }
+
+    public function produk()
+    {
+        return $this->hasManyThrough(Produk::class, Toko::class, 'user_id', 'toko_id', 'id', 'id');
+    }
 }

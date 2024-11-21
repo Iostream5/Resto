@@ -458,7 +458,7 @@
                     </div>
                 </div>
                 <div class="tab-content  fadeInUp" data-wow-delay="0.1s">
-                    <div id="tab-1" class="tab-pane fade show p-0 fadeInUp" data-wow-delay="0.1s">
+                    <div id="tab-1" class="tab-pane fade show p-0 fadeInUp active" data-wow-delay="0.1s">
                         @if(Auth::user()->favorite->isNotEmpty())
                         <div class="row">
                             @foreach ($favorite as $items)

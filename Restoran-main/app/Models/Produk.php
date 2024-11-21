@@ -20,7 +20,7 @@ class Produk extends Model
 
     public function toko()
     {
-        return $this->belongsTo(Toko::class, 'toko_id');
+        return $this->belongsTo(Toko::class);
     }
 
     public function user()

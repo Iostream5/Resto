@@ -51,9 +51,7 @@
                                         <h2>Harga Satuan: {{ $item->produk->harga}}</h2>
                                         <h2>Total Harga Produk Yang di Pesan: {{ $item->total_harga}}</h2>
                                         <h2 class="mt-4">Di Pesan Pada : {{ $item->created_at}}</h2>
-
                                     </div>
-
                                 </div>
                                 <div class="col-12 text-end mt-3">
                                     <div class="d-flex align-items-center justify-content-end gap-4">
@@ -68,7 +66,6 @@
                                             </button>
                                         </form>
                                     </div>
-
                                 </div>
                             </div>
                             @endforeach

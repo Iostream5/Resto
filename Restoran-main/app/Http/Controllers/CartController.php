@@ -27,7 +27,7 @@ class CartController extends Controller
             $cartItem->increment('quantity');
         }
 
-        return back();
+        return redirect()->route('keranjang');
     }
 
     public function hapus($produkId)
@@ -136,8 +136,11 @@ class CartController extends Controller
 
     public function analisa(Request $request)
     {
-        $produk = Produk::with('penjualan')->where('user_id', Auth::id())->get();
+        $produk = Produk::where('user_id', Auth::id())->with('penjualan')->get();
 
+        $request->validate([
+            'jumlah_terjual' => 'required|integer|min:1',
+        ]);
 
         $jumlahTerjual = $request->jumlah_terjual;
 
@@ -146,7 +149,7 @@ class CartController extends Controller
             $produk->keuntungan = ($produk->harga - $produk->harga_beli) * $jumlahTerjual;
         }
 
-        return view('page.profil', compact('produk', 'jumlahTerjual'));
+        return view('page.profil', compact('produks', 'jumlahTerjual'));
     }
 
     public function hapusRiwayat($id)
