@@ -74,8 +74,8 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return redirect()->route('profil');
-    })->name('dashboard');
+        return redirect()->route('home');
+    });
 });
 
 

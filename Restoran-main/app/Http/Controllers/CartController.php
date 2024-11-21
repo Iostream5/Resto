@@ -46,6 +46,13 @@ class CartController extends Controller
         return view('page.profil', compact('keranjang'));
     }
 
+    public function struk($id)
+    {
+        $penjualan = Penjualan::with('produk')->find($id);
+        $totalHarga = $penjualan->produk->harga * $penjualan->jumlah_terjual;
+        return view('page.detail.struk', compact('penjualan', 'totalHarga'));
+    }
+
 
     public function detail($produkId)
     {
