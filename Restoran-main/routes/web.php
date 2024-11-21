@@ -79,6 +79,7 @@ Route::middleware([
     Route::get('/struk/{id}', [CartController::class, 'struk'])->name('struk');
     Route::delete('/struk/Del/{id}', [CartController::class, 'hapusRiwayat'])->name('hapus.riwayat');
 
+
     //analisis produk
     Route::get('/analisa', [DataController::class, 'index'])->name('analisa.produk');
 });
@@ -91,4 +92,14 @@ Route::middleware('auth')->group(function () {
     Route::get('user', [ProdukController::class, 'tampil'])->name('user.tampil');
     Route::get('profile/edit', [UserController::class, 'edit'])->name('profile.edit');
     Route::put('profile', [UserController::class, 'update'])->name('profile.update');
+});
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 });

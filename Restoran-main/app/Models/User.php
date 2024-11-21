@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -64,15 +65,11 @@ class User extends Authenticatable
         ];
     }
 
-    public function produk()
-    {
-        return $this->hasManyThrough(Produk::class, Toko::class);
-    }
-
     public function toko()
     {
         return $this->hasOne(Toko::class);
     }
+
 
     public function favorite()
     {
@@ -87,5 +84,10 @@ class User extends Authenticatable
     public function analisa()
     {
         return $this->hasMany(Analisa::class);
+    }
+
+    public function produk()
+    {
+        return $this->hasManyThrough(Produk::class, Toko::class, 'user_id', 'toko_id', 'id', 'id');
     }
 }

@@ -24,7 +24,7 @@
 
 <body style="background: linear-gradient(rgba(15, 23, 43, .9), rgba(15, 23, 43, .9))">
 
-    <div class="container-xxl bg-white p-0">
+    <div class="container-xxl no-print bg-white p-0">
         {{-- nav --}}
         @include('bagian.nav')
 
@@ -55,19 +55,21 @@
                                         <div class="w-100 d-flex flex-column text-start ps-4">
                                             <h5 class="d-flex justify-content-between border-bottom pb-2">
                                                 <span>{{ $item->produk->nama }}</span>
-                                                <span class="text-primary">Rp.{{ number_format($item->produk->harga)
+                                                <span class="text-primary">Rp. {{ number_format($item->produk->harga)
                                                     }}</span>
                                             </h5>
                                             <div class="d-flex justify-content-between">
                                                 <small class="fst-italic">{{ $item->produk->toko->nama_toko }}</small>
                                                 <div class="mb-3 d-flex align-items-center">
                                                     <button type="button" class="btn btn-outline-secondary"
-                                                        data-action="decrease" data-id="{{ $item->id }}">-</button>
+                                                        data-action="decrease"
+                                                        data-id="{{ $item->produk->id }}">-</button>
                                                     <input name="jumlah_terjual[]" type="text" class="text-center"
-                                                        style="width: 50px" id="quantity_{{ $item->id }}"
-                                                        value="{{ $item->quantity }}" class="form-control" readonly>
+                                                        style="width: 50px" id="quantity_{{ $item->produk->id }}"
+                                                        value="{{ $item->quantity }}" readonly>
                                                     <button type="button" class="btn btn-outline-secondary"
-                                                        data-action="increase" data-id="{{ $item->id }}">+</button>
+                                                        data-action="increase"
+                                                        data-id="{{ $item->produk->id }}">+</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -79,13 +81,12 @@
                                 <input type="hidden" name="selected_products" id="selectedProductsInput">
 
                                 <div class="col-12 text-end mt-3">
-                                    <button type="submit" class="btn btn-primary"
-                                        onclick="showSuccessMessage()">Checkout !</button>
+                                    <button type="button" id="checkout-btn" class="btn btn-primary">Pesan!</button>
                                 </div>
                             </form>
 
                             <!-- Modal untuk konfirmasi checkout -->
-                            {{-- <div class="modal fade" id="checkoutModal" tabindex="-1"
+                            <div class="modal fade" id="checkoutModal" tabindex="-1"
                                 aria-labelledby="checkoutModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-scrollable">
                                     <div class="modal-content">
@@ -109,7 +110,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -130,116 +131,123 @@
     <script src="{{ asset('template/lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
     <script src="{{ asset('templatelib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
     <script src="{{ asset('template/js/main.js') }}"></script>
-    {{-- <script>
-        document.addEventListener('DOMContentLoaded', function () {
-        // Event listener untuk tombol Increment (tambah jumlah)
-        document.querySelectorAll('button[data-action="increase"]').forEach(function (button) {
-        button.addEventListener('click', function () {
-        var productId = this.getAttribute('data-id'); // Ambil ID produk
-        var quantityInput = document.getElementById('quantity_' + productId); // Ambil input quantity berdasarkan ID produk
-        
-        var currentValue = parseInt(quantityInput.value) || 0; // Ambil nilai saat ini, jika kosong set default 0
-        quantityInput.value = currentValue + 1; // Tambah jumlah
-        });
-        });
-        
-        // Event listener untuk tombol Decrement (kurangi jumlah)
-        document.querySelectorAll('button[data-action="decrease"]').forEach(function (button) {
-        button.addEventListener('click', function () {
-        var productId = this.getAttribute('data-id'); // Ambil ID produk
-        var quantityInput = document.getElementById('quantity_' + productId); // Ambil input quantity berdasarkan ID produk
-        
-        var currentValue = parseInt(quantityInput.value) || 0; // Ambil nilai saat ini, jika kosong set default 0
-        if (currentValue > 1) { // Pastikan jumlah tidak kurang dari 1
-        quantityInput.value = currentValue - 1; // Kurangi jumlah
-        }
-        });
-        });
-        );
-        
-        // Event listener untuk tombol checkout
-        // document.getElementById('checkout-btn').addEventListener('click', function () {
-        // var selectedProducts = [];
-        // var totalPrice = 0;
-        
-        // // Loop untuk mengambil produk yang dicentang
-        // document.querySelectorAll('.product-checkbox:checked').forEach(function (checkbox) {
-        // var productId = checkbox.value;
-        // var quantity = parseInt(document.getElementById('quantity_' + productId).value);
-        // var price = parseFloat(checkbox.getAttribute('data-price'));
-        // var productName = checkbox.getAttribute('data-name');
-        
-        // // Menambahkan data produk yang dipilih ke array
-        // selectedProducts.push({
-        // productId: productId,
-        // productName: productName,
-        // price: price,
-        // quantity: quantity,
-        // total: price * quantity
-        // });
-        
-        // totalPrice += price * quantity; // Menghitung total harga
-        // });
-        
-        // if (selectedProducts.length === 0) {
-        // alert("Silakan pilih produk terlebih dahulu.");
-        // return;
-        // }
-        
-        // // Menampilkan detail produk yang dipilih di dalam modal
-        // var checkoutDetails = document.getElementById('checkoutDetails');
-        // checkoutDetails.innerHTML = ''; // Clear previous content
-        // selectedProducts.forEach(function (product) {
-        // checkoutDetails.innerHTML += `
-        // <p>${product.productName} - ${product.quantity} x Rp. ${product.price.toLocaleString()} = Rp.
-        //     ${product.total.toLocaleString()}</p>
-        // `;
-        // });
-        
-        // // Menampilkan total harga
-        // document.getElementById('totalPrice').innerText = 'Rp. ' + totalPrice.toLocaleString();
-        
-        // // Menyimpan data produk yang dipilih ke dalam input hidden
-        // document.getElementById('selectedProductsInput').value = JSON.stringify(selectedProducts);
-        
-        // // Tampilkan modal konfirmasi checkout
-        // var checkoutModal = new bootstrap.Modal(document.getElementById('checkoutModal'));
-        // checkoutModal.show();
-        // });
-        
-        // // Event listener untuk konfirmasi checkout
-        // document.getElementById('confirmCheckoutBtn').addEventListener('click', function () {
-        // var form = document.getElementById('checkoutForm');
-        // form.submit(); // Submit form setelah konfirmasi checkout
-        // });
-        // });
-    </script> --}}
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-        // Fungsi untuk menangani tombol tambah (+)
         document.querySelectorAll('button[data-action="increase"]').forEach(function (button) {
-        button.addEventListener('click', function () {
-        var productId = this.getAttribute('data-id'); // Ambil ID produk
-        var quantityInput = document.getElementById('quantity_' + productId); // Ambil input quantity berdasarkan ID produk
-        
-        var currentValue = parseInt(quantityInput.value) || 0; // Ambil nilai saat ini, jika kosong set default 0
-        quantityInput.value = currentValue + 1; // Tambah jumlah
+            button.addEventListener('click', function () {
+                var productId = this.getAttribute('data-id');
+                var quantityInput = document.getElementById('quantity_' + productId);
+
+                var currentValue = parseInt(quantityInput.value) || 0;
+                quantityInput.value = currentValue + 1;
+            });
         });
-        });
-        
-        // Fungsi untuk menangani tombol kurang (-)
+
         document.querySelectorAll('button[data-action="decrease"]').forEach(function (button) {
-        button.addEventListener('click', function () {
-        var productId = this.getAttribute('data-id'); // Ambil ID produk
-        var quantityInput = document.getElementById('quantity_' + productId); // Ambil input quantity berdasarkan ID produk
+            button.addEventListener('click', function () {
+                var productId = this.getAttribute('data-id');
+                var quantityInput = document.getElementById('quantity_' + productId); 
+                var currentValue = parseInt(quantityInput.value) || 0; 
+                if (currentValue > 1) {
+                    quantityInput.value = currentValue - 1; 
+                }
+            });
+        });
+
+        document.getElementById('checkout-btn').addEventListener('click', function () {
+            var selectedProducts = [];
+            var totalPrice = 0;
         
-        var currentValue = parseInt(quantityInput.value) || 0; // Ambil nilai saat ini, jika kosong set default 0
-        if (currentValue > 1) { // Pastikan jumlah tidak kurang dari 1
-        quantityInput.value = currentValue - 1; // Kurangi jumlah
-        }
+            document.querySelectorAll('.product-checkbox:checked').forEach(function (checkbox) {
+                var productId = checkbox.value;
+                var quantityInput = document.getElementById('quantity_' + productId);
+            
+                if (!quantityInput) {
+                    console.warn('Quantity input not found for product ID:', productId);
+                    return; 
+                }
+            
+                var quantity = parseInt(quantityInput.value) || 0;
+                var price = parseFloat(checkbox.getAttribute('data-price'));
+                var productName = checkbox.getAttribute('data-name');
+            
+                selectedProducts.push({
+                    productId: productId,
+                    productName: productName,
+                    price: price,
+                    quantity: quantity,
+                    total: price * quantity,
+                });
+            
+                totalPrice += price * quantity;
+            });
+        
+            if (selectedProducts.length === 0) {
+                alert("Silakan pilih produk terlebih dahulu.");
+                return;
+            }
+        
+            var checkoutDetails = document.getElementById('checkoutDetails');
+            checkoutDetails.innerHTML = '';
+            selectedProducts.forEach(function (product) {
+                checkoutDetails.innerHTML += `
+                    <p>${product.productName} - ${product.quantity} x Rp. ${product.price.toLocaleString()} = Rp. ${product.total.toLocaleString()}</p>
+                `;
+            });
+        
+            document.getElementById('totalPrice').innerText = 'Rp. ' + totalPrice.toLocaleString();
+        
+            document.getElementById('selectedProductsInput').value = JSON.stringify(selectedProducts);
+        
+            var checkoutModal = new bootstrap.Modal(document.getElementById('checkoutModal'));
+            checkoutModal.show();
         });
+
+        document.getElementById('confirmCheckoutBtn').addEventListener('click', function () {
+            // Ambil data dari modal
+            var checkoutDetails = document.getElementById('checkoutDetails').innerHTML;
+            var totalPrice = document.getElementById('totalPrice').innerText;
+
+            // Masukkan data ke dalam elemen struk
+            var struckElement = document.querySelector('.struck');
+            struckElement.querySelector('.items tbody').innerHTML = '';
+            var strukHeader = `
+                <div class="header">
+                    <h2>Toko Anda</h2>
+                    <p>Terima kasih telah berbelanja!</p>
+                </div>
+                <p><strong>Nama:</strong> {{ Auth::user()->name }}</p>
+                <p><strong>Tanggal:</strong> ${new Date().toLocaleString()}</p>
+            `;
+            struckElement.innerHTML = strukHeader + `
+                <table class="items">
+                    <thead>
+                        <tr>
+                            <th>Produk</th>
+                            <th>Jumlah</th>
+                            <th>Harga</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${checkoutDetails.replace(/<p>/g, '<tr><td>')
+                                         .replace(/ - /g, '</td><td>')
+                                         .replace(/ x /g, '</td><td>')
+                                         .replace(/<\/p>/g, '</td></tr>')}
+                    </tbody>
+                </table>
+                <p class="total"><strong>Total:</strong> ${totalPrice}</p>
+            `;
+            
+            // Cetak struk
+            window.print();
+            
+            // Submit form ke server
+            var form = document.getElementById('checkoutForm');
+            form.submit();
+            showSuccessMessage();
         });
-        });
+
+
         function showSuccessMessage() {
             Swal.fire({
                 title: 'Berhasil Checkout!',
@@ -253,6 +261,82 @@
             });
         }
     </script>
+    <script>
+
+    </script>
+
+    <style>
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            .struck,
+            .struck * {
+                visibility: visible;
+            }
+
+            .struck {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+            }
+        }
+
+        .struck {
+            border: 1px solid #ddd;
+            padding: 20px;
+            max-width: 400px;
+            margin: auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .items {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .items th,
+        .items td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .total {
+            text-align: right;
+            margin-top: 10px;
+            font-size: 1.2em;
+        }
+    </style>
+    <div class="struk">
+        <div class="struck no-print">
+            <div class="header">
+                <h2>Toko Anda</h2>
+                <p>Terima kasih telah berbelanja!</p>
+            </div>
+            <table class="items">
+                <thead>
+                    <tr>
+                        <th>Produk</th>
+                        <th>Jumlah</th>
+                        <th>Harga</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+            <p class="total"><strong>Total:</strong> Rp 0</p>
+        </div>
+    </div>
 </body>
 
 </html>

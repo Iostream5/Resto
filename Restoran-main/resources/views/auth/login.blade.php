@@ -66,14 +66,7 @@
         </x-authentication-card>
     </div>
 </x-guest-layout>
-
 <script>
     // JavaScript untuk toggle visibility
     const passwordInput = document.getElementById('password');
     const togglePassword = document.getElementById('togglePassword');
-
-    togglePassword.addEventListener('change', function() {
-        // Toggle tipe password dan text
-        passwordInput.type = this.checked ? 'text' : 'password';
-    });
-</script>

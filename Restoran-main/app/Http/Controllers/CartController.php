@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\DataTerjual;
 use App\Models\Penjualan;
 use App\Models\Produk;
 use App\Models\Toko;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class CartController extends Controller
 {
@@ -27,7 +30,7 @@ class CartController extends Controller
             $cartItem->increment('quantity');
         }
 
-        return back();
+        return redirect()->route('keranjang');
     }
 
     public function hapus($produkId)
@@ -89,6 +92,9 @@ class CartController extends Controller
             return redirect()->back()->with('error', 'Tidak ada produk yang dipilih.');
         }
 
+        $penjualanData = [];
+        $totalHarga = 0;
+
         foreach ($produkIds as $index => $produkId) {
             $produk = Produk::find($produkId);
 
@@ -99,60 +105,73 @@ class CartController extends Controller
             $penjualan = new Penjualan;
             $penjualan->user_id = Auth::id();
             $penjualan->produk_id = $produk->id;
+            $penjualan->harga_jual = $produk->harga;
             $penjualan->jumlah_terjual = $jumlahTerjual[$index];
             $penjualan->total_harga = $produk->harga * $jumlahTerjual[$index];
 
-            // Simpan penjualan
             $penjualan->save();
 
-            // Hapus produk dari keranjang setelah checkout
+            $penjualanData[] = [
+                'produk_nama' => $produk->nama,
+                'jumlah' => $jumlahTerjual[$index],
+                'harga' => $produk->harga,
+                'total' => $produk->harga * $jumlahTerjual[$index],
+            ];
+
+            $totalHarga += $produk->harga * $jumlahTerjual[$index];
+
             Cart::where('user_id', Auth::id())
                 ->where('produk_id', $produk->id)
                 ->delete();
         }
 
-        return redirect()->route('transaksi')->with('success', 'Checkout berhasil!');
+        return redirect()->route('transaksi');
     }
-
 
     public function transaksi()
     {
+        // Mengambil data penjualan untuk pengguna yang sedang login, beserta data produk terkait
         $penjualan = Penjualan::where('user_id', Auth::id())->with('produk')->get();
 
+        // Memeriksa apakah ada data penjualan
+        if ($penjualan) {
+            // Menggunakan each untuk memproses setiap item tanpa menggunakan foreach
+            $penjualan->each(function ($item) {
+                // Membuat instance baru untuk DataTerjual
+                $dataJual = new DataTerjual();
+
+                // Menyimpan data produk_id, user_id, jumlah_terjual, dan total_harga
+                $dataJual->produk_id = $item->produk_id;
+                $dataJual->user_id = $item->user_id;
+                $dataJual->jumlah_terjual = $item->jumlah_terjual;
+                $dataJual->total_harga = $item->jumlah_terjual * $item->produk->harga;
+
+                // Menghitung total harga produk yang telah terjual
+                $total_harga_produk = Penjualan::where('produk_id', $item->produk_id)
+                    ->sum('total_harga');
+
+                // Menyimpan keuntungan
+                $dataJual->keuntungan = $total_harga_produk;
+
+                // Menyimpan data ke dalam tabel DataTerjual
+                $dataJual->save();
+            });
+        }
+
+        // Mengembalikan tampilan dengan data penjualan
         return view('page.detail.transaksi', compact('penjualan'));
     }
 
-    public function struk($id)
-    {
-        $penjualan = Penjualan::with('produk')->find($id);
-        $totalHarga = $penjualan->produk->harga * $penjualan->jumlah_terjual;
-
-        Penjualan::where('user_id', Auth::id())
-            ->where('produk_id', $penjualan->id)
-            ->delete();
-
-        return view('page.detail.struk', compact('penjualan', 'totalHarga'));
-    }
-
-    public function analisa(Request $request)
-    {
-        $produk = Produk::with('penjualan')->where('user_id', Auth::id())->get();
-
-
-        $jumlahTerjual = $request->jumlah_terjual;
-
-        foreach ($produk as $produk) {
-            $produk->total_harga = $produk->harga * $jumlahTerjual;
-            $produk->keuntungan = ($produk->harga - $produk->harga_beli) * $jumlahTerjual;
-        }
-
-        return view('page.profil', compact('produk', 'jumlahTerjual'));
-    }
 
     public function hapusRiwayat($id)
     {
-        $penjualan = Penjualan::find($id);
+        // Mencari penjualan berdasarkan ID dan memuat data produk terkait
+        $penjualan = Penjualan::with('produk')->find($id);
+
+        // Menghapus data penjualan
         $penjualan->delete();
-        return redirect()->route('transaksi');
+
+        // Redirect ke halaman profil
+        return redirect()->route('profil');
     }
 }

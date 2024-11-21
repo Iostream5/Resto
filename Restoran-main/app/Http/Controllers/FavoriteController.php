@@ -16,7 +16,7 @@ class FavoriteController extends Controller
             'produk_id' => $produkId,
         ]);
 
-        return back();
+        return redirect()->route('profil');
     }
 
     public function hapus($produkId)

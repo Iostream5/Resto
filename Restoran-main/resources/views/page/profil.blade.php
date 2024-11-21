@@ -432,7 +432,7 @@
                                 </a>
                             </li>
                             @endif
-                            {{-- @if (Auth::user()->produk->isNotEmpty())
+                            @if (Auth::user()->produk->isNotEmpty())
                             <li class="nav-item col-6 col-md-4 text-center">
                                 <a class="d-flex align-items-center justify-content-center text-start pb-3"
                                     data-bs-toggle="pill" href="#tab-3">
@@ -453,12 +453,12 @@
                                     </div>
                                 </a>
                             </li>
-                            @endif --}}
+                            @endif
                         </ul>
                     </div>
                 </div>
                 <div class="tab-content  fadeInUp" data-wow-delay="0.1s">
-                    <div id="tab-1" class="tab-pane fade show p-0 fadeInUp" data-wow-delay="0.1s">
+                    <div id="tab-1" class="tab-pane fade show p-0 fadeInUp active" data-wow-delay="0.1s">
                         @if(Auth::user()->favorite->isNotEmpty())
                         <div class="row">
                             @foreach ($favorite as $items)
@@ -549,31 +549,31 @@
                         <small>Buat Toko Anda!</small>
                     </div>
                     @endif
-                    {{-- <div id="tab-3" class="tab-pane fade show p-0">
+                    <div id="tab-3" class="tab-pane fade show p-0">
                         <div class="container mt-5">
                             <h2>Analisa Penjualan Produk</h2>
-                            @if ($produk)
+                            @if ($dataTerjual)
                             <table class="table table-bordered mt-4">
                                 <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>Foto Produk</th>
                                         <th>Nama Produk</th>
                                         <th>Harga Jual</th>
-                                        <th>Harga Beli</th>
                                         <th>Jumlah Terjual</th>
-                                        <th>Total Harga</th>
                                         <th>Keuntungan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($produk as $produk)
+                                    @foreach ($dataTerjual as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $produk->nama }}</td>
-                                        <td>{{ number_format($produk->harga, 2) }}</td>
-                                        <td>{{ $produk->jumlah_terjual }}</td>
-                                        <td>{{ $produk->total_harga }}</td>
-                                        <td>{{ number_format($produk->keuntungan, 2) }}</td>
+                                        <td><img src="{{ asset('storage/'. $item->produk->foto) }}" height="100"
+                                                width="auto" alt=""></td>
+                                        <td>{{ $item->produk->nama }}</td>
+                                        <td>{{ number_format($item->produk->harga, 2) }}</td>
+                                        <td>{{ $item->total_terjual }}</td>
+                                        <td>{{ number_format($item->total_keuntungan, 2) }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -582,7 +582,7 @@
                             <p>Produk tidak ditemukan.</p>
                             @endif
                         </div>
-                    </div> --}}
+                    </div>
 
                 </div>
             </div>
