@@ -37,40 +37,42 @@
                 <div class="text-center wow fadeInUp my-5" data-wow-delay="0.1s">
                     <h1 class="mb-5">Riwayat pembelian</h1>
                 </div>
-                <div class="tab-content">
-                    <div class="tab-pane fade show p-0 active">
-                        <div class="container">
-                            @foreach ($penjualan as $item)
-                            <div class="container">
-                                <div class="d-flex">
-                                    <img class="img-fluid rounded" src="{{ asset('storage/' . $item->produk->foto) }}"
-                                        alt="" style="width:20rem;">
-                                    <div class="ms-4">
-                                        <h2>Nama Produk: {{ $item->produk->nama }}</h2>
-                                        <h2>Jumlah yang di Pesan: {{ $item->jumlah_terjual}}</h2>
-                                        <h2>Harga Satuan: {{ $item->produk->harga}}</h2>
-                                        <h2>Total Harga Produk Yang di Pesan: {{ $item->total_harga}}</h2>
-                                        <h2 class="mt-4">Di Pesan Pada : {{ $item->created_at}}</h2>
-                                    </div>
-                                </div>
-                                <div class="col-12 text-end mt-3">
-                                    <div class="d-flex align-items-center justify-content-end gap-4">
-                                        <a href="{{ route('struk', $item->id) }}" type="button"
-                                            class="btn btn-sm btn-primary" id="checkout-btn">Lihat
-                                            Struk</a>
-                                        <form action="{{ route('hapus.riwayat',$item->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger">
-                                                Hapus Riwayat
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Foto</th>
+                            <th>Nama Produk</th>
+                            <th>Jumlah yang Dipesan</th>
+                            <th>Harga Satuan</th>
+                            <th>Total Harga</th>
+                            <th>Pesan Pada</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($penjualan as $index => $item)
+                        <tr>
+                            <td>{{ $index + 1 }}</td> <!-- Nomor urut -->
+                            <td><img class="img-fluid rounded" src="{{ asset('storage/' . $item->produk->foto) }}" alt="" style="width: 100px;"></td>
+                            <td>{{ $item->produk->nama }}</td>
+                            <td>{{ $item->jumlah_terjual }}</td>
+                            <td>Rp {{ number_format($item->produk->harga, 0, ',', '.') }}</td> <!-- Format harga satuan -->
+                            <td>Rp {{ number_format($item->total_harga, 0, ',', '.') }}</td> <!-- Format total harga -->
+                            <td>{{ $item->created_at }}</td>
+                            <td>
+                                <a href="{{ route('struk', $item->id) }}" class="btn btn-sm btn-primary">Lihat Struk</a>
+                                <form action="{{ route('hapus.riwayat',$item->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger">Hapus Riwayat</button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+
                 </div>
             </div>
         </div>
