@@ -27,6 +27,20 @@
 
     <link href="{{ asset('template/css/style.css') }}" rel="stylesheet">
 </head>
+<style>
+    .ellipsis {
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        /* Batasi ke 4 baris */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.5em;
+        /* Sesuaikan dengan tinggi baris */
+        max-height: calc(1.5em * 4);
+        /* Line height * jumlah baris */
+    }
+</style>
 
 <body style="background: linear-gradient(rgba(15, 23, 43, .9), rgba(15, 23, 43, .9))">
 
@@ -50,7 +64,29 @@
                             <span class="text-primary">Rp.{{ $produk->harga }}</span>
                         </h5>
                         <h6 class="d-block border-bottom pb-2 text-muted">{{ $produk->kategori->nama_kategori }}</h6>
-                        <small class="fst-italic">{{ $produk->deskripsi}}</small>
+                        @if (Auth::check() && Auth::user()->favorite->contains('produk_id', $produk->id))
+                        <form class="float-end bg-warning" style="border-radius: 15px"
+                            action="{{ route('favorites.hapus', $produk->id) }}" method="POST"
+                            class="position-absolute top-0 end-0 m-1">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-transparent">
+                                <i class="fa fa-heart text-danger fa-2x"></i>
+                            </button>
+                        </form>
+                        @elseif (Auth::check())
+                        <form class="float-end bg-warning" style="border-radius: 15px"
+                            action="{{ route('favorites.tambah', $produk->id) }}" method="POST"
+                            class="position-absolute top-0 end-0 m-1">
+                            @csrf
+                            <button type="submit" class="btn btn-transparent">
+                                <i class="fa fa-heart text-muted fa-2x"></i>
+                            </button>
+                        </form>
+                        @endif
+                        <div class="overflow-auto">
+                            <small class="fst-italic">{{ $produk->deskripsi}}</small>
+                        </div>
 
                         <div class="d-flex ratings text-nowrap">
                             @php
@@ -67,15 +103,28 @@
                         <div class="mt-3">
                             <form action="{{ route('cart.tambah', $produk->id) }}" method="POST">
                                 @csrf
-                                <button class="btn btn-success">Pesan</button>
+                                <button class="btn btn-warning text-light">Pesan <svg width="20px" height="20px"
+                                        viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                                        stroke="#000000">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+                                        </g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <path
+                                                d="M21 5L19 12H7.37671M20 16H8L6 3H3M16 5.5H13.5M13.5 5.5H11M13.5 5.5V8M13.5 5.5V3M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z"
+                                                stroke="#ffffff" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round"></path>
+                                        </g>
+                                    </svg></button>
                             </form>
+
                         </div>
                     </div>
                 </div>
 
                 <div class="mt-4">
                     <div class="border p-3 rounded d-flex align-items-center">
-                        <img src="{{ asset('template/img/menu-1.jpg') }}" alt="Logo Toko"
+                        <img src="{{ asset('storage/'. $produk->toko->foto) }}" alt="Logo Toko"
                             style="width: 80px; height: 80px; border-radius: 50%;" class="me-3">
                         <div>
                             <h6 class="text-primary">{{ $produk->toko->nama_toko }}</h6>
@@ -90,59 +139,57 @@
                                 </div>
                                 <small class="ms-2 fw-lighther">{{ $produk->toko->rating }}</small>
                             </div>
-                            <p>Deskripsi: {{ $produk->toko->deskripsi }}</p>
+                            <p class="ellipsis">Deskripsi: {{ $produk->toko->deskripsi }}</p>
                             <a href="{{ route('toko.detail', $produk->toko->id) }}"
                                 class="btn btn-outline-primary">Kunjungi
                                 Toko</a>
                         </div>
                     </div>
                 </div>
-
-                <div class="mt-4">
-                    <h6>Komentar Pengguna</h6>
-
-                    <form>
-                        <div class="mb-3">
-                            <label for="userComment" class="form-label">Komentar</label>
-                            <textarea class="form-control" id="userComment" rows="3"
-                                placeholder="Tulis komentar Anda di sini"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Kirim Komentar</button>
-                    </form>
-
-                    <div class="mt-3">
-                        <div class="border-bottom pb-2 mb-2 d-flex align-items-start">
-                            <img src="{{ asset('img/zzi.png') }}" alt="Profil Pengguna"
-                                style="width: 40px; height: 40px; border-radius: 50%;" class="me-2">
-                            <div>
-                                <strong>Ali Ahmad</strong>
-                                <p class="mb-1">Burgernya enak banget! Rasa dagingnya sangat juicy dan bumbunya pas.
-                                    Pasti pesan lagi!</p>
-                                <small class="text-muted">Tanggal: 4 November 2024</small>
+                <h4 class="fw-bold m-3">Produk Lainnya</h4>
+                <div class="row mt-4 col-12">
+                    @foreach ($produks as $produks)
+                    <a href="{{ route('detail', [$produks->id, $produks->nama]) }}"
+                        class="ms-auto col-lg-3 col-md-5 col-6 position-relative">
+                        @if (Auth::check() && Auth::user()->favorite->contains('produk_id', $produks->id))
+                        <form action="{{ route('favorites.hapus', $produks->id) }}" method="POST"
+                            class="position-absolute top-0 end-0 m-1">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-transparent">
+                                <i class="fa fa-heart text-danger fa-2x"></i>
+                            </button>
+                        </form>
+                        @elseif (Auth::check())
+                        <form action="{{ route('favorites.tambah', $produks->id) }}" method="POST"
+                            class="position-absolute top-0 end-0 m-1">
+                            @csrf
+                            <button type="submit" class="btn btn-transparent">
+                                <i class="fa fa-heart text-muted fa-2x"></i>
+                            </button>
+                        </form>
+                        @endif
+                        <img src="{{ asset('storage/'. $produks->foto) }}" width="100%" class="rounded-5" alt="...">
+                        <div class="card-body">
+                            <p class="text-dark text-start produk fw-bold m-0">{{ $produks->nama }}</p>
+                            <small class="text-dark text-start produk fw-lighter ellipsis">{{ $produks->deskripsi
+                                }}</small>
+                            <div class="d-flex justify-content-between align-items-center gap-2">
+                                <h6 class="text-primary fw-bold text-nowrap">Rp.{{ $produks->harga }}</h6>
+                                <form class="my-3 justify-content-between d-flex"
+                                    action="{{ route('cart.tambah', $produks->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-warning btn-lg-sm float-end">
+                                        <small class="d-md-block d-none" style="font-size: 10px">
+                                            Tambah Ke Keranjang<i class="bi bi-cart-plus ms-2"></i>
+                                        </small>
+                                        <i class="d-md-none d-block bi bi-cart-plus"></i>
+                                    </button>
+                                </form>
                             </div>
                         </div>
-
-                        <div class="border-bottom pb-2 mb-2 d-flex align-items-start">
-                            <img src="{{ asset('img/zzi.png') }}" alt="Profil Pengguna"
-                                style="width: 40px; height: 40px; border-radius: 50%;" class="me-2">
-                            <div>
-                                <strong>Siti Nurhaliza</strong>
-                                <p class="mb-1">Suka banget dengan burger ini! Pengirimannya cepat dan hangat sampai
-                                    di rumah.</p>
-                                <small class="text-muted">Tanggal: 3 November 2024</small>
-                            </div>
-                        </div>
-
-                        <div class="border-bottom pb-2 mb-2 d-flex align-items-start">
-                            <img src="{{ asset('img/zzi.png') }}" alt="Profil Pengguna"
-                                style="width: 40px; height: 40px; border-radius: 50%;" class="me-2">
-                            <div>
-                                <strong>Rizqi</strong>
-                                <p class="mb-1">Bagus, tapi saya berharap ada lebih banyak pilihan saus!</p>
-                                <small class="text-muted">Tanggal: 2 November 2024</small>
-                            </div>
-                        </div>
-                    </div>
+                    </a>
+                    @endforeach
                 </div>
             </div>
         </div>

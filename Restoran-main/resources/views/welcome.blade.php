@@ -21,6 +21,20 @@
     <link href="{{ asset('template/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('template/css/style.css') }}" rel="stylesheet">
 </head>
+<style>
+    .ellipsis {
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        /* Batasi ke 4 baris */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.5em;
+        /* Sesuaikan dengan tinggi baris */
+        max-height: calc(1.5em * 4);
+        /* Line height * jumlah baris */
+    }
+</style>
 
 <body style="background: linear-gradient(rgba(15, 23, 43, .9), rgba(15, 23, 43, .9))">
     <div class="container-xxl bg-white p-0">
@@ -98,7 +112,8 @@
                         <img src="{{ asset('storage/'. $item->foto) }}" width="100%" class="rounded-5" alt="...">
                         <div class="card-body">
                             <p class="text-dark text-start produk fw-bold m-0">{{ $item->nama }}</p>
-                            <small class="text-dark text-start produk fw-lighter">{{ $item->deskripsi }}</small>
+                            <small class="text-dark text-start produk fw-lighter ellipsis">{{ $item->deskripsi
+                                }}</small>
                             <div class="d-flex justify-content-between align-items-center gap-2">
                                 <h6 class="text-primary fw-bold text-nowrap">Rp.{{ $item->harga }}</h6>
                                 <form class="my-3 justify-content-between d-flex"
@@ -141,7 +156,7 @@
                                     class="btn btn-sm btn-primary">Kunjungi</a>
                             </div>
 
-                            <small class="fst-italic">{{ $item->deskripsi }}</small>
+                            <small class="fst-italic ellipsis">{{ $item->deskripsi }}</small>
                         </div>
                     </div>
                     @endforeach

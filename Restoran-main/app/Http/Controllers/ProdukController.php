@@ -14,7 +14,7 @@ class ProdukController extends Controller
 {
     public function tampil()
     {
-        return view('page.profil');
+        return redirect()->route('profil');
     }
 
     public function data()

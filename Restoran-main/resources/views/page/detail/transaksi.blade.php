@@ -54,14 +54,16 @@
                         @foreach ($penjualan as $index => $item)
                         <tr>
                             <td>{{ $index + 1 }}</td> <!-- Nomor urut -->
-                            <td><img class="img-fluid rounded" src="{{ asset('storage/' . $item->produk->foto) }}" alt="" style="width: 100px;"></td>
+                            <td><img class="img-fluid rounded" src="{{ asset('storage/' . $item->produk->foto) }}"
+                                    alt="" style="width: 100px;"></td>
                             <td>{{ $item->produk->nama }}</td>
                             <td>{{ $item->jumlah_terjual }}</td>
-                            <td>Rp {{ number_format($item->produk->harga, 0, ',', '.') }}</td> 
-                            <td>Rp {{ number_format($item->total_harga, 0, ',', '.') }}</td> 
+                            <td>Rp {{ number_format($item->produk->harga, 0, ',', '.') }}</td>
+                            <td>Rp {{ number_format($item->total_harga, 0, ',', '.') }}</td>
                             <td>{{ $item->created_at }}</td>
                             <td>
-                                <a href="{{ route('struk', $item->id) }}" class="btn btn-sm btn-primary">Lihat Struk</a>
+                                {{-- <a href="{{ route('struk', $item->id) }}" class="btn btn-sm btn-primary">Lihat
+                                    Struk</a> --}}
                                 <form action="{{ route('hapus.riwayat',$item->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
@@ -73,10 +75,10 @@
                     </tbody>
                 </table>
 
-                </div>
             </div>
         </div>
-        @include('bagian.footer')
+    </div>
+    @include('bagian.footer')
     </div>
 
 

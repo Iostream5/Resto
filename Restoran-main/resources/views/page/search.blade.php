@@ -33,6 +33,20 @@
     <!-- Template Stylesheet -->
     <link href="{{ asset('template/css/style.css') }}" rel="stylesheet">
 </head>
+<style>
+    .ellipsis {
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        /* Batasi ke 4 baris */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.5em;
+        /* Sesuaikan dengan tinggi baris */
+        max-height: calc(1.5em * 4);
+        /* Line height * jumlah baris */
+    }
+</style>
 
 <body style="background: linear-gradient(rgba(15, 23, 43, .9), rgba(15, 23, 43, .9))">
 
@@ -184,7 +198,7 @@
                                                 <small class="ms-2 fw-lighther">{{ $item->rating }}</small>
                                             </div>
                                         </h5>
-                                        <small class="fst-italic">{{ $item->deskripsi }}</small>
+                                        <small class="fst-italic ellipsis">{{ $item->deskripsi }}</small>
                                     </div>
                                 </div>
                             </a>

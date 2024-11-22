@@ -182,6 +182,20 @@
         z-index: 1;
     }
 </style>
+<style>
+    .ellipsis {
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        /* Batasi ke 4 baris */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.5em;
+        /* Sesuaikan dengan tinggi baris */
+        max-height: calc(1.5em * 4);
+        /* Line height * jumlah baris */
+    }
+</style>
 
 <body style="background: linear-gradient(rgba(15, 23, 43, .9), rgba(15, 23, 43, .9))">
     <div class="container-xxl bg-white p-0">
@@ -479,7 +493,7 @@
                                             alt="{{ $items->produk->nama }}" style="border-radius: 15px">
                                         <div class="card-body">
                                             <h5 class="card-title">{{ $items->produk->nama }}</h5>
-                                            <p class="card-text">{{ $items->produk->deskripsi }}</p>
+                                            <p class="card-text ellipsis">{{ $items->produk->deskripsi }}</p>
                                             <h5 class="text-primary">Rp.{{ number_format($items->produk->harga, 0, ',',
                                                 '.') }}</h5>
                                         </div>
@@ -532,7 +546,7 @@
                                                 alt="{{ $item->nama }}" style="border-radius: 15px">
                                             <div class="card-body">
                                                 <h5 class="card-title">{{ $item->nama }}</h5>
-                                                <p class="card-text">{{ $item->deskripsi }}</p>
+                                                <p class="card-text ellipsis">{{ $item->deskripsi }}</p>
                                                 <h5 class="text-primary">Rp.{{ $item->harga }}</h5>
                                             </div>
                                         </div>

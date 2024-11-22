@@ -53,8 +53,9 @@ class DataController extends Controller
 
     public function detail($id)
     {
+        $produks = Produk::inRandomOrder()->take(8)->get();
         $produk = Produk::with('toko', 'kategori')->find($id);
-        return view('page.detail', compact('produk'));
+        return view('page.detail', compact('produk', 'produks'));
     }
 
     public function tokoDetail($id)

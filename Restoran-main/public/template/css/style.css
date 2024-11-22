@@ -155,7 +155,7 @@
     background-size: cover;
 }
 
-.breadcrumb-item+.breadcrumb-item::before {
+.breadcrumb-item + .breadcrumb-item::before {
     color: rgba(255, 255, 255, 0.5);
 }
 
@@ -560,14 +560,12 @@
 }
 
 .form-inputs:focus {
-
     box-shadow: none;
     border: none;
 }
 
 .b {
     border-left: 1px solid rgba(141, 141, 141, 0.6);
-
 }
 
 .c {
@@ -575,27 +573,22 @@
 }
 
 .searching {
-
     position: relative;
 }
 
 .searching .fa-search {
-
     position: absolute;
     top: 20px;
     left: 20px;
     color: #9ca3af;
-
 }
 
 .searching span {
-
     position: absolute;
     right: 17px;
     top: 13px;
     padding: 2px;
     border-left: 1px solid #d1d5db;
-
 }
 
 .left-pan {
@@ -603,19 +596,16 @@
 }
 
 .left-pan i {
-
     padding-left: 10px;
 }
 
 .form-inputs {
-
     height: 55px;
     text-indent: 33px;
     border-radius: 10px;
 }
 
 .form-inputs:focus {
-
     box-shadow: none;
     border: none;
 }
@@ -645,14 +635,12 @@
 }
 
 .form-inputs:focus {
-
     box-shadow: none;
     border: none;
 }
 
 .b {
     border-left: 1px solid rgba(141, 141, 141, 0.6);
-
 }
 
 .c {
@@ -660,27 +648,22 @@
 }
 
 .searching {
-
     position: relative;
 }
 
 .searching .fa-search {
-
     position: absolute;
     top: 20px;
     left: 20px;
     color: #9ca3af;
-
 }
 
 .searching span {
-
     position: absolute;
     right: 17px;
     top: 13px;
     padding: 2px;
     border-left: 1px solid #d1d5db;
-
 }
 
 .left-pan {
@@ -688,32 +671,27 @@
 }
 
 .left-pan i {
-
     padding-left: 10px;
 }
 
 .form-inputs {
-
     height: 55px;
     text-indent: 33px;
     border-radius: 10px;
 }
 
 .form-inputs:focus {
-
     box-shadow: none;
     border: none;
 }
 
 .ratings i {
-
     color: #cecece;
 }
 
 .rating-color {
     color: #fbc634 !important;
 }
-
 
 /* Tampilan card */
 .profile-card {
@@ -780,13 +758,11 @@
     display: none;
 }
 
-
 .rounded-5 {
-    border-radius: 15px
+    border-radius: 15px;
 }
 
 .ratings i {
-
     color: #cecece;
 }
 
@@ -795,27 +771,22 @@
 }
 
 .searching {
-
     position: relative;
 }
 
 .searching .fa-search {
-
     position: absolute;
     top: 20px;
     left: 20px;
     color: #9ca3af;
-
 }
 
 .searching span {
-
     position: absolute;
     right: 17px;
     top: 13px;
     padding: 2px;
     border-left: 1px solid #d1d5db;
-
 }
 
 .left-pan {
@@ -823,19 +794,16 @@
 }
 
 .left-pan i {
-
     padding-left: 10px;
 }
 
 .form-inputs {
-
     height: 55px;
     text-indent: 33px;
     border-radius: 10px;
 }
 
 .form-inputs:focus {
-
     box-shadow: none;
     border: none;
 }
@@ -870,7 +838,7 @@
 }
 
 .red-heart path {
-    fill: #FF4545;
+    fill: #ff4545;
 }
 
 .list-group {
@@ -899,7 +867,7 @@
 
 .list-group-item button:focus svg path:nth-child(2) {
     fill: black;
-    color: black
+    color: black;
 }
 
 .list-group-item button:focus {
@@ -910,10 +878,7 @@
     .nav-item {
         width: 50%;
     }
-
-
 }
-
 
 .toko-section {
     background-color: white;
@@ -925,7 +890,6 @@
 }
 
 .ratings i {
-
     color: #cecece;
 }
 
@@ -954,14 +918,12 @@
 }
 
 .form-inputs:focus {
-
     box-shadow: none;
     border: none;
 }
 
 .b {
     border-left: 1px solid rgba(141, 141, 141, 0.6);
-
 }
 
 .c {
@@ -969,27 +931,22 @@
 }
 
 .searching {
-
     position: relative;
 }
 
 .searching .fa-search {
-
     position: absolute;
     top: 20px;
     left: 20px;
     color: #9ca3af;
-
 }
 
 .searching span {
-
     position: absolute;
     right: 17px;
     top: 13px;
     padding: 2px;
     border-left: 1px solid #d1d5db;
-
 }
 
 .left-pan {
@@ -997,19 +954,16 @@
 }
 
 .left-pan i {
-
     padding-left: 10px;
 }
 
 .form-inputs {
-
     height: 55px;
     text-indent: 33px;
     border-radius: 10px;
 }
 
 .form-inputs:focus {
-
     box-shadow: none;
     border: none;
 }
