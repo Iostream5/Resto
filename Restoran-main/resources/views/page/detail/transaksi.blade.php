@@ -57,8 +57,8 @@
                             <td><img class="img-fluid rounded" src="{{ asset('storage/' . $item->produk->foto) }}" alt="" style="width: 100px;"></td>
                             <td>{{ $item->produk->nama }}</td>
                             <td>{{ $item->jumlah_terjual }}</td>
-                            <td>Rp {{ number_format($item->produk->harga, 0, ',', '.') }}</td> <!-- Format harga satuan -->
-                            <td>Rp {{ number_format($item->total_harga, 0, ',', '.') }}</td> <!-- Format total harga -->
+                            <td>Rp {{ number_format($item->produk->harga, 0, ',', '.') }}</td> 
+                            <td>Rp {{ number_format($item->total_harga, 0, ',', '.') }}</td> 
                             <td>{{ $item->created_at }}</td>
                             <td>
                                 <a href="{{ route('struk', $item->id) }}" class="btn btn-sm btn-primary">Lihat Struk</a>
