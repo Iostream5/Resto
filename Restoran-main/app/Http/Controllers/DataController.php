@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\DataTerjual;
 use App\Models\Kategori;
 use App\Models\Produk;
 use App\Models\Toko;
@@ -76,12 +77,19 @@ class DataController extends Controller
 
     public function profil()
     {
+        $dataTerjual = DataTerjual::select('produk_id')
+            ->selectRaw('SUM(jumlah_terjual) as total_terjual')
+            ->selectRaw('SUM(keuntungan) as total_keuntungan')
+            ->groupBy('produk_id')
+            ->get();
         $keranjang = Cart::where('user_id', Auth::id())->with('produk')->get();
         $produk = Auth::user()->produk;
         $favorite = Auth::user()->favorite()->with('produk')->get();
         $user = Auth::user();
         $user->load(['produk', 'toko']);
 
-        return view('page.profil', compact('user', 'favorite', 'produk', 'keranjang'));
+
+
+        return view('page.profil', compact('user', 'favorite', 'produk', 'keranjang', 'dataTerjual'));
     }
 }
