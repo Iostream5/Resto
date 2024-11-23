@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\TokoController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\RiwayatController;
 use App\Models\Kategori;
 use App\Models\Produk;
 use App\Models\Toko;
@@ -16,7 +17,6 @@ Route::get('/', function () {
 });
 
 //toko
-
 Route::get('/toko', [TokoController::class, 'tampil'])->name('toko.tampil');
 Route::get('/toko/data', [TokoController::class, 'data'])->name('toko.data');
 Route::get('/toko/tambah', [TokoController::class, 'tambah'])->name('toko.tambah');
@@ -25,11 +25,7 @@ Route::get('/toko/{id}/edit', [TokoController::class, 'edit'])->name('toko.edit'
 Route::put('/toko/{id}', [TokoController::class, 'update'])->name('toko.update');
 Route::delete('/toko/{id}', [TokoController::class, 'hapus'])->name('toko.hapus');
 
-
-
-
 //kategori
-
 Route::get('/kategori', [KategoriController::class, 'tampil'])->name('kategori.tampil');
 Route::get('/kategori/datas/all', [KategoriController::class, 'data'])->name('kategori.data');
 Route::get('/kategori/tambah', [KategoriController::class, 'tambah'])->name('kategori.tambah');
@@ -39,8 +35,6 @@ Route::get('/kategori/edit/{id}', [KategoriController::class, 'edit'])->name('ka
 Route::put('/kategori/{id}', [KategoriController::class, 'update'])->name('kategori.update');
 Route::delete('/kategori/{id}', [KategoriController::class, 'hapus'])->name('kategori.hapus');
 
-
-
 //produk
 Route::get('produk', [ProdukController::class, 'tampil'])->name('produk.tampil');
 Route::post('produk', [ProdukController::class, 'simpan'])->name('produk.simpan');
@@ -49,3 +43,8 @@ Route::get('produk/tambah', [ProdukController::class, 'tambah'])->name('produk.t
 Route::get('produk/{id}/edit', [ProdukController::class, 'edit'])->name('produk.edit');
 Route::put('produk/{id}', [ProdukController::class, 'update'])->name('produk.update');
 Route::delete('produk/{id}', [ProdukController::class, 'hapus'])->name('produk.destroy');
+
+//Riwayat Pembelian
+Route::get('Riwayat', [RiwayatController::class, 'tampil'])->name('riwayat.tampil');
+Route::get('Riwayat/data', [RiwayatController::class, 'data'])->name('riwayat.data');
+Route::delete('Riwayat/{id}', [RiwayatController::class, 'hapus'])->name('riwayat.destroy');
