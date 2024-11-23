@@ -20,12 +20,13 @@
             <div class=" d-flex align-items-center mb-2 order-1 order-lg-3">
                 <a href="/profil">
                     @if (Auth::user()->profile_photo_path)
-                    <img class="profile-image" src=" {{ asset('storage/' .$profile_photo_url) }}"
+                    <img class="profile-image" src="{{ asset('storage/' . Auth::user()->profile_photo_path) }}"
                         alt="{{ Auth::user()->name }}" height="70" width="70" alt="Profile Image" />
                     @else
-                    <img class="profile-image"" src=" {{ Auth::user()->profile_photo_url }}"
-                    alt="{{ Auth::user()->name }}" height="70" width="70" alt="Profile Image" />
+                    <img class="profile-image" src=" {{ Auth::user()->profile_photo_path }}"
+                        alt="{{ Auth::user()->name }}" height="70" width="70" alt="Profile Image" />
                     @endif
+
                 </a>
             </div>
             @else

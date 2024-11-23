@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Restoran - Bootstrap Restaurant Template</title>
+    <title>Restoran - TefaTie</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -125,7 +125,7 @@
                 <div class="mt-4">
                     <div class="border p-3 rounded d-flex align-items-center">
                         <img src="{{ asset('storage/'. $produk->toko->foto) }}" alt="Logo Toko"
-                            style="width: 80px; height: 80px; border-radius: 50%;" class="me-3">
+                            style="width: auto; height: 80px; border-radius:5px;" class="me-3">
                         <div>
                             <h6 class="text-primary">{{ $produk->toko->nama_toko }}</h6>
                             <div class="d-flex ratings text-nowrap">

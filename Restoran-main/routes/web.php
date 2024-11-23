@@ -17,8 +17,12 @@ Route::get('/about', function () {
 });
 Route::get('/search', [DataController::class, 'search'])->name('produk.search');
 Route::get('/searching', [DataController::class, 'searching'])->name('search');
-Route::get('/toko/{id}/me', [DataController::class, 'tokoDetail'])->name('toko.detail');
 Route::get('/kategori/{id}', [DataController::class, 'kategori'])->name('kategori');
+
+//detail Produk
+Route::get('/detail/{id:nama}', [DataController::class, 'detail'])->name('detail');
+//detail Toko
+Route::get('/toko/{id}', [DataController::class, 'tokoDetail'])->name('toko.detail');
 
 Route::middleware([
     'auth:sanctum',
@@ -38,7 +42,6 @@ Route::middleware([
 
     //produk
     Route::get('produk', [ProdukController::class, 'tampil'])->name('produk.tampil');
-    Route::get('/detail/{id:nama}', [DataController::class, 'detail'])->name('detail');
     Route::post('Produk', [ProdukController::class, 'simpan'])->name('produk.simpan');
     Route::get('produk/data', [ProdukController::class, 'data'])->name('produk.data');
     Route::get('produk/tambah', [ProdukController::class, 'tambah'])->name('produk.tambah');

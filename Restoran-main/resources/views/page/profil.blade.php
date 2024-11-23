@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Restoran - Bootstrap Restaurant Template</title>
+    <title>Restoran - TefaTie</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -446,7 +446,7 @@
                                 </a>
                             </li>
                             @endif
-                            @if (Auth::user()->produk->isNotEmpty())
+                            {{-- @if (Auth::user()->produk->isNotEmpty())
                             <li class="nav-item col-6 col-md-4 text-center">
                                 <a class="d-flex align-items-center justify-content-center text-start pb-3"
                                     data-bs-toggle="pill" href="#tab-3">
@@ -467,7 +467,7 @@
                                     </div>
                                 </a>
                             </li>
-                            @endif
+                            @endif --}}
                         </ul>
                     </div>
                 </div>
@@ -563,7 +563,7 @@
                         <small>Buat Toko Anda!</small>
                     </div>
                     @endif
-                    <div id="tab-3" class="tab-pane fade show p-0">
+                    {{-- <div id="tab-3" class="tab-pane fade show p-0">
                         <div class="container mt-5">
                             <h2>Analisa Penjualan Produk</h2>
                             @if ($dataTerjual)
@@ -596,7 +596,7 @@
                             <p>Produk tidak ditemukan.</p>
                             @endif
                         </div>
-                    </div>
+                    </div> --}}
 
                 </div>
             </div>

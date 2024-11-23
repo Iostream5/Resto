@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Restoran - Bootstrap Restaurant Template</title>
+    <title>Restoran - TefaTie</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -150,7 +150,8 @@
                                     alt="...">
                                 <div class="card-body">
                                     <p class="text-dark text-start produk fw-bold m-0">{{ $item->nama }}</p>
-                                    <small class="text-dark text-start produk fw-lighter">{{ $item->deskripsi }}</small>
+                                    <small class="text-dark text-start produk fw-lighter ellipsis">{{ $item->deskripsi
+                                        }}</small>
                                     <div class="d-flex justify-content-between align-items-center gap-2">
                                         <h6 class="text-primary fw-bold text-nowrap">Rp.{{ $item->harga }}</h6>
                                         <form class="my-3 justify-content-between d-flex"

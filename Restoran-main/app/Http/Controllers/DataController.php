@@ -81,6 +81,7 @@ class DataController extends Controller
         $dataTerjual = DataTerjual::select('produk_id')
             ->selectRaw('SUM(jumlah_terjual) as total_terjual')
             ->selectRaw('SUM(keuntungan) as total_keuntungan')
+            ->where('user_id', Auth::id())
             ->groupBy('produk_id')
             ->get();
         $keranjang = Cart::where('user_id', Auth::id())->with('produk')->get();

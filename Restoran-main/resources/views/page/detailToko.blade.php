@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Restoran - Bootstrap Restaurant Template</title>
+    <title>Restoran - TefaTie</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -59,10 +59,8 @@
                 <div class="container mt-5">
                     <div class="row">
                         <div class="col-md-4 text-center">
-                            <div class="">
-                                <div class="profile-img-wrapper">
-                                    <img src="{{ asset('storage/'.$toko->foto) }}" class="profile-img" alt="Profil">
-                                </div>
+                            <div class="d-flex">
+                                <img src="{{ asset('storage/'.$toko->foto) }}" class="profile-img" alt="Profil">
                             </div>
                         </div>
                         <div class="col-md-4 mt-2">
@@ -74,18 +72,17 @@
 
                                 </li>
                                 <li class="list-group-item">
-                                    Email: <span id="email">rahawaih.com</span>
+                                    Email: <i>Tidak Memiliki Email</i>
 
-                                </li>
-                                <li class="list-group-item">
-                                    Telepon: <span id="telepon">+62 899 9999 9999</span>
                                 </li>
                                 <li class="list-group-item">
                                     Alamat: <span id="alamat">{{ $toko->alamat }}</span>
 
                                 </li>
-                                <li class="list-group-item">
-                                    Quality: <span id="alamat">Best Quality</span>
+                                <li class="list-group-item fw-bold">
+                                    Deskripsi Toko: <div class="overflow-auto" style="height: 100px">
+                                        <i class="fw-normal">{{ $toko->deskripsi }}</i>
+                                    </div>
 
                                 </li>
                             </ul>
