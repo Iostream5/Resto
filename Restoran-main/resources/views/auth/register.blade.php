@@ -49,11 +49,11 @@
             @endif
 
             <div class="flex items-center justify-end mt-4 gap-1">
-                <a class="underline text-sm text-yellow-500 hover:text-yellow-600 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500" href="{{ route('login') }}">
+                <a class="underline text-sm text-yellow-500 hover:text-yellow-300 rounded-md focus:text-yellow-500 focus:outline-none " href="{{ route('login') }}">
                     {{ __('Already registered?') }}
                 </a>
 
-                <x-button class="ms-4 bg-yellow-500 hover:bg-yellow-600 focus:bg-yellow-600 active:bg-yellow-700 focus:ring-yellow-500">
+                <x-button class="ms-4 bg-yellow-500 hover:bg-yellow-600 focus:bg-yellow-600 active:bg-yellow-700 focus:ring-white">
                     {{ __('Register') }}
                 </x-button>
             </div>

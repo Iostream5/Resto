@@ -17,8 +17,8 @@
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body class="font-sans antialiased bg-cover bg-center bg-green-900" style="background-image: url('path-to-your-image.jpg');">
-        <div class="font-sans text-gray-900 antialiased bg-black">
+    <body class="font-sans antialiased bg-cover bg-center">
+        <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
 
