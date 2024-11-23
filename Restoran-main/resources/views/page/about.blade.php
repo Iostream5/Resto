@@ -51,18 +51,18 @@
 
                             <div class="col-6 text-start">
                                 <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.1s"
-                                    src="img/logo.jpeg" alt="">
+                                    src="img/pex.jpg" alt="">
                             </div>
                             <div class="col-6 text-start">
-                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.3s" src="img/Inox.jpg"
+                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.3s" src="img/pexe.jpg"
                                     style="margin-top: 25%;" alt="">
                             </div>
                             <div class="col-6 text-end">
-                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.5s" src="img/logo.png"
+                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.5s" src="img/pexel.jpg"
                                     alt="">
                             </div>
                             <div class="col-6 text-end">
-                                <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.7s" src="img/zzi.png"
+                                <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.7s" src="img/boa.jpeg"
                                     alt="">
                             </div>
                         </div>
