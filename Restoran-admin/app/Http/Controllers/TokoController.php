@@ -17,8 +17,11 @@ class TokoController extends Controller
     public function data(Request $request)
     {
         if ($request->ajax()) {
-            $toko = Toko::select(['id', 'nama_toko', 'alamat', 'rating', 'foto']);
+            $toko = Toko::with('user')->select(['id', 'user_id', 'nama_toko', 'alamat', 'rating', 'foto']);
             return DataTables::of($toko)
+                ->addColumn('user_id', function ($toko) {
+                    return $toko->user->name;
+                })
                 ->addColumn('action', function ($toko) {
                     return '
                         <a href="' . route('toko.edit', $toko->id) . '" class="btn btn-primary btn-sm">Edit</a>

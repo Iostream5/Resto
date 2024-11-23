@@ -10,8 +10,7 @@
 </head>
 
 <body>
-    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
-        data-sidebar-position="fixed" data-header-position="fixed">
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical">
         <aside class="left-sidebar">
             <div>
                 <div class="brand-logo d-flex align-items-center justify-content-between">
@@ -28,31 +27,27 @@
             </div>
         </aside>
         <div class="body-wrapper">
-
             @include('bagian.header')
-
             <div class="container-fluid">
                 <div class="container">
-                    <h1>Toko</h1>
-                    <a href="{{ route('toko.tambah') }}" class="btn btn-primary">Add Toko</a>
-                    <table id="tokoTable" class="table table-bordered">
+                    <h1>Riwayat Transaksi</h1>
+                    <table id="riwayat-table" class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Pemilik Toko</th>
-                                <th>Nama Toko</th>
-                                <th>Alamat</th>
-                                <th>Rating</th>
-                                <th>Foto</th>
-                                <th>Aksi</th>
+                                <th>id</th>
+                                <th>Produk</th>
+                                <th>User</th>
+                                <th>Harga Produk</th>
+                                <th>Jumlah Beli</th>
+                                <th>Total Harga</th>
+                                <th>Tanggal</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody></tbody>
+                        <tbody class="text-center"></tbody>
                     </table>
                 </div>
-
                 @include('bagian.footer')
-
             </div>
         </div>
     </div>
@@ -63,22 +58,35 @@
     <script src="{{asset('template/src/assets/libs/apexcharts/dist/apexcharts.min.js')}}"></script>
     <script src="{{asset('template/src/assets/libs/simplebar/dist/simplebar.js')}}"></script>
     <script src="{{asset('template/src/assets/js/dashboard.js')}}"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#tokoTable').DataTable({
+            $('#riwayat-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ route('toko.data') }}',
+                ajax: '{{ route('riwayat.data') }}',
                 columns: [
                     { data: 'id', name: 'id' },
+                    { data: 'produk_id', name: 'produk_id' },
                     { data: 'user_id', name: 'user_id' },
-                    { data: 'nama_toko', name: 'nama_toko' },
-                    { data: 'alamat', name: 'alamat' },
-                    { data: 'rating', name: 'rating' },
-                    { data: 'foto', name: 'foto', orderable: false, searchable: false },
+                    { data: 'harga_jual', name: 'harga_jual' },
+                    { data: 'jumlah_terjual', name: 'jumlah_terjual' },
+                    { data: 'total_harga', name: 'total_harga' },
+                    { 
+                        data: 'created_at', 
+                        name: 'created_at',
+                        render: function(data) {
+                            // Format tanggal menggunakan JavaScript
+                            const date = new Date(data);
+                            const day = String(date.getDate()).padStart(2, '0');
+                            const month = String(date.getMonth() + 1).padStart(2, '0');
+                            const year = date.getFullYear();
+                            const hours = String(date.getHours()).padStart(2, '0');
+                            const minutes = String(date.getMinutes()).padStart(2, '0');
+                            return `${day} - ${month} - ${year}  ${hours} : ${minutes}`;
+                        }
+                    },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                 ]
             });

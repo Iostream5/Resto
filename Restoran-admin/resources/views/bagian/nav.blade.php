@@ -40,6 +40,14 @@
                 <span class="hide-menu">Produk</span>
             </a>
         </li>
+        <li class="sidebar-item">
+            <a class="sidebar-link" href="{{ route('riwayat.tampil') }}" aria-expanded="false">
+                <span>
+                    <i class="ti ti-credit-card"></i>
+                </span>
+                <span class="hide-menu">Riwayat Transaksi</span>
+            </a>
+        </li>
 
     </ul>
 </nav>

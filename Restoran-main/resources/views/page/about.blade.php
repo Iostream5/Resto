@@ -50,19 +50,19 @@
                         <div class="row g-3">
 
                             <div class="col-6 text-start">
-                                <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.1s"
-                                    src="img/logo.jpeg" alt="">
+                                <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.1s" src="img/pex.jpg"
+                                    alt="">
                             </div>
                             <div class="col-6 text-start">
-                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.3s" src="img/Inox.jpg"
+                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.3s" src="img/pexe.jpg"
                                     style="margin-top: 25%;" alt="">
                             </div>
                             <div class="col-6 text-end">
-                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.5s" src="img/logo.png"
+                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.5s" src="img/pexel.jpg"
                                     alt="">
                             </div>
                             <div class="col-6 text-end">
-                                <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.7s" src="img/zzi.png"
+                                <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.7s" src="img/boa.jpeg"
                                     alt="">
                             </div>
                         </div>
@@ -87,26 +87,25 @@
                         <div class="row g-4 mb-4">
                             <div class="col-sm-6">
                                 <div class="d-flex align-items-center border-start border-5 border-primary px-3">
-                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0" data-toggle="counter-up">50
+                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0" data-toggle="counter-up">5
                                     </h1>
                                     <div class="ps-4">
-                                        <p class="mb-0">Years of</p>
+                                        <p class="mb-0">Month of</p>
                                         <h6 class="text-uppercase mb-0">Experience</h6>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="d-flex align-items-center border-start border-5 border-primary px-3">
-                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0" data-toggle="counter-up">50
+                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0" data-toggle="counter-up">10
                                     </h1>
                                     <div class="ps-4">
-                                        <p class="mb-0">Popular</p>
-                                        <h6 class="text-uppercase mb-0">Master Chefs</h6>
+                                        <p class="mb-0">Person</p>
+                                        <h6 class="text-uppercase mb-0">Pro Person</h6>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <a class="btn btn-primary py-3 px-5 mt-2" href="">Read More</a>
                     </div>
                 </div>
             </div>
@@ -115,13 +114,13 @@
             <div class="container">
                 <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                     <h5 class="section-title ff-secondary text-center text-primary fw-normal">Team Members</h5>
-                    <h1 class="mb-5">Our Master Chefs</h1>
+                    <h1 class="mb-5">Our Team</h1>
                 </div>
                 <div class="row g-4">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="team-item text-center rounded overflow-hidden">
                             <div class="rounded-circle overflow-hidden m-4">
-                                <img class="img-fluid" src="img/logo.png" alt="">
+                                <img class="img-fluid" src="img/JPGGG.jpg" alt="">
                             </div>
                             <h5 class="mb-0">Rizqi Ramadhan</h5>
                             <small>Designation</small>
@@ -138,14 +137,13 @@
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                         <div class="team-item text-center rounded overflow-hidden">
                             <div class="rounded-circle overflow-hidden m-4">
-                                <img class="img-fluid" src="img/team-2.jpg" alt="">
+                                <img class="img-fluid" src="img/JPGGG.jpg" alt="">
                             </div>
                             <h5 class="mb-0">Azhar Adrian Hasibuan</h5>
                             <small>Designation</small>
                             <div class="d-flex justify-content-center mt-3">
                                 <a class="btn btn-square btn-primary mx-1"
-                                    href="https://www.facebook.com/SMKAlIttihad "><i
-                                        class="fab fa-facebook-f"></i></a>
+                                    href="https://www.facebook.com/SMKAlIttihad "><i class="fab fa-facebook-f"></i></a>
                                 <a class="btn btn-square btn-primary mx-1" href="https://twitter.com/SMKAlIttihad"><i
                                         class="fab fa-twitter"></i></a>
                                 <a class="btn btn-square btn-primary mx-1"
@@ -157,7 +155,7 @@
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                         <div class="team-item text-center rounded overflow-hidden">
                             <div class="rounded-circle overflow-hidden m-4">
-                                <img class="img-fluid" src="img/team-3.jpg" alt="">
+                                <img class="img-fluid" src="img/JPGGG.jpg" alt="">
                             </div>
                             <h5 class="mb-0">Rio Adrian Sidik</h5>
                             <small>Designation</small>
@@ -166,8 +164,8 @@
                                         class="fab fa-facebook-f"></i></a>
                                 <a class="btn btn-square btn-primary mx-1" href="https://twitter.com/SMKAlIttihad"><i
                                         class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square btn-primary mx-1"
-                                    href="https://www.instagram.com/Youcnock"><i class="fab fa-instagram"></i></a>
+                                <a class="btn btn-square btn-primary mx-1" href="https://www.instagram.com/Youcnock"><i
+                                        class="fab fa-instagram"></i></a>
                             </div>
                         </div>
                     </div>
