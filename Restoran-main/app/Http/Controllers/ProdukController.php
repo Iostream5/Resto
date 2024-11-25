@@ -137,9 +137,6 @@ class ProdukController extends Controller
         $produk = Produk::whereHas('toko', function ($query) {
             $query->where('user_id', Auth::id());
         })->findOrFail($id);
-        if ($produk->foto) {
-            Storage::disk('public')->delete($produk->foto);
-        }
         $produk->delete();
 
         return redirect()->route('profil')->with('success', 'Produk berhasil dihapus');

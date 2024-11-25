@@ -24,7 +24,6 @@ class TokoController extends Controller
                 })
                 ->addColumn('action', function ($toko) {
                     return '
-                        <a href="' . route('toko.edit', $toko->id) . '" class="btn btn-primary btn-sm">Edit</a>
                         <form action="' . route('toko.hapus', $toko->id) . '" method="POST" style="display:inline;">
                             ' . csrf_field() . '
                             ' . method_field('DELETE') . '

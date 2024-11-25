@@ -24,17 +24,14 @@ Route::get('/detail/{id:nama}', [DataController::class, 'detail'])->name('detail
 //detail Toko
 Route::get('/toko/{id}', [DataController::class, 'tokoDetail'])->name('toko.detail');
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
 
     Route::get('/profil', [DataController::class, 'profil'])->name('profil');
+
     //toko
     Route::get('/toko', [TokoController::class, 'tampil'])->name('toko.tampil');
     Route::get('/toko/data', [TokoController::class, 'data'])->name('toko.data');
-    Route::get('/toko/tambah', [TokoController::class, 'tambah'])->name('toko.tambah');
+    Route::get('/toko/tambah/user', [TokoController::class, 'tambah'])->name('toko.tambah');
     Route::post('/toko', [TokoController::class, 'simpan'])->name('toko.simpan');
     Route::get('/toko/{id}/edit', [TokoController::class, 'edit'])->name('toko.edit');
     Route::put('/toko/{id}', [TokoController::class, 'update'])->name('toko.update');
@@ -65,6 +62,7 @@ Route::middleware([
     Route::get('/transaksi', [CartController::class, 'transaksi'])->name('transaksi');
     Route::get('/struk/{id}', [CartController::class, 'struk'])->name('struk');
     Route::delete('/struk/Del/{id}', [CartController::class, 'hapusRiwayat'])->name('hapus.riwayat');
+    Route::get('/Transaksi/Pembelian', [CartController::class, 'Riwayat'])->name('Riwayat');
 });
 Route::middleware('auth')->group(function () {
     Route::get('user', [ProdukController::class, 'tampil'])->name('user.tampil');
@@ -80,6 +78,3 @@ Route::middleware([
         return redirect()->route('home');
     });
 });
-
-
-# mklink /D "C:\Users\UsEr\Documents\Resto\Restoran-main\storage\app\public" "C:\Users\UsEr\Documents\Resto\Restoran-admin\public\storage"

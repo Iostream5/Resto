@@ -45,7 +45,6 @@
                                 @foreach ($keranjang as $item)
                                 <div class="col-lg-6">
                                     <div class="d-flex align-items-center">
-                                        <!-- Mengubah produk_id menjadi array -->
                                         <input type="checkbox" class="product-checkbox me-4" name="produk_id[]"
                                             value="{{ $item->produk->id }}" data-price="{{ $item->produk->harga }}"
                                             data-name="{{ $item->produk->nama }}">
@@ -77,7 +76,6 @@
                                 </div>
                                 @endforeach
 
-                                <!-- Input hidden untuk menyimpan data produk yang dipilih -->
                                 <input type="hidden" name="selected_products" id="selectedProductsInput">
 
                                 <div class="col-12 text-end mt-3">
@@ -112,6 +110,7 @@
                                 </div>
                             </div>
                         </div>
+                        <meta name="csrf-token" content="{{ csrf_token() }}">
                     </div>
                 </div>
             </div>
@@ -145,10 +144,31 @@
         document.querySelectorAll('button[data-action="decrease"]').forEach(function (button) {
             button.addEventListener('click', function () {
                 var productId = this.getAttribute('data-id');
-                var quantityInput = document.getElementById('quantity_' + productId); 
-                var currentValue = parseInt(quantityInput.value) || 0; 
+                var quantityInput = document.getElementById('quantity_' + productId);
+                var currentValue = parseInt(quantityInput.value) || 0;
+
                 if (currentValue > 1) {
-                    quantityInput.value = currentValue - 1; 
+                    quantityInput.value = currentValue - 1;
+                } else if (currentValue === 1) {
+                    // Hapus produk dari keranjang jika quantity menjadi 0
+                    if (confirm("Apakah Anda yakin ingin menghapus produk ini dari keranjang?")) {
+                        fetch(`/keranjang/hapus/${productId}`, {
+                            method: 'DELETE',
+                            headers: {
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                            }
+                        })
+                        .then(response => {
+                            if (response.ok) {
+                                // Hapus elemen produk dari tampilan
+                                button.closest('.col-lg-6').remove();
+                                alert("Produk berhasil dihapus dari keranjang.");
+                            } else {
+                                console.error("Gagal menghapus produk dari keranjang.");
+                            }
+                        })
+                        .catch(error => console.error("Terjadi kesalahan:", error));
+                    }
                 }
             });
         });
@@ -156,20 +176,20 @@
         document.getElementById('checkout-btn').addEventListener('click', function () {
             var selectedProducts = [];
             var totalPrice = 0;
-        
+
             document.querySelectorAll('.product-checkbox:checked').forEach(function (checkbox) {
                 var productId = checkbox.value;
                 var quantityInput = document.getElementById('quantity_' + productId);
-            
+
                 if (!quantityInput) {
                     console.warn('Quantity input not found for product ID:', productId);
-                    return; 
+                    return;
                 }
-            
+
                 var quantity = parseInt(quantityInput.value) || 0;
                 var price = parseFloat(checkbox.getAttribute('data-price'));
                 var productName = checkbox.getAttribute('data-name');
-            
+
                 selectedProducts.push({
                     productId: productId,
                     productName: productName,
@@ -177,15 +197,15 @@
                     quantity: quantity,
                     total: price * quantity,
                 });
-            
+
                 totalPrice += price * quantity;
             });
-        
+
             if (selectedProducts.length === 0) {
                 alert("Silakan pilih produk terlebih dahulu.");
                 return;
             }
-        
+
             var checkoutDetails = document.getElementById('checkoutDetails');
             checkoutDetails.innerHTML = '';
             selectedProducts.forEach(function (product) {
@@ -193,61 +213,23 @@
                     <p>${product.productName} - ${product.quantity} x Rp. ${product.price.toLocaleString()} = Rp. ${product.total.toLocaleString()}</p>
                 `;
             });
-        
+
             document.getElementById('totalPrice').innerText = 'Rp. ' + totalPrice.toLocaleString();
-        
             document.getElementById('selectedProductsInput').value = JSON.stringify(selectedProducts);
-        
+
             var checkoutModal = new bootstrap.Modal(document.getElementById('checkoutModal'));
             checkoutModal.show();
         });
 
         document.getElementById('confirmCheckoutBtn').addEventListener('click', function () {
-            // Ambil data dari modal
-            var checkoutDetails = document.getElementById('checkoutDetails').innerHTML;
-            var totalPrice = document.getElementById('totalPrice').innerText;
-
-            // Masukkan data ke dalam elemen struk
-            var struckElement = document.querySelector('.struck');
-            struckElement.querySelector('.items tbody').innerHTML = '';
-            var strukHeader = `
-                <div class="header">
-                    <h2>Toko Anda</h2>
-                    <p>Terima kasih telah berbelanja!</p>
-                </div>
-                <p><strong>Nama:</strong> {{ Auth::user()->name }}</p>
-                <p><strong>Tanggal:</strong> ${new Date().toLocaleString()}</p>
-            `;
-            struckElement.innerHTML = strukHeader + `
-                <table class="items">
-                    <thead>
-                        <tr>
-                            <th>Produk</th>
-                            <th>Jumlah</th>
-                            <th>Harga</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${checkoutDetails.replace(/<p>/g, '<tr><td>')
-                                         .replace(/ - /g, '</td><td>')
-                                         .replace(/ x /g, '</td><td>')
-                                         .replace(/<\/p>/g, '</td></tr>')}
-                    </tbody>
-                </table>
-                <p class="total"><strong>Total:</strong> ${totalPrice}</p>
-            `;
-            
-            // Cetak struk
-            window.print();
-            
-            // Submit form ke server
             var form = document.getElementById('checkoutForm');
             form.submit();
             showSuccessMessage();
         });
 
+    </script>
 
+    <script>
         function showSuccessMessage() {
             Swal.fire({
                 title: 'Berhasil Checkout!',
@@ -261,10 +243,7 @@
             });
         }
     </script>
-    <script>
-
-    </script>
-
+    {{--
     <style>
         @media print {
             body * {
@@ -336,7 +315,7 @@
             </table>
             <p class="total"><strong>Total:</strong> Rp 0</p>
         </div>
-    </div>
+    </div> --}}
 </body>
 
 </html>

@@ -146,6 +146,53 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="mt-4">
+                    <h6>Komentar Pengguna</h6>
+
+                    <form>
+                        <div class="mb-3">
+                            <label for="userComment" class="form-label">Komentar</label>
+                            <textarea class="form-control" id="userComment" rows="3"
+                                placeholder="Tulis komentar Anda di sini"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Kirim Komentar</button>
+                    </form>
+
+                    <div class="mt-3">
+                        <div class="border-bottom pb-2 mb-2 d-flex align-items-start">
+                            <img src="{{ asset('img/zzi.png') }}" alt="Profil Pengguna"
+                                style="width: 40px; height: 40px; border-radius: 50%;" class="me-2">
+                            <div>
+                                <strong>Ali Ahmad</strong>
+                                <p class="mb-1">Burgernya enak banget! Rasa dagingnya sangat juicy dan bumbunya pas.
+                                    Pasti pesan lagi!</p>
+                                <small class="text-muted">Tanggal: 4 November 2024</small>
+                            </div>
+                        </div>
+
+                        <div class="border-bottom pb-2 mb-2 d-flex align-items-start">
+                            <img src="{{ asset('img/zzi.png') }}" alt="Profil Pengguna"
+                                style="width: 40px; height: 40px; border-radius: 50%;" class="me-2">
+                            <div>
+                                <strong>Siti Nurhaliza</strong>
+                                <p class="mb-1">Suka banget dengan burger ini! Pengirimannya cepat dan hangat sampai
+                                    di rumah.</p>
+                                <small class="text-muted">Tanggal: 3 November 2024</small>
+                            </div>
+                        </div>
+
+                        <div class="border-bottom pb-2 mb-2 d-flex align-items-start">
+                            <img src="{{ asset('img/zzi.png') }}" alt="Profil Pengguna"
+                                style="width: 40px; height: 40px; border-radius: 50%;" class="me-2">
+                            <div>
+                                <strong>Rizqi</strong>
+                                <p class="mb-1">Bagus, tapi saya berharap ada lebih banyak pilihan saus!</p>
+                                <small class="text-muted">Tanggal: 2 November 2024</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <h4 class="fw-bold m-3">Produk Lainnya</h4>
                 <div class="row mt-4 col-12">
                     @foreach ($produks as $produks)
@@ -191,6 +238,7 @@
                     </a>
                     @endforeach
                 </div>
+
             </div>
         </div>
 

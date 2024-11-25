@@ -89,7 +89,7 @@
                         </div>
                     </div>
                 </div>
-                <h4 class="mt-5 mx-5">Produk Dari Toko {{ $toko->nama_toko }}</h4>
+                <h4 class="mt-5 mx-5">Produk Dari {{ $toko->nama_toko }}</h4>
                 <div class="row mt-4 col-12">
                     @foreach ($toko->produk as $item)
                     <a href="{{ route('detail', $item->id) }}" class="ms-auto col-lg-3 col-md-5 col-6">
@@ -99,7 +99,7 @@
                             <small class="text-dark text-start produk fw-lighter ellipsis">{{ $item->deskripsi}}</small>
                             <h5 class="text-primary fw-bold text-nowrap">Rp.{{ $item->harga }}</h5>
                             <div class="d-flex justify-content-between align-items-center">
-                                <div class="ratings text-nowrap">
+                                {{-- <div class="ratings text-nowrap">
                                     @php
                                     $rating = $item->rating;
                                     @endphp
@@ -109,7 +109,7 @@
                                             @endfor
                                     </div>
                                     <h5 class="review-count">12 Reviews</h5>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </a>
@@ -120,26 +120,23 @@
                 </div>
             </div>
 
+            @include('bagian.footer')
+
+            <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
         </div>
-    </div>
 
-    @include('bagian.footer')
-
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('template/lib/wow/wow.min.js') }}"></script>
-    <script src="{{ asset('template/lib/easing/easing.min.js') }}"></script>
-    <script src="{{ asset('template/lib/waypoints/waypoints.min.js') }}"></script>
-    <script src="{{ asset('template/lib/counterup/counterup.min.js') }}"></script>
-    <script src="{{ asset('template/lib/owlcarousel/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('template/lib/tempusdominus/js/moment.min.js') }}"></script>
-    <script src="{{ asset('template/lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
-    <script src="{{ asset('template/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
-    <script>
-        function menu() {
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="{{ asset('template/lib/wow/wow.min.js') }}"></script>
+        <script src="{{ asset('template/lib/easing/easing.min.js') }}"></script>
+        <script src="{{ asset('template/lib/waypoints/waypoints.min.js') }}"></script>
+        <script src="{{ asset('template/lib/counterup/counterup.min.js') }}"></script>
+        <script src="{{ asset('template/lib/owlcarousel/owl.carousel.min.js') }}"></script>
+        <script src="{{ asset('template/lib/tempusdominus/js/moment.min.js') }}"></script>
+        <script src="{{ asset('template/lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
+        <script src="{{ asset('template/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+        <script>
+            function menu() {
             window.location = "{{ route('search') }}"
         }
 
@@ -151,9 +148,9 @@
                 element.textContent = element.textContent.replace(/[^\s@]/g, '*');
             }
         }
-    </script>
+        </script>
 
-    <script src="{{ asset('template/js/main.js') }}"></script>
+        <script src="{{ asset('template/js/main.js') }}"></script>
 </body>
 
 </html>

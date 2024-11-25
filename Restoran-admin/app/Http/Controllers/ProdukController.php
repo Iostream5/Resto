@@ -29,7 +29,6 @@ class ProdukController extends Controller
             })
             ->addColumn('action', function ($produk) {
                 return '
-                <a href="' . route('produk.edit', $produk->id) . '" class="btn btn-warning">Edit</a>
                 <form action="' . route('produk.destroy', $produk->id) . '" method="POST" style="display:inline;">
                     ' . csrf_field() . '
                     ' . method_field('DELETE') . '

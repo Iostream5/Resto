@@ -172,13 +172,17 @@ class CartController extends Controller
 
     public function hapusRiwayat($id)
     {
-        // Mencari penjualan berdasarkan ID dan memuat data produk terkait
         $penjualan = Penjualan::with('produk')->find($id);
 
-        // Menghapus data penjualan
         $penjualan->delete();
 
-        // Redirect ke halaman profil
-        return redirect()->route('profil');
+        return redirect()->route('Riwayat');
+    }
+
+    public function Riwayat()
+    {
+        $penjualan = Penjualan::where('user_id', Auth::id())->with('produk')->get();
+
+        return view('page.detail.transaksi', compact('penjualan'));
     }
 }

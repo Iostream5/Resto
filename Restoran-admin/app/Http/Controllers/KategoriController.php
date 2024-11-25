@@ -18,11 +18,11 @@ class KategoriController extends Controller
     public function data()
     {
         $kategoris = Kategori::query();
-    
+
         return DataTables::of($kategoris)
             ->addColumn('action', function ($kategori) {
                 return '
-                    <a href="' . route('kategori.edit', $kategori->id) . '" class="btn btn-warning btn-sm">Edit</a>
+                     <a href="' . route('kategori.edit', $kategori->id) . '" class="btn btn-warning btn-sm">Edit</a>
                     <form action="' . route('kategori.hapus', $kategori->id) . '" method="POST" style="display:inline;">
                         ' . csrf_field() . '
                         ' . method_field('DELETE') . '
@@ -64,7 +64,7 @@ class KategoriController extends Controller
         $kategori = Kategori::find($id);
         $kategori->nama_kategori = $request->nama_kategori;
         $kategori->foto = $request->file('foto')->store('kategori', 'public');
-        $kategori->update();    
+        $kategori->update();
 
         return redirect()->route('kategori.tampil');
     }

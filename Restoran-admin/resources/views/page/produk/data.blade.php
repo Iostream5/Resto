@@ -34,7 +34,7 @@
             <div class="container-fluid">
                 <div class="container">
                     <h1>Produk</h1>
-                    <a href="{{ route('produk.tambah') }}" class="btn btn-primary">Add Produk</a>
+                    {{-- <a href="{{ route('produk.tambah') }}" class="btn btn-primary">Add Produk</a> --}}
                     <table id="produkTable" class="table table-bordered">
                         <thead>
                             <tr>
